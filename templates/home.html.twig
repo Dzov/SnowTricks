@@ -1,7 +1,13 @@
 {% extends("base.html.twig") %}
 
 {% block body %}
-    <section >
-        <img src="{{ asset('img/jumbo.jpg') }}" class="img-fluid">
+    <section class="home__jumbotron">
+        <p class="home__jumbotron--slogan">SnowTricks <br> Rejoignez la communauté des passionnés de snowboard !</p>
+    </section>
+
+    {% include('trick_card.html.twig') %}
+
+    <section class="d-flex justify-content-center">
+        <button type="button" class="btn btn-outline-primary mb-3">Voir plus</button>
     </section>
 {% endblock %}
