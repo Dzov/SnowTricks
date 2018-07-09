@@ -48,4 +48,13 @@
   font-size: 15px;
 }
 
+.login__section {
+  height: 80vh;
+}
+
+.forms {
+  border: 1px solid lightgray;
+  padding: 20px;
+}
+
 /*# sourceMappingURL=master.css.map */
