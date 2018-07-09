@@ -4,6 +4,10 @@
   {
     flex-wrap: nowrap;
     overflow-x: auto;
+
+    .card {
+      flex: 1 0 18%!important;
+    }
   }
 
   &__information--container
@@ -24,6 +28,12 @@
 
 .trick__comments
 {
+  &--img{
+      border-radius: 30px;
+      width: 50px;
+      height: 50px;
+  }
+
   &--comment
   {
     box-shadow: #565656 -2px 1px 3px;

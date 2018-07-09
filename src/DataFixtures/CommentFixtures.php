@@ -31,7 +31,7 @@ class CommentFixtures extends Fixture implements DependentFixtureInterface
         $manager->persist($comment2);
 
         $comment3 = new Comment();
-        $comment3->setContent('J\'adorerai réussir celui ci mais il me faut plus d\'entrainement');
+        $comment3->setContent('J\'adorerais réussir celui ci mais il me faut plus d\'entrainement');
         $comment3->setPostedAt(new \DateTime());
         $comment3->setTrick($this->getReference('trick3'));
         $comment3->setUser($this->getReference('user1'));

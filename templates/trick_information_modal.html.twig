@@ -11,8 +11,20 @@
                     <div class="trick__slider--container">
                         <div class="card-deck trick__slider--images">
                             {% for image in trick.images %}
-                                <div class="card">
-                                    <img src="img{{ asset(image.fileName) }}" alt="Image de la figure {{ trick.name }}" width="100" height="100">
+                                <div class="card border-0">
+                                    <img src="img{{ asset(image.fileName) }}" alt="Image de la figure {{ trick.name }}" width="105" height="105">
+                                </div>
+                                <div class="card border-0">
+                                    <img src="img{{ asset(image.fileName) }}" alt="Image de la figure {{ trick.name }}" width="105" height="105">
+                                </div>
+                                <div class="card border-0">
+                                    <img src="img{{ asset(image.fileName) }}" alt="Image de la figure {{ trick.name }}" width="105" height="105">
+                                </div>
+                                <div class="card border-0">
+                                    <img src="img{{ asset(image.fileName) }}" alt="Image de la figure {{ trick.name }}" width="105" height="105">
+                                </div>
+                                <div class="card border-0">
+                                    <img src="img{{ asset(image.fileName) }}" alt="Image de la figure {{ trick.name }}" width="105" height="105">
                                 </div>
                             {% endfor %}
                         </div>

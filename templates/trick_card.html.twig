@@ -1,7 +1,7 @@
 <section class="mx-3 my-5">
     <div class="card-deck">
         {% for trick in tricks %}
-            <div class="card mb-3">
+            <div class="trick_card card mb-3">
                 {% for image in trick.images | slice(0, 15) %}
                     <img class="card-img-top" src="img{{ asset(image.fileName) }}" alt="Image de la figure {{ trick.name }}" width="100%" height="150">
                 {% endfor %}
