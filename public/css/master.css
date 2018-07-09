@@ -14,4 +14,30 @@
   padding: 2% 0;
 }
 
+.card {
+  flex: 1 0 15% !important;
+}
+
+.trick__slider--images {
+  flex-wrap: nowrap;
+  overflow-x: auto;
+}
+.trick__information--container ul {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+}
+.trick__information--container ul li {
+  border: 1px solid lightgray;
+  border-radius: 5px;
+  padding: 0 5px;
+}
+
+.trick__comments--comment {
+  box-shadow: #565656 -2px 1px 3px;
+}
+.trick__comments--content {
+  font-size: 15px;
+}
+
 /*# sourceMappingURL=master.css.map */

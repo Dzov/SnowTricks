@@ -1,72 +1,29 @@
-{% block trickCard %}
+<section class="mx-3 my-5">
+    <div class="card-deck">
+        {% for trick in tricks %}
+            <div class="card mb-3">
+                {% for image in trick.images | slice(0, 15) %}
+                    <img class="card-img-top" src="img{{ asset(image.fileName) }}" alt="Image de la figure {{ trick.name }}" width="100%" height="150">
+                {% endfor %}
+                <div class="card-body">
+                    <h5 class="card-title">
+                        <a href="#{{ trick.id }}" data-toggle="modal"> {{ trick.name | capitalize }}</a>
+                    </h5>
+                </div>
+                <div class="card-footer">
+                    <small class="text-muted">
+                        {% if trick.updatedAt is empty %}
+                            Créé le
+                            {{ trick.createdAt | date("d/m/Y \à H:i") }}
+                        {% else %}
+                            Mis à jour le
+                            {{ trick.updatedAt | date("d/m/Y \à H:i") }}
+                        {% endif %}
+                    </small>
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+    {% include('trick_information_modal.html.twig') %}
+</section>
 
-    <section class="mx-3 my-5">
-        <div class="card-deck">
-            {% for trick in tricks | slice(0,5) %}
-                <div class="card">
-                    {% for image in trick.images | slice(0) %}
-                        <img class="card-img-top" src="img{{ asset(image.fileName) }}" alt="Image de la figure {{ trick.name }}" width="100%" height="150">
-                    {% endfor %}
-                    <div class="card-body">
-                        <h5 class="card-title">{{ trick.name | capitalize }}</h5>
-                    </div>
-                    <div class="card-footer">
-                        <small class="text-muted">
-                            Dernière mise à jour le
-                            {% if trick.updatedAt is empty %}
-                                {{ trick.createdAt | date("d/m/Y \à H:i") }}
-                            {% else %}
-                                {{ trick.updatedAt | date("d/m/Y \à H:i") }}
-                            {% endif %}
-                        </small>
-                    </div>
-                </div>
-            {% endfor %}
-        </div>
-        <div class="card-deck">
-            {% for trick in tricks | slice(5, 10) %}
-                <div class="card">
-                    {% for image in trick.images | slice(0) %}
-                        <img class="card-img-top" src="img{{ asset(image.fileName) }}" alt="Image de la figure {{ trick.name }}" width="100%" height="150">
-                    {% endfor %}
-                    <div class="card-body">
-                        <h5 class="card-title">{{ trick.name | capitalize }}</h5>
-                    </div>
-                    <div class="card-footer">
-                        <small class="text-muted">
-                            Dernière mise à jour le
-                            {% if trick.updatedAt is empty %}
-                                {{ trick.createdAt | date("d/m/Y \à H:i") }}
-                            {% else %}
-                                {{ trick.updatedAt | date("d/m/Y \à H:i") }}
-                            {% endif %}
-                        </small>
-                    </div>
-                </div>
-            {% endfor %}
-        </div>
-        <div class="card-deck">
-            {% for trick in tricks | slice(10, 15) %}
-                <div class="card">
-                    {% for image in trick.images | slice(0) %}
-                        <img class="card-img-top" src="img{{ asset(image.fileName) }}" alt="Image de la figure {{ trick.name }}" width="100%" height="150">
-                    {% endfor %}
-                    <div class="card-body">
-                        <h5 class="card-title">{{ trick.name | capitalize }}</h5>
-                    </div>
-                    <div class="card-footer">
-                        <small class="text-muted">
-                            Dernière mise à jour le
-                            {% if trick.updatedAt is empty %}
-                                {{ trick.createdAt | date("d/m/Y \à H:i") }}
-                            {% else %}
-                                {{ trick.updatedAt | date("d/m/Y \à H:i") }}
-                            {% endif %}
-                        </small>
-                    </div>
-                </div>
-            {% endfor %}
-        </div>
-    </section>
-
-{% endblock %}

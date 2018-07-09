@@ -1,0 +1,12 @@
+<div class="trick__comments--list my-3 mx-5">
+    {% for comment in trick.comments | reverse %}
+        <div class="card-body trick__comments--comment mb-2">
+            <small class="text-muted">
+                {{ comment.user.firstName }} a commenté le {{ comment.postedAt | date("d/m/Y \à H:i") }}
+            </small>
+            <p class="trick__comments--content my-2 mx-2 px-1">
+                {{ comment.content }}
+            </p>
+        </div>
+    {% endfor %}
+</div>
