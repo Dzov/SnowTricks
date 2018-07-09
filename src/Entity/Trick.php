@@ -2,6 +2,8 @@
 
 namespace App\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -17,14 +19,15 @@ class Trick
     private $id;
 
     /**
-     * @ORM\Column(type="string", length=255)
+     * @ORM\ManyToOne(targetEntity="App\Entity\Category")
+     * @ORM\JoinColumn(nullable=false)
      */
-    private $name;
+    private $category;
 
     /**
-     * @ORM\Column(type="text")
+     * @ORM\OneToMany(targetEntity="App\Entity\Comment", mappedBy="trick")
      */
-    private $description;
+    private $comments;
 
     /**
      * @ORM\Column(type="datetime")
@@ -32,16 +35,36 @@ class Trick
     private $createdAt;
 
     /**
+     * @ORM\Column(type="text")
+     */
+    private $description;
+
+    /**
+     * @ORM\OneToMany(targetEntity="App\Entity\Image", mappedBy="trick")
+     */
+    private $images;
+
+    /**
+     * @ORM\Column(type="string", length=255)
+     */
+    private $name;
+
+    /**
      * @ORM\Column(type="datetime", nullable=true)
      */
     private $updatedAt;
 
     /**
-     * @ORM\ManyToOne(targetEntity="App\Entity\Category")
-     * @ORM\JoinColumn(nullable=false)
+     * @ORM\OneToMany(targetEntity="App\Entity\Video", mappedBy="trick")
      */
-    private $category;
+    private $videos;
 
+    public function __construct()
+    {
+        $this->comments = new ArrayCollection();
+        $this->images = new ArrayCollection();
+        $this->videos = new ArrayCollection();
+    }
 
     public function getId()
     {
@@ -104,6 +127,51 @@ class Trick
     public function setCategory(Category $category): self
     {
         $this->category = $category;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Comment
+     */
+    public function getComments(): Collection
+    {
+        return $this->comments;
+    }
+
+    public function setComments(Collection $comments): self
+    {
+        $this->comments = $comments;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Image[]
+     */
+    public function getImages(): Collection
+    {
+        return $this->images;
+    }
+
+    public function setImages(Collection $images): self
+    {
+        $this->images = $images;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Video[]
+     */
+    public function getVideos(): Collection
+    {
+        return $this->videos;
+    }
+
+    public function setVideos(Collection $videos): self
+    {
+        $this->videos = $videos;
 
         return $this;
     }
