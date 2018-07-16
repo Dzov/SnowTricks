@@ -72,6 +72,7 @@ class TrickFixtures extends Fixture implements DependentFixtureInterface
         $trick7 = new Trick();
         $trick7->setDescription('Rotation verticale avant');
         $trick7->setCreatedAt($date->add(new \DateInterval('P6DT2H9M')));
+        $trick7->setUpdatedAt($date->add(new \DateInterval('P12DT12H')));
         $trick7->setCategory($this->getReference('cat3'));
         $trick7->setName('Front flip');
         $manager->persist($trick7);
@@ -93,6 +94,7 @@ class TrickFixtures extends Fixture implements DependentFixtureInterface
         $trick10 = new Trick();
         $trick10->setDescription('Glisser sur une barre de slide avec l\'arrière de la planche sur la barre');
         $trick10->setCreatedAt($date->add(new \DateInterval('PT12H')));
+        $trick10->setUpdatedAt($date->add(new \DateInterval('P1DT12H')));
         $trick10->setCategory($this->getReference('cat4'));
         $trick10->setName('tail slide');
         $manager->persist($trick10);

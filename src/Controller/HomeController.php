@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use App\Entity\Trick;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Response;
 
@@ -12,6 +13,8 @@ class HomeController extends Controller
 {
     public function home(): Response
     {
-        return $this->render("home.html.twig");
+        $tricks = $this->getDoctrine()->getRepository(Trick::class)->findAll();
+
+        return $this->render("home.html.twig", ['tricks' => $tricks]);
     }
 }

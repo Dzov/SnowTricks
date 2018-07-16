@@ -20,6 +20,7 @@ class UserFixtures extends Fixture
         $user1->setPassword(sha1('john'));
         $user1->setActivated(true);
         $user1->setRegisteredAt(new \DateTime());
+        $user1->setAvatar('johnAvatar.jpeg');
         $manager->persist($user1);
 
         $user2 = new User();
@@ -29,6 +30,7 @@ class UserFixtures extends Fixture
         $user2->setPassword(sha1('sam'));
         $user2->setActivated(true);
         $user2->setRegisteredAt(new \DateTime());
+        $user2->setAvatar('samAvatar.png');
         $manager->persist($user2);
 
         $user3 = new User();
@@ -38,6 +40,7 @@ class UserFixtures extends Fixture
         $user3->setPassword(sha1('alex'));
         $user3->setActivated(true);
         $user3->setRegisteredAt(new \DateTime());
+        $user3->setAvatar('avatarDummy.png');
         $manager->persist($user3);
 
         $user4 = new User();
@@ -47,6 +50,7 @@ class UserFixtures extends Fixture
         $user4->setPassword(sha1('Ahmad'));
         $user4->setActivated(true);
         $user4->setRegisteredAt(new \DateTime());
+        $user4->setAvatar('ahmadAvatar.jpeg');
         $manager->persist($user4);
 
         $user5 = new User();
@@ -56,6 +60,7 @@ class UserFixtures extends Fixture
         $user5->setPassword(sha1('kimmy'));
         $user5->setActivated(true);
         $user5->setRegisteredAt(new \DateTime());
+        $user5->setAvatar('avatarDummy.png');
         $manager->persist($user5);
 
         $manager->flush();

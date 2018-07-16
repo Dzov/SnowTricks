@@ -14,6 +14,8 @@ class CommentFixtures extends Fixture implements DependentFixtureInterface
 {
     public function load(ObjectManager $manager)
     {
+        $date = new \DateTime();
+
         $comment1 = new Comment();
         $comment1->setContent('I managed this one the other day, it was awesome !');
         $comment1->setPostedAt(new \DateTime());
@@ -29,10 +31,24 @@ class CommentFixtures extends Fixture implements DependentFixtureInterface
         $manager->persist($comment2);
 
         $comment3 = new Comment();
-        $comment3->setContent('J\'adorerai réussir celui ci mais il me faut plus d\'entrainement');
+        $comment3->setContent('J\'adorerais réussir celui ci mais il me faut plus d\'entrainement');
         $comment3->setPostedAt(new \DateTime());
         $comment3->setTrick($this->getReference('trick3'));
+        $comment3->setUser($this->getReference('user1'));
+        $manager->persist($comment3);
+
+        $comment3 = new Comment();
+        $comment3->setContent('Trop cool !');
+        $comment3->setPostedAt($date->add(new \DateInterval('P1D')));
+        $comment3->setTrick($this->getReference('trick3'));
         $comment3->setUser($this->getReference('user4'));
+        $manager->persist($comment3);
+
+        $comment3 = new Comment();
+        $comment3->setContent('Magnifique !');
+        $comment3->setPostedAt($date->add(new \DateInterval('P3D')));
+        $comment3->setTrick($this->getReference('trick3'));
+        $comment3->setUser($this->getReference('user3'));
         $manager->persist($comment3);
 
         $manager->flush();
