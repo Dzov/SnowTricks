@@ -19,8 +19,7 @@ class ForgotPasswordType extends AbstractType
                     'attr'  => array('class' => 'form-control'),
                     'label' => 'Email'
                 )
-            )
-        ;
+            );
     }
 
     public function configureOptions(OptionsResolver $resolver)

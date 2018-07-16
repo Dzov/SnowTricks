@@ -2,10 +2,10 @@
 
 namespace App\Controller;
 
+use App\Entity\User;
+use App\Form\RegisterType;
+use http\Env\Request;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
-use Symfony\Component\Form\Extension\Core\Type\EmailType;
-use Symfony\Component\Form\Extension\Core\Type\PasswordType;
-use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\HttpFoundation\Response;
 
 /**
@@ -13,47 +13,28 @@ use Symfony\Component\HttpFoundation\Response;
  */
 class RegisterController extends Controller
 {
-    public function register(): Response
+    public function register(Response $request): Response
     {
-        $form = $this->createFormBuilder()
-            ->add(
-                'firstName',
-                TextType::class,
-                array(
-                    'attr' => array('class' => 'form-control'),
-                    'label' => 'Prénom'
-                )
-            )
-            ->add(
-                'lastName',
-                TextType::class,
-                array(
-                    'attr' => array('class' => 'form-control'),
-                    'label' => 'Nom de famille'
-                )
-            )
-            ->add(
-                'email',
-                EmailType::class,
-                array(
-                    'attr' => array('class' => 'form-control'),
-                    'label' => 'Email'
-                )
-            )
-            ->add(
-                'password',
-                PasswordType::class,
-                array(
-                    'attr' => array('class' => 'form-control'),
-                    'label' => 'Mot de passe'
-                )
-            )
-            ->getForm();
+        $user = new User();
+
+        $form = $this->createForm(RegisterType::class, $user);
+
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $user = $form->getData();
+
+            $em = $this->getDoctrine()->getManager();
+            $em->persist($user);
+            $em->flush();
+
+            return $this->redirectToRoute('login');
+        }
 
         return $this->render(
             'register.html.twig',
             array(
-                'form' => $form->createView(),
+                'form' => $form->createView()
             )
         );
     }

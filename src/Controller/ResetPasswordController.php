@@ -3,9 +3,6 @@
 namespace App\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
-use Symfony\Component\Form\Extension\Core\Type\EmailType;
-use Symfony\Component\Form\Extension\Core\Type\PasswordType;
-use Symfony\Component\Form\FormInterface;
 use Symfony\Component\HttpFoundation\Request;
 
 /**
@@ -25,27 +22,5 @@ class ResetPasswordController extends Controller
                 'form' => $form->createView(),
             )
         );
-    }
-
-    private function buildForm(): FormInterface
-    {
-        return $this->createFormBuilder()
-            ->add(
-                'email',
-                EmailType::class,
-                array(
-                    'attr'  => array('class' => 'form-control'),
-                    'label' => 'Email'
-                )
-            )
-            ->add(
-                'password',
-                PasswordType::class,
-                array(
-                    'attr'  => array('class' => 'form-control'),
-                    'label' => 'Mot de passe'
-                )
-            )
-            ->getForm();
     }
 }

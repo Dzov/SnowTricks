@@ -3,8 +3,6 @@
 namespace App\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
-use Symfony\Component\Form\Extension\Core\Type\EmailType;
-use Symfony\Component\Form\FormInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 
@@ -31,20 +29,6 @@ class ForgotPasswordController extends Controller
                 'form' => $form->createView(),
             )
         );
-    }
-
-    private function buildForm(): FormInterface
-    {
-        return $this->createFormBuilder()
-            ->add(
-                'email',
-                EmailType::class,
-                array(
-                    'attr'  => array('class' => 'form-control'),
-                    'label' => 'Email'
-                )
-            )
-            ->getForm();
     }
 }
 
