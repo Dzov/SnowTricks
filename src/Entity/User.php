@@ -17,6 +17,11 @@ class User
     private $id;
 
     /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    private $avatar;
+
+    /**
      * @ORM\Column(type="string", length=255)
      */
     private $firstName;
@@ -49,6 +54,18 @@ class User
     public function getId()
     {
         return $this->id;
+    }
+
+    public function getAvatar(): ?string
+    {
+        return $this->avatar;
+    }
+
+    public function setAvatar(string $avatar): self
+    {
+        $this->avatar = $avatar;
+
+        return $this;
     }
 
     public function getFirstName(): ?string
