@@ -1,0 +1,60 @@
+.home__jumbotron {
+  background: url("../img/jumbo.jpg") no-repeat 80%;
+  height: 95vh;
+  background-size: cover;
+}
+.home__jumbotron--slogan {
+  position: absolute;
+  top: 50%;
+  left: 5%;
+  right: 5%;
+  background-color: rgba(128, 128, 128, 0.4);
+  color: #ffffff;
+  text-align: center;
+  padding: 2% 0;
+}
+
+.trick_card {
+  flex: 1 0 15% !important;
+}
+
+.trick__slider--images {
+  flex-wrap: nowrap;
+  overflow-x: auto;
+}
+.trick__slider--images .card {
+  flex: 1 0 18% !important;
+}
+.trick__information--container ul {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+}
+.trick__information--container ul li {
+  border: 1px solid lightgray;
+  border-radius: 5px;
+  padding: 0 5px;
+}
+
+.trick__comments--img {
+  border-radius: 30px;
+  width: 50px;
+  height: 50px;
+}
+.trick__comments--comment {
+  box-shadow: #565656 -2px 1px 3px;
+}
+.trick__comments--content {
+  font-size: 15px;
+}
+
+.login__section {
+  height: 80vh;
+}
+
+.forms {
+  border: 1px solid lightgray;
+  padding: 20px;
+}
+
+/*# sourceMappingURL=master.css.map */

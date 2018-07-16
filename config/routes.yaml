@@ -1,3 +1,19 @@
-#index:
-#    path: /
-#    controller: App\Controller\DefaultController::index
+home:
+    path: /
+    controller: App\Controller\HomeController::home
+
+login:
+    path: /login
+    controller: App\Controller\LoginController::login
+
+sign_up:
+    path: /sign-up
+    controller: App\Controller\RegisterController::register
+
+forgot_password:
+    path: /forgot-password
+    controller: App\Controller\ForgotPasswordController::forgotPassword
+
+reset_password:
+    path: /reset-password
+    controller: App\Controller\ResetPasswordController::reset
