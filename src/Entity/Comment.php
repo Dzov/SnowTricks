@@ -17,14 +17,16 @@ class Comment
     private $id;
 
     /**
-     * @ORM\Column(type="integer")
+     * @ORM\ManyToOne(targetEntity="App\Entity\Trick", cascade={"persist"})
+     * @ORM\JoinColumn(nullable=false)
      */
-    private $trickId;
+    private $trick;
 
     /**
-     * @ORM\Column(type="integer")
+     * @ORM\ManyToOne(targetEntity="App\Entity\User")
+     * @ORM\JoinColumn(nullable=false)
      */
-    private $userId;
+    private $user;
 
     /**
      * @ORM\Column(type="text")
@@ -41,26 +43,26 @@ class Comment
         return $this->id;
     }
 
-    public function getTrickId(): ?int
+    public function getTrick(): ?Trick
     {
-        return $this->trickId;
+        return $this->trick;
     }
 
-    public function setTrickId(int $trickId): self
+    public function setTrick(Trick $trick): self
     {
-        $this->trickId = $trickId;
+        $this->trick = $trick;
 
         return $this;
     }
 
-    public function getUserId(): ?int
+    public function getUser(): ?User
     {
-        return $this->userId;
+        return $this->user;
     }
 
-    public function setUserId(int $userId): self
+    public function setUser(User $user): self
     {
-        $this->userId = $userId;
+        $this->user = $user;
 
         return $this;
     }

@@ -1,7 +1,7 @@
 .home__jumbotron
 {
   background: url("../img/jumbo.jpg") no-repeat 80%;
-  height: 100vh;
+  height: 95vh;
   background-size: cover;
 
   &--slogan {
@@ -14,4 +14,8 @@
     text-align: center;
     padding: 2% 0;
   }
+}
+
+.trick_card{
+  flex: 1 0 15%!important;
 }

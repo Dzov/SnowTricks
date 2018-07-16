@@ -17,14 +17,19 @@ class User
     private $id;
 
     /**
-     * @ORM\Column(type="string", length=255)
+     * @ORM\Column(type="string", length=255, nullable=true)
      */
-    private $first_name;
+    private $avatar;
 
     /**
      * @ORM\Column(type="string", length=255)
      */
-    private $last_name;
+    private $firstName;
+
+    /**
+     * @ORM\Column(type="string", length=255)
+     */
+    private $lastName;
 
     /**
      * @ORM\Column(type="string", length=255)
@@ -34,17 +39,12 @@ class User
     /**
      * @ORM\Column(type="string", length=255)
      */
-    private $username;
-
-    /**
-     * @ORM\Column(type="string", length=255)
-     */
     private $password;
 
     /**
      * @ORM\Column(type="datetime")
      */
-    private $registered_at;
+    private $registeredAt;
 
     /**
      * @ORM\Column(type="boolean")
@@ -56,26 +56,38 @@ class User
         return $this->id;
     }
 
-    public function getFirstName(): ?string
+    public function getAvatar(): ?string
     {
-        return $this->first_name;
+        return $this->avatar;
     }
 
-    public function setFirstName(string $first_name): self
+    public function setAvatar(string $avatar): self
     {
-        $this->first_name = $first_name;
+        $this->avatar = $avatar;
+
+        return $this;
+    }
+
+    public function getFirstName(): ?string
+    {
+        return $this->firstName;
+    }
+
+    public function setFirstName(string $firstName): self
+    {
+        $this->firstName = $firstName;
 
         return $this;
     }
 
     public function getLastName(): ?string
     {
-        return $this->last_name;
+        return $this->lastName;
     }
 
-    public function setLastName(string $last_name): self
+    public function setLastName(string $lastName): self
     {
-        $this->last_name = $last_name;
+        $this->lastName = $lastName;
 
         return $this;
     }
@@ -88,18 +100,6 @@ class User
     public function setEmail(string $email): self
     {
         $this->email = $email;
-
-        return $this;
-    }
-
-    public function getUsername(): ?string
-    {
-        return $this->username;
-    }
-
-    public function setUsername(string $username): self
-    {
-        $this->username = $username;
 
         return $this;
     }
@@ -118,12 +118,12 @@ class User
 
     public function getRegisteredAt(): ?\DateTimeInterface
     {
-        return $this->registered_at;
+        return $this->registeredAt;
     }
 
-    public function setRegisteredAt(\DateTimeInterface $registered_at): self
+    public function setRegisteredAt(\DateTimeInterface $registeredAt): self
     {
-        $this->registered_at = $registered_at;
+        $this->registeredAt = $registeredAt;
 
         return $this;
     }
