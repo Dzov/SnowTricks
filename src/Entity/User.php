@@ -3,11 +3,12 @@
 namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Security\Core\User\UserInterface;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\UserRepository")
  */
-class User
+class User implements UserInterface
 {
     /**
      * @ORM\Id()
@@ -45,6 +46,11 @@ class User
      * @ORM\Column(type="datetime")
      */
     private $registeredAt;
+
+    /**
+     * @var string
+     */
+    private $username;
 
     /**
      * @ORM\Column(type="boolean")
@@ -138,5 +144,31 @@ class User
         $this->activated = $activated;
 
         return $this;
+    }
+
+    public function getRoles()
+    {
+        return array('ROLE_USER');
+    }
+
+    public function getSalt()
+    {
+        return null;
+    }
+
+    public function getUsername(): string
+    {
+        return $this->email;
+    }
+
+    public function setUsername(string $email)
+    {
+        $this->username = $email;
+
+        return $this;
+    }
+
+    public function eraseCredentials()
+    {
     }
 }

@@ -4,24 +4,27 @@ namespace App\Controller;
 
 use App\Form\LoginType;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
-use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\Security\Http\Authentication\AuthenticationUtils;
 
 /**
  * @author Amélie-Dzovinar Haladjian
  */
 class LoginController extends Controller
 {
-    public function login(Request $request): Response
+    public function login(AuthenticationUtils $authenticationUtils): Response
     {
-        $form = $this->createForm(LoginType::class);
+        $error = $authenticationUtils->getLastAuthenticationError();
+        $lastUsername = $authenticationUtils->getLastUsername();
 
-        $form->handleRequest($request);
+//        $form = $this->createForm(LoginType::class, ['_username' => $lastUsername]);
 
         return $this->render(
             'login.html.twig',
             array(
-                'form' => $form->createView(),
+                'lastUsername' => $lastUsername,
+                'error'        => $error,
+//                'form'         => $form->createView()
             )
         );
     }
