@@ -13,12 +13,18 @@
                 <li class="nav-item">
                     <a class="nav-link" href="{{ path('home') }}#tricks_section">Tricks</a>
                 </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="{{ path('login') }}">Se connecter</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="{{ path('sign_up') }}">S'inscrire</a>
-                </li>
+                {% if is_granted('IS_AUTHENTICATED_FULLY') %}
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ path('logout') }}">Se déconnecter</a>
+                    </li>
+                {% else %}
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ path('login') }}">Se connecter</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ path('sign_up') }}">S'inscrire</a>
+                    </li>
+                {% endif %}
             </ul>
         </div>
     </nav>
