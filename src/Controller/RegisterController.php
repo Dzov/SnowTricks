@@ -6,12 +6,16 @@ use App\Entity\User;
 use App\Form\RegisterType;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Response;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 
 /**
  * @author Amélie-Dzovinar Haladjian
  */
 class RegisterController extends Controller
 {
+    /**
+     * @Route("/sign-up", name="sign_up")
+     */
     public function register(Response $request): Response
     {
         $user = new User();
