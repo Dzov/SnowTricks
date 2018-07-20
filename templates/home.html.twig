@@ -2,7 +2,11 @@
 
 {% block body %}
     <section class="home__jumbotron">
-        <p class="home__jumbotron--slogan">SnowTricks <br> Rejoignez la communauté des passionnés de snowboard !</p>
+        {% if is_granted('IS_AUTHENTICATED_FULLY') %}
+            <p class="home__jumbotron--slogan">SnowTricks <br> Ravi de vous voir {{ app.user.firstName }} ! </p>
+        {% else %}
+            <p class="home__jumbotron--slogan">SnowTricks <br> Rejoignez la communauté des passionnés de snowboard !</p>
+        {% endif %}
     </section>
 
     {% include('trick_card.html.twig') %}

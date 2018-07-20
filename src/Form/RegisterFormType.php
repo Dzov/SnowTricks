@@ -12,7 +12,7 @@ use Symfony\Component\Form\FormInterface;
 /**
  * @author Amélie-Dzovinar Haladjian
  */
-class RegisterType extends AbstractType
+class RegisterFormType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options): FormInterface
     {

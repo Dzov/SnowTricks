@@ -3,7 +3,7 @@
 namespace App\Controller;
 
 use App\Entity\User;
-use App\Form\RegisterType;
+use App\Form\RegisterFormType;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Response;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
@@ -20,7 +20,7 @@ class RegisterController extends Controller
     {
         $user = new User();
 
-        $form = $this->createForm(RegisterType::class, $user);
+        $form = $this->createForm(RegisterFormType::class, $user);
 
         $form->handleRequest($request);
 

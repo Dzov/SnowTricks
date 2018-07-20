@@ -23,7 +23,7 @@
   overflow-x: auto;
 }
 .trick__slider--images .card {
-  flex: 1 0 18% !important;
+  flex: 0 0 15% !important;
 }
 .trick__information--container ul {
   list-style-type: none;
@@ -48,6 +48,24 @@
   font-size: 15px;
 }
 
+.trick_edit_form {
+  border: 0;
+}
+
+@media (min-width: 640px) {
+  .comments__section, .trick_edit_form {
+    width: 55%;
+    margin: auto;
+  }
+  .comments__section h5, .trick_edit_form h5 {
+    text-align: center;
+  }
+
+  .trick_edit_form button {
+    width: 50%;
+    margin: auto;
+  }
+}
 .login__section {
   height: 80vh;
 }
@@ -55,7 +73,6 @@
 .forms {
   border: 1px solid lightgray;
   padding: 20px;
-  font-size: 10px;
 }
 
 /*# sourceMappingURL=master.css.map */

@@ -2,7 +2,7 @@
 
 namespace App\Controller;
 
-use App\Form\ResetPasswordType;
+use App\Form\ResetPasswordFormType;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
@@ -17,7 +17,7 @@ class ResetPasswordController extends Controller
      */
     public function reset(Request $request)
     {
-        $form = $this->createForm(ResetPasswordType::class);
+        $form = $this->createForm(ResetPasswordFormType::class);
 
         $form->handleRequest($request);
 

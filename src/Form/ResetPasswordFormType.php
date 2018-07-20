@@ -11,7 +11,7 @@ use Symfony\Component\Form\FormInterface;
 /**
  * @author Amélie-Dzovinar Haladjian
  */
-class ResetPasswordType extends AbstractType
+class ResetPasswordFormType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options): FormInterface
     {

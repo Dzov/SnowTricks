@@ -33,17 +33,7 @@
                     </div>
 
                     <hr>
-
-                    <h5>Commentaires</h5>
-
-                    <div class="trick__comment--form">
-
-                    </div>
-                    {% if trick.comments is empty %}
-                        <p>Pas de commentaire pour le moment !</p>
-                    {% else %}
-                        {% include('comment_card.html.twig') %}
-                    {% endif %}
+                    {% include('trick_comment_section.html.twig') %}
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>

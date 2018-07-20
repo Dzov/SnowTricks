@@ -1,17 +1,14 @@
-.trick
-{
-  &__slider--images
-  {
+.trick {
+  &__slider--images {
     flex-wrap: nowrap;
     overflow-x: auto;
 
     .card {
-      flex: 1 0 18%!important;
+      flex: 0 0 15% !important;
     }
   }
 
-  &__information--container
-  {
+  &__information--container {
     ul {
       list-style-type: none;
       margin: 0;
@@ -26,19 +23,36 @@
   }
 }
 
-.trick__comments
-{
-  &--img{
-      border-radius: 30px;
-      width: 50px;
-      height: 50px;
+.trick__comments {
+  &--img {
+    border-radius: 30px;
+    width: 50px;
+    height: 50px;
   }
 
-  &--comment
-  {
+  &--comment {
     box-shadow: #565656 -2px 1px 3px;
   }
-  &--content{
+  &--content {
     font-size: 15px;
+  }
+}
+
+@media (min-width: 640px) {
+  .comments__section, .trick_edit_form {
+    width: 55%;
+    margin: auto;
+
+    h5 {
+      text-align: center;
+    }
+  }
+  
+  .trick_edit_form
+  {
+    button{
+      width: 50%;
+      margin: auto;
+    }
   }
 }
