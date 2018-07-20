@@ -12,6 +12,7 @@ use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\Form\FormInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Validator\Constraints\Choice;
+use Symfony\Component\Validator\Constraints\NotBlank;
 
 /**
  * @author Amélie-Dzovinar Haladjian
@@ -35,18 +36,20 @@ class EditTrickFormType extends AbstractType
                 'description',
                 TextareaType::class,
                 array(
-                    'attr'     => array('class' => 'form-control'),
-                    'label'    => 'Description',
-                    'required' => true
+                    'attr'        => array('class' => 'form-control'),
+                    'label'       => 'Description',
+                    'required'    => true,
+                    'constraints' => array(new NotBlank())
                 )
             )
             ->add(
                 'name',
                 TextType::class,
                 array(
-                    'attr'     => array('class' => 'form-control'),
-                    'label'    => 'Nom de la figure',
-                    'required' => true
+                    'attr'        => array('class' => 'form-control'),
+                    'label'       => 'Nom de la figure',
+                    'required'    => true,
+                    'constraints' => array(new NotBlank())
                 )
             )
 //            ->add(
@@ -71,7 +74,7 @@ class EditTrickFormType extends AbstractType
     {
         $resolver->setDefaults(
             [
-                'data_class' => 'App\Entity\Trick'
+                'data_class' => 'App\Entity\Trick',
             ]
         );
     }
