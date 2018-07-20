@@ -54,6 +54,11 @@ class Trick
      */
     private $updatedAt;
 
+//    /**
+//     * @var ArrayCollection
+//     */
+//    private $uploadedFiles;
+
     /**
      * @ORM\OneToMany(targetEntity="App\Entity\Video", mappedBy="trick")
      */
@@ -161,6 +166,13 @@ class Trick
         return $this;
     }
 
+    public function addImages(Collection $images): self
+    {
+        foreach ($images as $image) {
+            $this->images[] = $image;
+        }
+    }
+
     /**
      * @return Collection|Video[]
      */
@@ -175,4 +187,47 @@ class Trick
 
         return $this;
     }
+
+//    public function upload()
+//    {
+//        foreach($this->uploadedFiles as $uploadedFile)
+//        {
+//            $file = new Image();
+//
+//            $fileName = sha1(uniqid()).'.'.$uploadedFile->guessExtension();
+//            $file->setFileName($fileName);
+//
+//            $uploadedFile->move($this->getUploadRootDir(), $fileName);
+//
+//            $this->getImages()->add($file);
+//            $file->setTrick($this);
+//
+//            unset($uploadedFile);
+//        }
+//    }
+//
+//    public function getUploadDir()
+//    {
+//        // On retourne le chemin relatif vers l'image pour un navigateur (relatif au répertoire /web donc)
+//        return 'uploads/img';
+//    }
+//
+//    protected function getUploadRootDir()
+//    {
+//        // On retourne le chemin relatif vers l'image pour notre code PHP
+//        return __DIR__.'/../../../../web/'.$this->getUploadDir();
+//    }
+//
+//    /**
+//     * @return ArrayCollection
+//     */
+//    public function getUploadedFiles(): ArrayCollection
+//    {
+//        return $this->uploadedFiles;
+//    }
+//
+//    public function setUploadedFiles(array $uploadedFiles)
+//    {
+//        $this->uploadedFiles = $uploadedFiles;
+//    }
 }
