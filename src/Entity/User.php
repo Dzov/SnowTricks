@@ -11,11 +11,9 @@ use Symfony\Component\Security\Core\User\UserInterface;
 class User implements UserInterface
 {
     /**
-     * @ORM\Id()
-     * @ORM\GeneratedValue()
-     * @ORM\Column(type="integer")
+     * @ORM\Column(type="boolean")
      */
-    private $id;
+    private $activated;
 
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
@@ -25,17 +23,24 @@ class User implements UserInterface
     /**
      * @ORM\Column(type="string", length=255)
      */
+    private $email;
+
+    /**
+     * @ORM\Column(type="string", length=255)
+     */
     private $firstName;
+
+    /**
+     * @ORM\Id()
+     * @ORM\GeneratedValue()
+     * @ORM\Column(type="integer")
+     */
+    private $id;
 
     /**
      * @ORM\Column(type="string", length=255)
      */
     private $lastName;
-
-    /**
-     * @ORM\Column(type="string", length=255)
-     */
-    private $email;
 
     /**
      * @ORM\Column(type="string", length=255)
@@ -48,14 +53,14 @@ class User implements UserInterface
     private $registeredAt;
 
     /**
+     * @ORM\Column(type="string")
+     */
+    private $token;
+
+    /**
      * @var string
      */
     private $username;
-
-    /**
-     * @ORM\Column(type="boolean")
-     */
-    private $activated;
 
     public function getId()
     {
@@ -170,5 +175,17 @@ class User implements UserInterface
 
     public function eraseCredentials()
     {
+    }
+
+    public function getToken(): ?string
+    {
+        return $this->token;
+    }
+
+    public function setToken(string $token = null): self
+    {
+        $this->token = $token;
+
+        return $this;
     }
 }

@@ -15,7 +15,7 @@ security:
             form_login:
                 login_path: login
                 check_path: login
-                csrf_token_generator: security.csrf.token_manager
+
 
             # http_basic: true
             # https://symfony.com/doc/current/security.html#a-configuring-how-your-users-will-authenticate

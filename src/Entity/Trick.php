@@ -159,18 +159,14 @@ class Trick
         return $this->images;
     }
 
-    public function setImages(Collection $images): self
-    {
-        $this->images = $images;
-
-        return $this;
-    }
-
     public function addImages(Collection $images): self
     {
         foreach ($images as $image) {
             $this->images[] = $image;
+            $image->setTrick($this);
         }
+
+        return $this;
     }
 
     /**

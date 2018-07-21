@@ -3,6 +3,7 @@
 namespace App\Form;
 
 use App\Entity\Category;
+use App\Entity\Trick;
 use App\Form\Type\ImageType;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
@@ -64,6 +65,8 @@ class EditTrickFormType extends AbstractType
                     ),
                     'allow_add'     => true,
                     'allow_delete'  => true,
+                    'required'      => false,
+                    'by_reference'  => false
                 )
             )
 //            ->add(
@@ -81,7 +84,7 @@ class EditTrickFormType extends AbstractType
     {
         $resolver->setDefaults(
             [
-                'data_class' => 'App\Entity\Trick',
+                'data_class' => Trick::class,
             ]
         );
     }
