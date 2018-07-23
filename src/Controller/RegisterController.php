@@ -49,6 +49,11 @@ class RegisterController extends Controller
 
             $this->sendValidationEmail($mailer, $user, $token);
 
+            $this->addFlash(
+                'info',
+                'Votre inscription est bien enregistrée ! Un mail de confirmation vous a été envoyé, cliquez sur le lien pour activer votre compte.'
+            );
+
             return $this->redirectToRoute('home');
         }
 
@@ -79,6 +84,7 @@ class RegisterController extends Controller
      */
     public function validate(Request $request)
     {
+
         $token = $request->get('t');
 
         if (!$token) {
@@ -88,14 +94,14 @@ class RegisterController extends Controller
         $user = $this->getDoctrine()->getRepository(User::class)->findOneBy(['id' => $request->get('u')]);
 
         if (!$user) {
-            return new Response(new UsernameNotFoundException());
+            throw $this->createNotFoundException('404');
         }
 
-        if ($user->getToken() === $token) {
-            $user->setActivated(true);
+        if ($this->isCsrfTokenValid($user->getToken(), $token)) {
+            $user->activate();
+            $this->getDoctrine()->getManager()->flush();
+            $this->addFlash('success', 'Votre compte a été activé');
         }
-
-        $this->addFlash('success', 'Votre compte a été activé');
 
         return $this->redirect('/');
     }
