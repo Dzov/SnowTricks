@@ -72,4 +72,17 @@
   padding: 20px;
 }
 
+ul {
+  margin-bottom: 0;
+  padding: 0;
+}
+
+li {
+  list-style-type: none;
+}
+
+a {
+  text-decoration: none;
+}
+
 /*# sourceMappingURL=master.css.map */

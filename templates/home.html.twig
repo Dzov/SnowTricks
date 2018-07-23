@@ -3,11 +3,7 @@
 {% block body %}
     <section class="home__jumbotron">
         {% include('flash_messages.html.twig') %}
-        {% if is_granted('IS_AUTHENTICATED_FULLY') %}
-            <p class="home__jumbotron--slogan">SnowTricks <br> Ravi de vous voir {{ app.user.firstName }} ! </p>
-        {% else %}
-            <p class="home__jumbotron--slogan">SnowTricks <br> Rejoignez la communauté des passionnés de snowboard !</p>
-        {% endif %}
+        <p class="home__jumbotron--slogan">SnowTricks <br> Rejoignez la communauté des passionnés de snowboard !</p>
     </section>
 
     {% include('trick_card.html.twig') %}

@@ -32,8 +32,13 @@ class AddTrickController extends Controller
             $em->flush();
 
             $this->addFlash('success', 'La figure a bien été créée');
+
+            return $this->redirect('/');
         }
 
-        return $this->render('add_trick.html.twig', ['form' => $form->createView(), 'trick' => $trick]);
+        return $this->render(
+            'add_trick.html.twig',
+            ['form' => $form->createView(), 'trick' => $trick]
+        );
     }
 }
