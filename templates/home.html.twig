@@ -2,6 +2,7 @@
 
 {% block body %}
     <section class="home__jumbotron">
+        {% include('flash_messages.html.twig') %}
         {% if is_granted('IS_AUTHENTICATED_FULLY') %}
             <p class="home__jumbotron--slogan">SnowTricks <br> Ravi de vous voir {{ app.user.firstName }} ! </p>
         {% else %}
