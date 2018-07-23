@@ -1,0 +1,52 @@
+{% extends('base.html.twig') %}
+
+{% block body %}
+    {% if trick.images is not empty %}
+        {% for image in trick.images | slice(0) %}
+            <div class="trick_header_image" style="background: url('/img/{{ asset(image.fileName) }}') center 30%; background-size: cover; height: 300px; width: auto">
+            </div>
+        {% endfor %}
+    {% endif %}
+    <section id="tricks_section" class="mx-md-5 my-md-3">
+        <div class="modal-body">
+            {% if trick.images is not empty %}
+                <div class="trick__slider--container">
+                    <div class="trick__slider--images">
+                        {% for image in trick.images %}
+                            <div class="border-0 d-flex justify-content-between">
+                                <img src="/img{{ asset(image.fileName) }}" alt="Image de la figure {{ trick.name }}" width="105" height="105" class="card">
+                            </div>
+                            <div class="controls">
+                                <a href="{{ path( 'edit_trick', {'trickId': trick.id} ) }}"><i class="fa fa-pencil mr-2"></i></a>
+                                <a href=""><i class="fa fa-trash"></i></a>
+                            </div>
+                        {% endfor %}
+                    </div>
+                </div>
+                <hr>
+            {% endif %}
+            <div class="trick_edit_form d-flex flex-column my-4">
+                {% if errors is defined %}
+                    {{ dump(errors) }}
+                {% endif %}
+                <h3 class="text-md-center mb-4">Ajouter une figure</h3>
+                {{ form_start(form, {'attr': {'class': 'd-flex flex-column'}}) }}
+                <div class="form-group">
+                    {{ form_row(form.name) }}
+                </div>
+                <div class="form-group">
+                    {{ form_row(form.description) }}
+                </div>
+                <div class="form-group">
+                    {{ form_row(form.category) }}
+                </div>
+                <div class="controls d-flex justify-content-around mx-md-3 my-3">
+                    <button type="submit" class="btn btn-success mr-md-3">Enregister</button>
+                    <button class="btn btn-danger">Supprimer</button>
+                </div>
+                {{ form_end(form) }}
+
+            </div>
+        </div>
+    </section>
+{% endblock %}
