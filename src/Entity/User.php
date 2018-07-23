@@ -3,12 +3,13 @@
 namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Security\Core\User\AdvancedUserInterface;
 use Symfony\Component\Security\Core\User\UserInterface;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\UserRepository")
  */
-class User implements UserInterface
+class User implements UserInterface, AdvancedUserInterface
 {
     /**
      * @ORM\Column(type="boolean")
@@ -53,6 +54,11 @@ class User implements UserInterface
     private $registeredAt;
 
     /**
+     * @ORM\Column(type="json")
+     */
+    private $roles;
+
+    /**
      * @ORM\Column(type="string")
      */
     private $token;
@@ -61,6 +67,17 @@ class User implements UserInterface
      * @var string
      */
     private $username;
+
+    public function __construct()
+    {
+        $this->roles = ['ROLE_USER'];
+    }
+
+    public function activate()
+    {
+        $this->setActivated(true);
+        $this->addRole('ROLE_ACTIVE_USER');
+    }
 
     public function getId()
     {
@@ -151,9 +168,14 @@ class User implements UserInterface
         return $this;
     }
 
-    public function getRoles()
+    public function getRoles(): array
     {
-        return array('ROLE_USER');
+        return $this->roles;
+    }
+
+    public function addRole(string $role)
+    {
+        $this->roles[] = $role;
     }
 
     public function getSalt()
@@ -187,5 +209,25 @@ class User implements UserInterface
         $this->token = $token;
 
         return $this;
+    }
+
+    public function isAccountNonExpired()
+    {
+        // TODO: Implement isAccountNonExpired() method.
+    }
+
+    public function isAccountNonLocked()
+    {
+        // TODO: Implement isAccountNonLocked() method.
+    }
+
+    public function isCredentialsNonExpired()
+    {
+        // TODO: Implement isCredentialsNonExpired() method.
+    }
+
+    public function isEnabled()
+    {
+        // TODO: Implement isEnabled() method.
     }
 }

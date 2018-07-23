@@ -17,11 +17,10 @@ class ImageType extends AbstractType
     {
         $builder
             ->add(
-                'fileName',
+                'file',
                 FileType::class,
                 array(
                     'label'    => false,
-                    'multiple' => true,
                     'required' => 'false',
                 )
             );

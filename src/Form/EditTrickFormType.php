@@ -5,6 +5,7 @@ namespace App\Form;
 use App\Entity\Category;
 use App\Entity\Trick;
 use App\Form\Type\ImageType;
+use Doctrine\Common\Collections\Collection;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\CollectionType;
@@ -66,7 +67,6 @@ class EditTrickFormType extends AbstractType
                     'allow_add'     => true,
                     'allow_delete'  => true,
                     'required'      => false,
-                    'by_reference'  => false
                 )
             )
 //            ->add(

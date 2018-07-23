@@ -2,8 +2,9 @@
 
 namespace App\Controller;
 
+use App\Entity\Image;
 use App\Entity\Trick;
-use App\Form\AddTrickFormType;
+use App\Form\EditTrickFormType;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
@@ -19,8 +20,10 @@ class AddTrickController extends Controller
     public function add(Request $request)
     {
         $trick = new Trick();
+        $trick->addImage(new Image());
+        $trick->addImage(new Image());
 
-        $form = $this->createForm(AddTrickFormType::class, $trick);
+        $form = $this->createForm(EditTrickFormType::class, $trick);
 
         $form->handleRequest($request);
 

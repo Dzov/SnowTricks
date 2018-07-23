@@ -17,10 +17,10 @@ class Image
      */
     private $id;
 
-//    /**
-//     * @var UploadedFile[]
-//     */
-//    private $files;
+    /**
+     * @var UploadedFile
+     */
+    private $file;
 
     /**
      * @ORM\Column(type="string", length=255)
@@ -38,17 +38,17 @@ class Image
         return $this->id;
     }
 
-//    public function getFiles(): ?array
-//    {
-//        return $this->files;
-//    }
-//
-//    public function setFiles(array $files = []): self
-//    {
-//        $this->files = $files;
-//
-//        return $this;
-//    }
+    public function getFile(): ?UploadedFile
+    {
+        return $this->file;
+    }
+
+    public function setFile(UploadedFile $file = null): self
+    {
+        $this->file = $file;
+
+        return $this;
+    }
 
     public function getFileName(): ?string
     {
@@ -73,20 +73,4 @@ class Image
 
         return $this;
     }
-
-//    public function upload(string $dir, Trick $trick)
-//    {
-//
-//        foreach ($this->files as $file) {
-//            if (null === $file) {
-//                return;
-//            }
-//
-//            $filename = md5(uniqid()) . $file->getClientOriginalName() . $file->guessExtension();
-//
-//            $file->move($dir, $filename);
-//
-//            $this->fileName = $filename;
-//        }
-//    }
 }

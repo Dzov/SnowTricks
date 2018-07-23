@@ -92,7 +92,7 @@ class RegisterController extends Controller
         $user = $this->getDoctrine()->getRepository(User::class)->findOneBy(['id' => $request->get('u')]);
 
         if (!$user) {
-            throw $this->createNotFoundException('404');
+            throw $this->createNotFoundException();
         }
 
         if ($user->getToken() === $token) {
