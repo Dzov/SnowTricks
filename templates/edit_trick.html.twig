@@ -1,26 +1,30 @@
 {% extends('base.html.twig') %}
 
 {% block body %}
-    {% for image in trick.images | slice(0) %}
-        <div class="trick_header_image" style="background: url('/img/{{ asset(image.fileName) }}') center 30%; background-size: cover; height: 300px; width: auto">
-        </div>
-    {% endfor %}
+    {% if trick.images is not empty %}
+        {% for image in trick.images | slice(0) %}
+            <div class="trick_header_image" style="background: url('/img/{{ asset(image.fileName) }}') center 30%; background-size: cover; height: 300px; width: auto">
+            </div>
+        {% endfor %}
+    {% endif %}
     <section id="tricks_section" class="mx-md-5 my-md-3">
         <div class="modal-body">
-            <div class="trick__slider--container">
-                <div class="trick__slider--images">
-                    {% for image in trick.images %}
-                        <div class="border-0 d-flex justify-content-between">
-                            <img src="/img{{ asset(image.fileName) }}" alt="Image de la figure {{ trick.name }}" width="105" height="105" class="card">
-                        </div>
-                        <div class="controls">
-                            <a href="{{ path( 'edit_trick', {'trickId': trick.id} ) }}"><i class="fa fa-pencil mr-2"></i></a>
-                            <a href=""><i class="fa fa-trash"></i></a>
-                        </div>
-                    {% endfor %}
+            {% if trick.images is not empty %}
+                <div class="trick__slider--container">
+                    <div class="trick__slider--images">
+                        {% for image in trick.images %}
+                            <div class="border-0 d-flex justify-content-between">
+                                <img src="/img{{ asset(image.fileName) }}" alt="Image de la figure {{ trick.name }}" width="105" height="105" class="card">
+                            </div>
+                            <div class="controls">
+                                <a href="{{ path( 'edit_trick', {'trickId': trick.id} ) }}"><i class="fa fa-pencil mr-2"></i></a>
+                                <a href=""><i class="fa fa-trash"></i></a>
+                            </div>
+                        {% endfor %}
+                    </div>
                 </div>
-            </div>
-            <hr>
+                <hr>
+            {% endif %}
             <div class="trick_edit_form d-flex flex-column my-4">
                 {% if errors is defined %}
                     {{ dump(errors) }}

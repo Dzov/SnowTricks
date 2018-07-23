@@ -1,10 +1,17 @@
-<section id="tricks_section" class="mx-3 my-5">
+<section id="tricks_section" class="mx-3 my-4 d-flex flex-column align-items-center">
+    {% if is_granted('IS_AUTHENTICATED_FULLY') %}
+        <a href="{{ path('add_trick') }}" class="btn btn-success mb-3">Ajouter une figure</a>
+    {% endif %}
     <div class="card-deck">
         {% for trick in tricks %}
             <div class="trick_card card mb-3">
-                {% for image in trick.images | slice(0, 15) %}
-                    <img class="card-img-top" src="img{{ asset(image.fileName) }}" alt="Image de la figure {{ trick.name }}" width="100%" height="150">
-                {% endfor %}
+                {% if trick.images is not empty %}
+                    {% for image in trick.images | slice(0, 15) %}
+                        <img class="card-img-top" src="img{{ asset(image.fileName) }}" alt="Image de la figure {{ trick.name }}" width="100%" height="150">
+                    {% endfor %}
+                {% else %}
+                    <img class="card-img-top" src="img/trickPlaceholder.jpg" alt="Image de la figure {{ trick.name }}" width="100%" height="150">
+                {% endif %}
                 <div class="card-body d-flex justify-content-between">
                     <h5 class="card-title align-self-center mb-0">
                         <a href="#{{ trick.id }}" data-toggle="modal"> {{ trick.name | capitalize }}</a>
@@ -12,7 +19,7 @@
                     {% if is_granted('IS_AUTHENTICATED_FULLY') %}
                         <div class="controls d-flex align-self-center justify-content-between">
                             <a href="{{ path( 'edit_trick', {'trickId': trick.id} ) }}"><i class="fa fa-pencil mr-2"></i></a>
-                            <a href=""><i class="fa fa-trash"></i></a>
+                            <a href="#{{ trick.id }}_delete" data-toggle="modal"><i class="fa fa-trash"></i></a>
                         </div>
                     {% endif %}
                 </div>
@@ -28,8 +35,9 @@
                     </small>
                 </div>
             </div>
+            {% include('trick_information_modal.html.twig') %}
+            {% include('delete_confirmation.html.twig') %}
         {% endfor %}
     </div>
-    {% include('trick_information_modal.html.twig') %}
 </section>
 

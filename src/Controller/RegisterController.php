@@ -12,8 +12,6 @@ use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Symfony\Component\Security\Core\Exception\InvalidCsrfTokenException;
-use Symfony\Component\Security\Core\Exception\UsernameNotFoundException;
-use Symfony\Component\Security\Csrf\CsrfTokenManager;
 use Symfony\Component\Security\Csrf\TokenGenerator\TokenGeneratorInterface;
 
 /**
@@ -97,7 +95,7 @@ class RegisterController extends Controller
             throw $this->createNotFoundException('404');
         }
 
-        if ($this->isCsrfTokenValid($user->getToken(), $token)) {
+        if ($user->getToken() === $token) {
             $user->activate();
             $this->getDoctrine()->getManager()->flush();
             $this->addFlash('success', 'Votre compte a été activé');

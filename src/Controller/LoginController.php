@@ -26,7 +26,7 @@ class LoginController extends Controller
         return $this->render(
             'login.html.twig',
             array(
-                'form' => $form->createView(),
+                'form'         => $form->createView(),
                 'lastUsername' => $lastUsername,
                 'error'        => $error,
             )
