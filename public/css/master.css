@@ -14,8 +14,9 @@
   padding: 2% 0;
 }
 
-.trick_card {
-  flex: 1 0 15% !important;
+.card-deck {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
 }
 
 .trick__slider--images {
@@ -46,10 +47,6 @@
 }
 .trick__comments--content {
   font-size: 15px;
-}
-
-.trick_edit_form {
-  border: 0;
 }
 
 @media (min-width: 640px) {
