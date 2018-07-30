@@ -2,41 +2,33 @@
 
 namespace App\Controller;
 
+use App\Form\LoginFormType;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
-use Symfony\Component\Form\Extension\Core\Type\EmailType;
-use Symfony\Component\Form\Extension\Core\Type\PasswordType;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\Security\Http\Authentication\AuthenticationUtils;
+use Symfony\Component\Routing\Annotation\Route;
 
 /**
  * @author Amélie-Dzovinar Haladjian
  */
 class LoginController extends Controller
 {
-    public function login(): Response
+    /**
+     * @Route("/login", name="login")
+     */
+    public function login(AuthenticationUtils $authenticationUtils): Response
     {
-        $form = $this->createFormBuilder()
-            ->add(
-                'email',
-                EmailType::class,
-                array(
-                    'attr' => array('class' => 'form-control'),
-                    'label' => 'Email'
-                )
-            )
-            ->add(
-                'password',
-                PasswordType::class,
-                array(
-                    'attr' => array('class' => 'form-control'),
-                    'label' => 'Mot de passe'
-                )
-            )
-            ->getForm();
+        $error = $authenticationUtils->getLastAuthenticationError();
+        $lastUsername = $authenticationUtils->getLastUsername();
+
+        $form = $this->createForm(LoginFormType::class);
 
         return $this->render(
             'login.html.twig',
             array(
-                'form' => $form->createView(),
+                'form'         => $form->createView(),
+                'lastUsername' => $lastUsername,
+                'error'        => $error,
             )
         );
     }

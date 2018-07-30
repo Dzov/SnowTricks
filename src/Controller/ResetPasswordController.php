@@ -2,35 +2,24 @@
 
 namespace App\Controller;
 
+use App\Form\ResetPasswordFormType;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
-use Symfony\Component\Form\Extension\Core\Type\EmailType;
-use Symfony\Component\Form\Extension\Core\Type\PasswordType;
+use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\Routing\Annotation\Route;
 
 /**
  * @author Amélie-Dzovinar Haladjian
  */
 class ResetPasswordController extends Controller
 {
-    public function reset()
+    /**
+     * @Route("/reset", name="reset")
+     */
+    public function reset(Request $request)
     {
-        $form = $this->createFormBuilder()
-            ->add(
-                'email',
-                EmailType::class,
-                array(
-                    'attr'  => array('class' => 'form-control'),
-                    'label' => 'Email'
-                )
-            )
-            ->add(
-                'password',
-                PasswordType::class,
-                array(
-                    'attr'  => array('class' => 'form-control'),
-                    'label' => 'Mot de passe'
-                )
-            )
-            ->getForm();
+        $form = $this->createForm(ResetPasswordFormType::class);
+
+        $form->handleRequest($request);
 
         return $this->render(
             'reset_password.html.twig',

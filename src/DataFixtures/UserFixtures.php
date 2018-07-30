@@ -17,7 +17,7 @@ class UserFixtures extends Fixture
         $user1->setFirstName('John');
         $user1->setLastName('Simmons');
         $user1->setEmail('john.simmons@gmail.com');
-        $user1->setPassword(sha1('john'));
+        $user1->setPassword(password_hash('john', PASSWORD_BCRYPT));
         $user1->setActivated(true);
         $user1->setRegisteredAt(new \DateTime());
         $user1->setAvatar('johnAvatar.jpeg');
@@ -27,7 +27,7 @@ class UserFixtures extends Fixture
         $user2->setFirstName('Sam');
         $user2->setLastName('Sander');
         $user2->setEmail('sam.sander@gmail.com');
-        $user2->setPassword(sha1('sam'));
+        $user2->setPassword(password_hash('sam', PASSWORD_BCRYPT));
         $user2->setActivated(true);
         $user2->setRegisteredAt(new \DateTime());
         $user2->setAvatar('samAvatar.png');
@@ -37,7 +37,7 @@ class UserFixtures extends Fixture
         $user3->setFirstName('Alex');
         $user3->setLastName('Shaw');
         $user3->setEmail('alex.shaw@gmail.com');
-        $user3->setPassword(sha1('alex'));
+        $user3->setPassword(password_hash('alex', PASSWORD_BCRYPT));
         $user3->setActivated(true);
         $user3->setRegisteredAt(new \DateTime());
         $user3->setAvatar('avatarDummy.png');
@@ -47,7 +47,7 @@ class UserFixtures extends Fixture
         $user4->setFirstName('Ahmad');
         $user4->setLastName('Tiha');
         $user4->setEmail('ahmad.tiha@gmail.com');
-        $user4->setPassword(sha1('Ahmad'));
+        $user4->setPassword(password_hash('Ahmad', PASSWORD_BCRYPT));
         $user4->setActivated(true);
         $user4->setRegisteredAt(new \DateTime());
         $user4->setAvatar('ahmadAvatar.jpeg');
@@ -57,7 +57,7 @@ class UserFixtures extends Fixture
         $user5->setFirstName('Kimmy');
         $user5->setLastName('Gale');
         $user5->setEmail('kimmy.gale@gmail.com');
-        $user5->setPassword(sha1('kimmy'));
+        $user5->setPassword(password_hash('kimmy', PASSWORD_BCRYPT));
         $user5->setActivated(true);
         $user5->setRegisteredAt(new \DateTime());
         $user5->setAvatar('avatarDummy.png');
