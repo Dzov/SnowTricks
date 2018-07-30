@@ -1,6 +1,8 @@
 <section id="tricks_section" class="mx-3 my-4 d-flex flex-column align-items-center">
-    {% if is_granted('IS_AUTHENTICATED_FULLY') %}
-        <a href="{{ path('add_trick') }}" class="btn btn-success mb-3">Ajouter une figure</a>
+    {% if app.user is not null %}
+        {% if app.user.activated == true %}
+            <a href="{{ path('add_trick') }}" class="btn btn-success mb-3">Ajouter une figure</a>
+        {% endif %}
     {% endif %}
     <div class="card-deck">
         {% for trick in tricks | slice(0, 15) %}
@@ -16,11 +18,13 @@
                     <h5 class="card-title align-self-center mb-0">
                         <a href="#{{ trick.id }}" data-toggle="modal"> {{ trick.name | capitalize }}</a>
                     </h5>
-                    {% if is_granted('IS_AUTHENTICATED_FULLY') %}
-                        <div class="controls d-flex align-self-center justify-content-between">
-                            <a href="{{ path( 'edit_trick', {'trickId': trick.id} ) }}"><i class="fa fa-pencil mr-2"></i></a>
-                            <a href="#{{ trick.id }}_delete" data-toggle="modal"><i class="fa fa-trash"></i></a>
-                        </div>
+                    {% if app.user is not null %}
+                        {% if app.user.activated == true %}
+                            <div class="controls d-flex align-self-center justify-content-between">
+                                <a href="{{ path( 'edit_trick', {'trickId': trick.id} ) }}"><i class="fa fa-pencil mr-2"></i></a>
+                                <a href="#{{ trick.id }}_delete" data-toggle="modal"><i class="fa fa-trash"></i></a>
+                            </div>
+                        {% endif %}
                     {% endif %}
                 </div>
                 <div class="card-footer">
