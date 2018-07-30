@@ -9,24 +9,8 @@
     {% endif %}
     <section id="tricks_section" class="mx-md-5 my-md-3">
         <div class="modal-body">
-            {% if trick.images is not empty %}
-                <div class="trick__slider--container">
-                    <div class="trick__slider--images">
-                        {% for image in trick.images %}
-                            <div class="border-0 d-flex justify-content-between">
-                                <img src="/img{{ asset(image.fileName) }}" alt="Image de la figure {{ trick.name }}" width="105" height="105" class="card">
-                            </div>
-                            <div class="controls">
-                                <a href="{{ path( 'edit_trick', {'trickId': trick.id} ) }}"><i class="fa fa-pencil mr-2"></i></a>
-                                <a href=""><i class="fa fa-trash"></i></a>
-                            </div>
-                        {% endfor %}
-                    </div>
-                </div>
-                <hr>
-            {% endif %}
             <div class="trick_edit_form d-flex flex-column my-4">
-                <h3 class="text-md-center mb-4">Modifier la figure</h3>
+                <h3 class="text-md-center mb-4">Ajouter une figure</h3>
                 {{ form_start(form, {'attr': {'class': 'd-flex flex-column'}}) }}
                 <div class="form-group">
                     {% if form_errors(form.name) is not empty %}
@@ -40,7 +24,7 @@
                 <div class="form-group">
                     {% if form_errors(form.description) is not empty %}
                         <div class="alert alert-danger" role="alert">
-                            {{ form_errors(form.description) }}
+                            {{ form_errors(form.name) }}
                         </div>
                     {% endif %}
                     {{ form_label(form.description) }}

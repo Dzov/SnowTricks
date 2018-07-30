@@ -3,6 +3,9 @@
 namespace App\Form;
 
 use App\Entity\Category;
+use App\Entity\Trick;
+use App\Form\Type\ImageType;
+use Doctrine\Common\Collections\Collection;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\CollectionType;
@@ -52,13 +55,20 @@ class EditTrickFormType extends AbstractType
                     'constraints' => array(new NotBlank())
                 )
             )
-//            ->add(
-//                'images',
-//                CollectionType::class,
-//                array(
-//                    'attr' => array('class' => 'form-control'),
-//                )
-//            )
+            ->add(
+                'images',
+                CollectionType::class,
+                array(
+                    'attr'          => array('class' => 'form-control'),
+                    'entry_type'    => ImageType::class,
+                    'entry_options' => array(
+                        'label' => false,
+                    ),
+                    'allow_add'     => true,
+                    'allow_delete'  => true,
+                    'required'      => false,
+                )
+            )
 //            ->add(
 //                'videos',
 //                CollectionType::class,
@@ -74,7 +84,7 @@ class EditTrickFormType extends AbstractType
     {
         $resolver->setDefaults(
             [
-                'data_class' => 'App\Entity\Trick',
+                'data_class' => Trick::class,
             ]
         );
     }

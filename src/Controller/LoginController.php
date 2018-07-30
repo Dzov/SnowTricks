@@ -2,10 +2,11 @@
 
 namespace App\Controller;
 
+use App\Form\LoginFormType;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Security\Http\Authentication\AuthenticationUtils;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
+use Symfony\Component\Routing\Annotation\Route;
 
 /**
  * @author Amélie-Dzovinar Haladjian
@@ -20,9 +21,12 @@ class LoginController extends Controller
         $error = $authenticationUtils->getLastAuthenticationError();
         $lastUsername = $authenticationUtils->getLastUsername();
 
+        $form = $this->createForm(LoginFormType::class);
+
         return $this->render(
             'login.html.twig',
             array(
+                'form'         => $form->createView(),
                 'lastUsername' => $lastUsername,
                 'error'        => $error,
             )

@@ -14,52 +14,32 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 /**
  * @author Amélie-Dzovinar Haladjian
  */
-class RegisterFormType extends AbstractType
+class LoginFormType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options): FormInterface
     {
         return $builder
             ->add(
-                'firstName',
+                '_username',
                 TextType::class,
                 array(
                     'attr'  => array('class' => 'form-control'),
-                    'label' => 'Prénom'
+                    'label' => 'Email',
                 )
             )
             ->add(
-                'lastName',
-                TextType::class,
-                array(
-                    'attr'  => array('class' => 'form-control'),
-                    'label' => 'Nom de famille'
-                )
-            )
-            ->add(
-                'email',
-                EmailType::class,
-                array(
-                    'attr'  => array('class' => 'form-control'),
-                    'label' => 'Email'
-                )
-            )
-            ->add(
-                'password',
+                '_password',
                 PasswordType::class,
                 array(
                     'attr'  => array('class' => 'form-control'),
-                    'label' => 'Mot de passe'
+                    'label' => 'Mot de passe',
                 )
             )
             ->getForm();
     }
 
-    public function configureOptions(OptionsResolver $resolver)
+    public function getBlockPrefix()
     {
-        $resolver->setDefaults(
-            [
-                'data_class' => User::class,
-            ]
-        );
+        return null;
     }
 }
