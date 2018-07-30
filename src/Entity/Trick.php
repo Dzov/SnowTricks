@@ -5,9 +5,13 @@ namespace App\Entity;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\TrickRepository")
+ *
+ * @UniqueEntity("name", message="Une figure du même nom existe déjà")
  */
 class Trick
 {
@@ -36,16 +40,20 @@ class Trick
 
     /**
      * @ORM\Column(type="text")
+     *
+     * @Assert\NotBlank()
      */
     private $description;
 
     /**
-     * @ORM\OneToMany(targetEntity="App\Entity\Image", mappedBy="trick")
+     * @ORM\OneToMany(targetEntity="App\Entity\Image", mappedBy="trick", cascade={"persist"})
      */
     private $images;
 
     /**
      * @ORM\Column(type="string", length=255)
+     *
+     * @Assert\NotBlank()
      */
     private $name;
 
@@ -149,14 +157,22 @@ class Trick
     /**
      * @return Collection|Image[]
      */
-    public function getImages(): Collection
+    public function getImages()
     {
         return $this->images;
     }
 
-    public function setImages(Collection $images): self
+    public function removeImage($image)
     {
-        $this->images = $images;
+        $this->images->remove($image);
+
+        return $this;
+    }
+
+    public function addImage($image): self
+    {
+        $this->images->add($image);
+        $image->setTrick($this);
 
         return $this;
     }
@@ -164,12 +180,12 @@ class Trick
     /**
      * @return Collection|Video[]
      */
-    public function getVideos(): Collection
+    public function getVideos(): ArrayCollection
     {
         return $this->videos;
     }
 
-    public function setVideos(Collection $videos): self
+    public function setVideos(ArrayCollection $videos): self
     {
         $this->videos = $videos;
 
