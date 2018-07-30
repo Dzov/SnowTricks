@@ -2,6 +2,7 @@
 
 namespace App\Form\Type;
 
+use App\Entity\Image;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\FileType;
 use Symfony\Component\Form\FormBuilderInterface;
@@ -16,11 +17,10 @@ class ImageType extends AbstractType
     {
         $builder
             ->add(
-                'fileName',
+                'file',
                 FileType::class,
                 array(
                     'label'    => false,
-                    'multiple' => true,
                     'required' => 'false',
                 )
             );
@@ -30,7 +30,7 @@ class ImageType extends AbstractType
     {
         $resolver->setDefaults(
             [
-                'data_class' => "App\Entity\Image",
+                'data_class' => Image::class,
             ]
         );
     }

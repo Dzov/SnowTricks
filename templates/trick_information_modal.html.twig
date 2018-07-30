@@ -1,44 +1,42 @@
-{% for trick in tricks %}
-    <div class="modal fade " id="{{ trick.id }}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
-        <div class="modal-dialog modal-lg" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    {% for image in trick.images | slice(0) %}
-                        <img src="img{{ asset(image.fileName) }}" alt="Image de la figure {{ trick.name }}" width="100%" height="300">
-                    {% endfor %}
+<div class="modal fade " id="{{ trick.id }}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                {% for image in trick.images | slice(0) %}
+                    <img src="img{{ asset(image.fileName) }}" alt="Image de la figure {{ trick.name }}" width="100%" height="300">
+                {% endfor %}
+            </div>
+            <div class="modal-body">
+                <div class="trick__slider--container">
+                    <div class="card-deck trick__slider--images">
+                        {% for image in trick.images %}
+                            <div class="card border-0">
+                                <img src="img{{ asset(image.fileName) }}" alt="Image de la figure {{ trick.name }}" width="105" height="105">
+                            </div>
+                        {% endfor %}
+                    </div>
                 </div>
-                <div class="modal-body">
-                    <div class="trick__slider--container">
-                        <div class="card-deck trick__slider--images">
-                            {% for image in trick.images %}
-                                <div class="card border-0">
-                                    <img src="img{{ asset(image.fileName) }}" alt="Image de la figure {{ trick.name }}" width="105" height="105">
-                                </div>
-                            {% endfor %}
-                        </div>
-                    </div>
-                    <div class="trick__information--container d-flex flex-column">
-                        <p class="mx-4 my-3 text-justify">{{ trick.description }}</p>
-                        <ul class=" d-flex justify-content-around">
-                            <li>
-                                <small class="text-muted">Groupe: {{ trick.category.name }}</small>
-                            </li>
-                            <li>
-                                <small class="text-muted">Créé le {{ trick.createdAt | date("d/m/Y") }}</small>
-                            </li>
-                            <li>
-                                <small class="text-muted">Modifié le {{ trick.updatedAt | date("d/m/Y") }}</small>
-                            </li>
-                        </ul>
-                    </div>
+                <div class="trick__information--container d-flex flex-column">
+                    <p class="mx-4 my-3 text-justify">{{ trick.description }}</p>
+                    <ul class=" d-flex justify-content-around">
+                        <li>
+                            <small class="text-muted">Groupe: {{ trick.category.name }}</small>
+                        </li>
+                        <li>
+                            <small class="text-muted">Créé le {{ trick.createdAt | date("d/m/Y") }}</small>
+                        </li>
+                        <li>
+                            <small class="text-muted">Modifié le {{ trick.updatedAt | date("d/m/Y") }}</small>
+                        </li>
+                    </ul>
+                </div>
 
-                    <hr>
-                    {% include('trick_comment_section.html.twig') %}
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                </div>
+                <hr>
+                {% include('trick_comment_section.html.twig') %}
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
             </div>
         </div>
     </div>
-{% endfor %}
+</div>

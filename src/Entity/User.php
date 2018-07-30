@@ -3,6 +3,7 @@
 namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Security\Core\User\AdvancedUserInterface;
 use Symfony\Component\Security\Core\User\UserInterface;
 
 /**
@@ -11,11 +12,9 @@ use Symfony\Component\Security\Core\User\UserInterface;
 class User implements UserInterface
 {
     /**
-     * @ORM\Id()
-     * @ORM\GeneratedValue()
-     * @ORM\Column(type="integer")
+     * @ORM\Column(type="boolean")
      */
-    private $id;
+    private $activated;
 
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
@@ -25,17 +24,24 @@ class User implements UserInterface
     /**
      * @ORM\Column(type="string", length=255)
      */
+    private $email;
+
+    /**
+     * @ORM\Column(type="string", length=255)
+     */
     private $firstName;
+
+    /**
+     * @ORM\Id()
+     * @ORM\GeneratedValue()
+     * @ORM\Column(type="integer")
+     */
+    private $id;
 
     /**
      * @ORM\Column(type="string", length=255)
      */
     private $lastName;
-
-    /**
-     * @ORM\Column(type="string", length=255)
-     */
-    private $email;
 
     /**
      * @ORM\Column(type="string", length=255)
@@ -48,14 +54,31 @@ class User implements UserInterface
     private $registeredAt;
 
     /**
+     * @ORM\Column(type="json")
+     */
+    private $roles = [];
+
+    /**
+     * @ORM\Column(type="string")
+     */
+    private $token;
+
+    /**
      * @var string
      */
     private $username;
 
-    /**
-     * @ORM\Column(type="boolean")
-     */
-    private $activated;
+    public function __construct()
+    {
+        $this->roles[] = 'ROLE_USER';
+        $this->activated = false;
+        $this->registeredAt = new \DateTime();
+    }
+
+    public function activate()
+    {
+        $this->setActivated(true);
+    }
 
     public function getId()
     {
@@ -146,9 +169,19 @@ class User implements UserInterface
         return $this;
     }
 
-    public function getRoles()
+    public function getRoles(): array
     {
-        return array('ROLE_USER');
+        return $this->roles;
+    }
+
+    public function addRole(string $role): self
+    {
+        if (!in_array('ROLE_USER', $this->roles)) {
+            $this->roles[] = 'ROLE_USER';
+        }
+        $this->roles[] = $role;
+
+        return $this;
     }
 
     public function getSalt()
@@ -170,5 +203,17 @@ class User implements UserInterface
 
     public function eraseCredentials()
     {
+    }
+
+    public function getToken(): ?string
+    {
+        return $this->token;
+    }
+
+    public function setToken(string $token = null): self
+    {
+        $this->token = $token;
+
+        return $this;
     }
 }

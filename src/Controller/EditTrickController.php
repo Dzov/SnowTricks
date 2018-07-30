@@ -18,25 +18,21 @@ class EditTrickController extends Controller
     /**
      * @Route("/tricks/{trickId}/edit", name="edit_trick", requirements={"id" = "\d+"})
      */
-    public function showEdit(Request $request, int $trickId)
+    public function edit(Request $request, int $trickId)
     {
         $trick = $this->getDoctrine()->getRepository(Trick::class)->find($trickId);
-//        $images = $this->getDoctrine()->getRepository(Image::class)->findBy(['trick' => $trick]);
 
         $form = $this->createForm(EditTrickFormType::class, $trick);
-            $images = $trick->getImages();
-//            dump($form); die;
+        $images = $trick->getImages();
 
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
             $trick->setUpdatedAt(new \DateTime());
 
-
-//            $trick->upload();
-
-//            $files = $trick->getImages();
-//
+            /**
+             * todo in listener
+             */
             foreach ($images as $file) {
                 /** @var UploadedFile $file */
                 $fileName = md5(uniqid()) . '.' . $file['file']->guessExtension();
@@ -44,21 +40,14 @@ class EditTrickController extends Controller
                 $file->move($this->getParameter('images_directory'), $fileName);
             }
 
-//            foreach ($images as $k => $image) {
-//                $image->setTrick($trick);
-//            }
-
             $this->getDoctrine()->getManager()->flush();
+
+            $this->addFlash('success', 'La figure a bien été mise à jour');
         }
 
         return $this->render(
             'edit_trick.html.twig',
             ['trick' => $trick, 'form' => $form->createView()]
         );
-    }
-
-    public function generateUniqueFileName()
-    {
-
     }
 }

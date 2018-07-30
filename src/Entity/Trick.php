@@ -5,9 +5,13 @@ namespace App\Entity;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\TrickRepository")
+ *
+ * @UniqueEntity("name", message="Une figure du même nom existe déjà")
  */
 class Trick
 {
@@ -36,16 +40,20 @@ class Trick
 
     /**
      * @ORM\Column(type="text")
+     *
+     * @Assert\NotBlank()
      */
     private $description;
 
     /**
-     * @ORM\OneToMany(targetEntity="App\Entity\Image", mappedBy="trick")
+     * @ORM\OneToMany(targetEntity="App\Entity\Image", mappedBy="trick", cascade={"persist"})
      */
     private $images;
 
     /**
      * @ORM\Column(type="string", length=255)
+     *
+     * @Assert\NotBlank()
      */
     private $name;
 
@@ -53,11 +61,6 @@ class Trick
      * @ORM\Column(type="datetime", nullable=true)
      */
     private $updatedAt;
-
-//    /**
-//     * @var ArrayCollection
-//     */
-//    private $uploadedFiles;
 
     /**
      * @ORM\OneToMany(targetEntity="App\Entity\Video", mappedBy="trick")
@@ -154,80 +157,38 @@ class Trick
     /**
      * @return Collection|Image[]
      */
-    public function getImages(): Collection
+    public function getImages()
     {
         return $this->images;
     }
 
-    public function setImages(Collection $images): self
+    public function removeImage($image)
     {
-        $this->images = $images;
+        $this->images->remove($image);
 
         return $this;
     }
 
-    public function addImages(Collection $images): self
+    public function addImage($image): self
     {
-        foreach ($images as $image) {
-            $this->images[] = $image;
-        }
+        $this->images->add($image);
+        $image->setTrick($this);
+
+        return $this;
     }
 
     /**
      * @return Collection|Video[]
      */
-    public function getVideos(): Collection
+    public function getVideos(): ArrayCollection
     {
         return $this->videos;
     }
 
-    public function setVideos(Collection $videos): self
+    public function setVideos(ArrayCollection $videos): self
     {
         $this->videos = $videos;
 
         return $this;
     }
-
-//    public function upload()
-//    {
-//        foreach($this->uploadedFiles as $uploadedFile)
-//        {
-//            $file = new Image();
-//
-//            $fileName = sha1(uniqid()).'.'.$uploadedFile->guessExtension();
-//            $file->setFileName($fileName);
-//
-//            $uploadedFile->move($this->getUploadRootDir(), $fileName);
-//
-//            $this->getImages()->add($file);
-//            $file->setTrick($this);
-//
-//            unset($uploadedFile);
-//        }
-//    }
-//
-//    public function getUploadDir()
-//    {
-//        // On retourne le chemin relatif vers l'image pour un navigateur (relatif au répertoire /web donc)
-//        return 'uploads/img';
-//    }
-//
-//    protected function getUploadRootDir()
-//    {
-//        // On retourne le chemin relatif vers l'image pour notre code PHP
-//        return __DIR__.'/../../../../web/'.$this->getUploadDir();
-//    }
-//
-//    /**
-//     * @return ArrayCollection
-//     */
-//    public function getUploadedFiles(): ArrayCollection
-//    {
-//        return $this->uploadedFiles;
-//    }
-//
-//    public function setUploadedFiles(array $uploadedFiles)
-//    {
-//        $this->uploadedFiles = $uploadedFiles;
-//    }
 }
