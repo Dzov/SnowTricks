@@ -3,6 +3,7 @@
 namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\HttpFoundation\File\UploadedFile;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\ImageRepository")
@@ -17,12 +18,17 @@ class Image
     private $id;
 
     /**
+     * @var UploadedFile
+     */
+    private $file;
+
+    /**
      * @ORM\Column(type="string", length=255)
      */
     private $fileName;
 
     /**
-     * @ORM\ManyToOne(targetEntity="App\Entity\Trick", cascade={"persist"})
+     * @ORM\ManyToOne(targetEntity="App\Entity\Trick", inversedBy="images")
      * @ORM\JoinColumn(nullable=false)
      */
     private $trick;
@@ -30,6 +36,18 @@ class Image
     public function getId()
     {
         return $this->id;
+    }
+
+    public function getFile(): ?UploadedFile
+    {
+        return $this->file;
+    }
+
+    public function setFile(UploadedFile $file = null): self
+    {
+        $this->file = $file;
+
+        return $this;
     }
 
     public function getFileName(): ?string

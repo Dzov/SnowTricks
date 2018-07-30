@@ -5,7 +5,7 @@ namespace App\Controller;
 use App\Entity\Trick;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Response;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
+use Symfony\Component\Routing\Annotation\Route;
 
 /**
  * @author Amélie-Dzovinar Haladjian
