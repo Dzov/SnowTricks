@@ -72,6 +72,7 @@ class Trick
         $this->comments = new ArrayCollection();
         $this->images = new ArrayCollection();
         $this->videos = new ArrayCollection();
+        $this->createdAt = new \DateTime();
     }
 
     public function getId()
@@ -172,7 +173,6 @@ class Trick
     public function addImage($image): self
     {
         $this->images->add($image);
-        $image->setTrick($this);
 
         return $this;
     }

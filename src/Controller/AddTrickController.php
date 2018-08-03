@@ -5,6 +5,7 @@ namespace App\Controller;
 use App\Entity\Image;
 use App\Entity\Trick;
 use App\Form\EditTrickFormType;
+use App\Service\ImageUploader;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
@@ -17,18 +18,18 @@ class AddTrickController extends Controller
     /**
      * @Route("trick/add", name="add_trick")
      */
-    public function add(Request $request)
+    public function add(Request $request, ImageUploader $uploader)
     {
         $trick = new Trick();
-        $trick->addImage(new Image());
-        $trick->addImage(new Image());
+//        $trick->addImage(new Image());
 
         $form = $this->createForm(EditTrickFormType::class, $trick);
 
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $trick->setCreatedAt(new \DateTime());
+
+            $uploader->uploadTrickImages($trick);
 
             $em = $this->getDoctrine()->getManager();
             $em->persist($trick);

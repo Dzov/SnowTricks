@@ -8,9 +8,8 @@
         {% for trick in tricks | slice(0, 15) %}
             <div class="trick_card card mb-3">
                 {% if trick.images is not empty %}
-                    {% for image in trick.images | slice(0) %}
-                        <img class="card-img-top" src="img{{ asset(image.fileName) }}" alt="Image de la figure {{ trick.name }}" width="100%" height="150">
-                    {% endfor %}
+                    {% set image = trick.images.first() %}
+                    <img class="card-img-top" src="img{{ asset(image.fileName) }}" alt="Image de la figure {{ trick.name }}" width="100%" height="150">
                 {% else %}
                     <img class="card-img-top" src="img/trickPlaceholder.jpg" alt="Image de la figure {{ trick.name }}" width="100%" height="150">
                 {% endif %}

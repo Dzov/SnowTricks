@@ -2,10 +2,14 @@
 
 {% block body %}
     {% if trick.images is not empty %}
-        {% for image in trick.images | slice(0) %}
+        {% set image = trick.images.first() %}
+        {% if image.fileName is not null %}
             <div class="trick_header_image" style="background: url('/img/{{ asset(image.fileName) }}') center 30%; background-size: cover; height: 300px; width: auto">
+                {% include('flash_messages.html.twig') %}
             </div>
-        {% endfor %}
+        {% endif %}
+    {% else %}
+        {% include('flash_messages.html.twig') %}
     {% endif %}
     <section id="tricks_section" class="mx-md-5 my-md-3">
         <div class="modal-body">

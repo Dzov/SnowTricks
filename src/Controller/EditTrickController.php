@@ -5,6 +5,7 @@ namespace App\Controller;
 use App\Entity\Image;
 use App\Entity\Trick;
 use App\Form\EditTrickFormType;
+use App\Service\ImageUploader;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
 use Symfony\Component\HttpFoundation\Request;
@@ -18,27 +19,19 @@ class EditTrickController extends Controller
     /**
      * @Route("/tricks/{trickId}/edit", name="edit_trick", requirements={"id" = "\d+"})
      */
-    public function edit(Request $request, int $trickId)
+    public function edit(Request $request, int $trickId, ImageUploader $uploader)
     {
         $trick = $this->getDoctrine()->getRepository(Trick::class)->find($trickId);
 
         $form = $this->createForm(EditTrickFormType::class, $trick);
-        $images = $trick->getImages();
 
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+            $trick = $form->getData();
             $trick->setUpdatedAt(new \DateTime());
 
-            /**
-             * todo in listener
-             */
-            foreach ($images as $file) {
-                /** @var UploadedFile $file */
-                $fileName = md5(uniqid()) . '.' . $file['file']->guessExtension();
-
-                $file->move($this->getParameter('images_directory'), $fileName);
-            }
+            $uploader->uploadTrickImages($trick);
 
             $this->getDoctrine()->getManager()->flush();
 

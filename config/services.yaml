@@ -29,9 +29,16 @@ services:
         resource: '../src/Controller'
         tags: ['controller.service_arguments']
 
+    App\Service\ImageUploader:
+        arguments:
+            $targetDirectory: '%images_directory%'
+
     App\EventListener\LoginListener:
         tags:
             - { name: kernel.event_listener, event: security.interactive_login }
 
-    # add more service definitions when explicit configuration is needed
-    # please note that last definitions always *replace* previous ones
+#    App\EventListener\ImageUploadListener:
+#        arguments: [ '@service_container' ]
+#        tags:
+#            - { name: doctrine.event_listener, event: prePersist }
+#            - { name: doctrine.event_listener, event: preUpdate }
