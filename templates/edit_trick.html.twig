@@ -13,11 +13,15 @@
         <div class="modal-body">
             {% if trick.images is not empty %}
                 <div class="trick__slider--container">
-                    <div class="trick__slider--images d-flex">
+                    <div class="trick__slider--images d-flex align-items-center">
                         {% for image in trick.images %}
-                            <div class=mr-3>
+                            <div class='mr-3 d-flex flex-column align-items-center'>
                                 <div class="border-0 d-flex justify-content-between card">
-                                    <img src="/img{{ asset(image.fileName) }}" alt="Image de la figure {{ trick.name }}" width="105" height="105" class="card">
+                                    {% if image.path is not null %}
+                                        <img src="{{ asset(image.path) }}" alt="Image de la figure {{ trick.name }}" width="105" height="105" class="card">
+                                    {% else %}
+                                        <img src="/img{{ asset(image.fileName) }}" alt="Image de la figure {{ trick.name }}" width="105" height="105" class="card">
+                                    {% endif %}
                                 </div>
                                 <div class="controls">
                                     <a href="{{ path( 'edit_trick', {'trickId': trick.id} ) }}"><i class="fa fa-pencil mr-2"></i></a>

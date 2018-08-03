@@ -4,7 +4,7 @@ namespace App\Controller;
 
 use App\Entity\Image;
 use App\Entity\Trick;
-use App\Form\EditTrickFormType;
+use App\Form\TrickFormType;
 use App\Service\ImageUploader;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
@@ -21,9 +21,9 @@ class AddTrickController extends Controller
     public function add(Request $request, ImageUploader $uploader)
     {
         $trick = new Trick();
-//        $trick->addImage(new Image());
+        $trick->addImage(new Image());
 
-        $form = $this->createForm(EditTrickFormType::class, $trick);
+        $form = $this->createForm(TrickFormType::class, $trick);
 
         $form->handleRequest($request);
 

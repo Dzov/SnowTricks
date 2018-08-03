@@ -22,11 +22,14 @@ class ImageUploader
     {
         $fileName = md5(uniqid()) . '.' . $uploadedFile->guessExtension();
 
+        $path = 'uploads/images/' . $fileName;
+
         $uploadedFile->move($this->getTargetDirectory(), $fileName);
 
         $image = new Image();
         $image->setFileName($fileName);
         $image->setFile($uploadedFile);
+        $image->setPath($path);
 
         return $image;
     }
@@ -37,9 +40,8 @@ class ImageUploader
 
         foreach ($files as $file) {
 
-            if ($file instanceof UploadedFile) {
-                $uploadedFile = $file;
-
+            if ($file->getFile() instanceof UploadedFile) {
+                $uploadedFile = $file->getFile();
                 $image = $this->upload($uploadedFile);
 
                 $image->setTrick($trick);

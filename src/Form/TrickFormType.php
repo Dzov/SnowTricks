@@ -20,7 +20,7 @@ use Symfony\Component\Validator\Constraints\NotBlank;
 /**
  * @author Amélie-Dzovinar Haladjian
  */
-class EditTrickFormType extends AbstractType
+class TrickFormType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options): FormInterface
     {

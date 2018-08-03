@@ -28,6 +28,11 @@ class Image
     private $fileName;
 
     /**
+     * @ORM\Column(type="string", length=255)
+     */
+    private $path;
+
+    /**
      * @ORM\ManyToOne(targetEntity="App\Entity\Trick", inversedBy="images")
      * @ORM\JoinColumn(nullable=false)
      */
@@ -70,6 +75,18 @@ class Image
     public function setTrick(Trick $trick): self
     {
         $this->trick = $trick;
+
+        return $this;
+    }
+
+    public function getPath(): ?string
+    {
+        return $this->path;
+    }
+
+    public function setPath(string $path = null): self
+    {
+        $this->path = $path;
 
         return $this;
     }

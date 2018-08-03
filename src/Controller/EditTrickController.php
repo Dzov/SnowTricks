@@ -4,7 +4,7 @@ namespace App\Controller;
 
 use App\Entity\Image;
 use App\Entity\Trick;
-use App\Form\EditTrickFormType;
+use App\Form\TrickFormType;
 use App\Service\ImageUploader;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
@@ -23,7 +23,7 @@ class EditTrickController extends Controller
     {
         $trick = $this->getDoctrine()->getRepository(Trick::class)->find($trickId);
 
-        $form = $this->createForm(EditTrickFormType::class, $trick);
+        $form = $this->createForm(TrickFormType::class, $trick);
 
         $form->handleRequest($request);
 
