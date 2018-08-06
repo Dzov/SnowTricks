@@ -163,9 +163,11 @@ class Trick
         return $this->images;
     }
 
-    public function removeImage($image)
+    public function removeImage(Image $image)
     {
-        $this->images->remove($image);
+        if ($this->images->contains($image)) {
+            $this->images->remove($image);
+        }
 
         return $this;
     }
