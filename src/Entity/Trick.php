@@ -46,7 +46,7 @@ class Trick
     private $description;
 
     /**
-     * @ORM\OneToMany(targetEntity="App\Entity\Image", mappedBy="trick", cascade={"persist"})
+     * @ORM\OneToMany(targetEntity="App\Entity\Image", mappedBy="trick", cascade={"persist", "remove"})
      */
     private $images;
 
@@ -170,9 +170,12 @@ class Trick
         return $this;
     }
 
-    public function addImage($image): self
+    public function addImage(Image $image): self
     {
-        $this->images->add($image);
+        if (!$this->images->contains($image)) {
+            $this->images->add($image);
+            $image->setTrick($this);
+        }
 
         return $this;
     }

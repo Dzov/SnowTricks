@@ -3,9 +3,15 @@
 {% block body %}
     {% if trick.images is not empty %}
         {% set image = trick.images.first() %}
-        <div class="trick_header_image" style="background: url('/img/{{ asset(image.fileName) }}') center 30%; background-size: cover; height: 300px; width: auto">
-            {% include('flash_messages.html.twig') %}
-        </div>
+        {% if image.path is not null %}
+            <div class="trick_header_image" style="background: url('{{ asset(image.path) }}') center 30%; background-size: cover; height: 300px; width: auto">
+                {% include('flash_messages.html.twig') %}
+            </div>
+        {% else %}
+            <div class="trick_header_image" style="background: url('/img/{{ asset(image.fileName) }}') center 30%; background-size: cover; height: 300px; width: auto">
+                {% include('flash_messages.html.twig') %}
+            </div>
+        {% endif %}
     {% else %}
         {% include('flash_messages.html.twig') %}
     {% endif %}
@@ -16,7 +22,7 @@
                     <div class="trick__slider--images d-flex align-items-center">
                         {% for image in trick.images %}
                             <div class='mr-3 d-flex flex-column align-items-center'>
-                                <div class="border-0 d-flex justify-content-between card">
+                                <div>
                                     {% if image.path is not null %}
                                         <img src="{{ asset(image.path) }}" alt="Image de la figure {{ trick.name }}" width="105" height="105" class="card">
                                     {% else %}
