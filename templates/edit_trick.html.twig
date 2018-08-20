@@ -30,7 +30,9 @@
                                     {% endif %}
                                 </div>
                                 <div class="controls">
-                                    <a href="{{ path( 'edit_trick', {'trickId': trick.id} ) }}"><i class="fa fa-pencil mr-2"></i></a>
+                                    <label for="trick_form_images_{{ loop.index0 }}_file">
+                                        <i class="fa fa-pencil mr-2"></i>
+                                    </label>
                                     <a href=""><i class="fa fa-trash"></i></a>
                                 </div>
                             </div>

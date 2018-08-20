@@ -20,7 +20,7 @@ class FileUploader
 
     public function upload(UploadedFile $uploadedFile)
     {
-        if ($uploadedFile === null) {
+        if (null === $uploadedFile) {
             return null;
         }
 

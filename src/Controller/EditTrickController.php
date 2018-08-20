@@ -19,16 +19,18 @@ class EditTrickController extends Controller
     /**
      * @Route("/tricks/{trickId}/edit", name="edit_trick", requirements={"id" = "\d+"})
      */
-    public function edit(Request $request, int $trickId, FileUploader $uploader)
+    public function edit(Request $request, int $trickId)
     {
         $trick = $this->getDoctrine()->getRepository(Trick::class)->find($trickId);
 
         $form = $this->createForm(TrickFormType::class, $trick);
+        dump($form->getData());
 
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
             $trick = $form->getData();
+
             $trick->setUpdatedAt(new \DateTime());
 
             $this->getDoctrine()->getManager()->flush();

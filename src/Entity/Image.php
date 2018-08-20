@@ -33,6 +33,11 @@ class Image
     private $path;
 
     /**
+     * @var string
+     */
+    private $tempFileName;
+
+    /**
      * @ORM\ManyToOne(targetEntity="App\Entity\Trick", inversedBy="images")
      * @ORM\JoinColumn(nullable=false)
      */
@@ -52,6 +57,15 @@ class Image
     {
         $this->file = $file;
 
+        if (null !== $file) {
+            $oldFile = $this->getOldPath();
+            if (file_exists($oldFile)) {
+                unlink($oldFile);
+            }
+        }
+
+        $this->setFileName(null);
+
         return $this;
     }
 
@@ -60,7 +74,7 @@ class Image
         return $this->fileName;
     }
 
-    public function setFileName(string $fileName): self
+    public function setFileName(string $fileName = null): self
     {
         $this->fileName = $fileName;
 
@@ -89,5 +103,26 @@ class Image
         $this->path = $path;
 
         return $this;
+    }
+
+    public function getTempFileName(): ?string
+    {
+        return $this->tempFileName;
+    }
+
+    public function setTempFileName(string $tempFileName = null): self
+    {
+        $this->tempFileName = $tempFileName;
+
+        return $this;
+    }
+
+    private function getOldPath()
+    {
+        if (null !== $this->getPath()) {
+            return __DIR__ . '/../../public/' . $this->getPath();
+        }
+
+        return __DIR__ . 'img/' . $this->getFileName();
     }
 }

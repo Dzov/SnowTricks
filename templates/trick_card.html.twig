@@ -5,7 +5,7 @@
         {% endif %}
     {% endif %}
     <div class="card-deck">
-        {% for trick in tricks | slice(0, 15) %}
+        {% for trick in tricks | sort | reverse %}
             <div class="trick_card card mb-3">
                 {% if trick.images is not empty %}
                     {% set image = trick.images.first() %}
