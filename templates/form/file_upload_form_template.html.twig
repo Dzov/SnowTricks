@@ -1,0 +1,12 @@
+{%- block file_widget -%}
+    <label for="{{ form.vars.id }}">
+        {% if form.parent.vars.data is not null %}
+            {% set publicPath = kernelProjectDir ~ '/public/' %}
+            {% set filePath = form.parent.vars.data.fileName | replace({ (publicPath): "" }) %}
+            <img src="{{ asset('img/' ~ filePath) }}">
+        {% else %}
+            <img src="{{ form.vars.filename | default( asset('img/file_upload.png')) }}">
+        {% endif %}
+    </label>
+    <input type="file" hidden id="{{ form.vars.id }}">
+{%- endblock file_widget -%}

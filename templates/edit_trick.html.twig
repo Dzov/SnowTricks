@@ -1,5 +1,7 @@
 {% extends('base.html.twig') %}
 
+{% form_theme form 'form/file_upload_form_template.html.twig' %}
+
 {% block body %}
     {% if trick.images is not empty %}
         {% set image = trick.images.first() %}
@@ -78,6 +80,7 @@
                         </div>
                     {% endif %}
                     {{ form_label(form.images) }}
+                    {{ dump(form.images) }}
                     {{ form_widget(form.images) }}
                 </div>
                 <div class="controls d-flex justify-content-around mx-md-3 my-3">
