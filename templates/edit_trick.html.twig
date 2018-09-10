@@ -32,7 +32,7 @@
                                     {% endif %}
                                 </div>
                                 <div class="controls">
-                                    <label for="trick_form_images_{{ loop.index0 }}_file">
+                                    <label for="trick_form_images_{{ loop.index0 + 1 }}_file">
                                         <i class="fa fa-pencil mr-2"></i>
                                     </label>
                                     <a href=""><i class="fa fa-trash"></i></a>
@@ -80,7 +80,6 @@
                         </div>
                     {% endif %}
                     {{ form_label(form.images) }}
-                    {{ dump(form.images) }}
                     {{ form_widget(form.images) }}
                 </div>
                 <div class="controls d-flex justify-content-around mx-md-3 my-3">

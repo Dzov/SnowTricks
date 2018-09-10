@@ -3,6 +3,7 @@
 namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\HttpFoundation\File\File;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
 
 /**
@@ -48,23 +49,18 @@ class Image
         return $this->id;
     }
 
-    public function getFile(): ?UploadedFile
+    public function getFile()
     {
         return $this->file;
     }
 
-    public function setFile(UploadedFile $file = null): self
+    public function setFile($file = null): self
     {
         $this->file = $file;
 
-        if (null !== $file) {
-            $oldFile = $this->getOldPath();
-            if (file_exists($oldFile)) {
-                unlink($oldFile);
-            }
+        if ($file instanceof UploadedFile) {
+            $this->setFileName(null);
         }
-
-        $this->setFileName(null);
 
         return $this;
     }

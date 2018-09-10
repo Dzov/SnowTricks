@@ -1,12 +1,17 @@
-{%- block file_widget -%}
-    <label for="{{ form.vars.id }}">
-        {% if form.parent.vars.data is not null %}
+{% block file_widget %}
+    <label for="{{ form.vars.id }}" class="mb-0 mt-2">
+        {% set image = form.parent.vars.data %}
+        {% if image is not null and image.id is not null %}
             {% set publicPath = kernelProjectDir ~ '/public/' %}
-            {% set filePath = form.parent.vars.data.fileName | replace({ (publicPath): "" }) %}
-            <img src="{{ asset('img/' ~ filePath) }}">
+            {% set filePath = image.fileName | replace({ (publicPath): "" }) %}
+            {% if form.parent.vars.data.path is not null %}
+                <img src="{{ asset(image.path) }}" width="105" height="105" class="card">
+            {% else %}
+                <img src="/img/{{ asset(image.fileName) }}" width="105" height="105" class="card">
+            {% endif %}
         {% else %}
-            <img src="{{ form.vars.filename | default( asset('img/file_upload.png')) }}">
+            <img src="{{ asset('img/file_upload.png') }}">
         {% endif %}
     </label>
-    <input type="file" hidden id="{{ form.vars.id }}">
-{%- endblock file_widget -%}
+    <input type="file" hidden id="{{ form.vars.id }}" name="{{ form.vars.full_name }}">
+{% endblock file_widget %}

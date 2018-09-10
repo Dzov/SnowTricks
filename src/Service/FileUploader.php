@@ -30,7 +30,7 @@ class FileUploader
         return $fileName;
     }
 
-    private function getTargetDirectory()
+    public function getTargetDirectory()
     {
         return $this->targetDirectory;
     }

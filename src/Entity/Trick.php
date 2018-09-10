@@ -166,7 +166,7 @@ class Trick
     public function removeImage(Image $image)
     {
         if ($this->images->contains($image)) {
-            $this->images->remove($image);
+            $this->images->removeElement($image);
         }
 
         return $this;

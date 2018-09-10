@@ -17,14 +17,11 @@ use Symfony\Component\Routing\Annotation\Route;
 class EditTrickController extends Controller
 {
     /**
-     * @Route("/tricks/{trickId}/edit", name="edit_trick", requirements={"id" = "\d+"})
+     * @Route("/tricks/{trick}/edit", name="edit_trick", requirements={"trick" = "\d+"})
      */
-    public function edit(Request $request, int $trickId)
+    public function edit(Request $request, Trick $trick)
     {
-        $trick = $this->getDoctrine()->getRepository(Trick::class)->find($trickId);
-
         $form = $this->createForm(TrickFormType::class, $trick);
-        dump($form->getData());
 
         $form->handleRequest($request);
 

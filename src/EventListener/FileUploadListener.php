@@ -6,6 +6,7 @@ use App\Entity\Image;
 use App\Service\FileUploader;
 use Doctrine\ORM\Event\LifecycleEventArgs;
 use Doctrine\ORM\Event\PreUpdateEventArgs;
+use Symfony\Component\HttpFoundation\File\File;
 
 /**
  * @author Amélie-Dzovinar Haladjian
@@ -36,20 +37,18 @@ class FileUploadListener
         $this->uploadFile($entity);
     }
 
-//    public function preRemoveUpload()
-//    {
-//        $this->tempFilename = $this->getUploadRootDir() . '/' . $this->id . '.' . $this->url;
-//    }
-//
-//    /**
-//     * @ORM\PostRemove()
-//     */
-//    public function removeUpload()
-//    {
-//        if (file_exists($this->tempFilename)) {
-//            unlink($this->tempFilename);
-//        }
-//    }
+    public function postLoad(LifecycleEventArgs $eventArgs)
+    {
+        $entity = $eventArgs->getEntity();
+
+        if (!$entity instanceof Image) {
+            return;
+        }
+
+        if (null !== $entity->getFileName()) {
+            $entity->setFile(new File($this->fileUploader->getTargetDirectory() . '/' . $entity->getFileName()));
+        }
+    }
 
     private function uploadFile($entity)
     {
