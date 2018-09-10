@@ -34,7 +34,7 @@ class AddTrickController extends Controller
 
             $this->addFlash('success', 'La figure a bien été créée');
 
-            return $this->redirectToRoute('home');
+            return $this->redirectToRoute('edit_trick', ['trick' => $trick->getId()]);
         }
 
         return $this->render(
