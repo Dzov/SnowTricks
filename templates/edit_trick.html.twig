@@ -22,7 +22,7 @@
             {% if trick.images is not empty %}
                 <div class="trick__slider--container">
                     <div class="trick__slider--images d-flex align-items-center">
-                        {% for image in trick.images %}
+                        {% for image in trick.images | reverse %}
                             <div class='mr-3 d-flex flex-column align-items-center'>
                                 <div>
                                     {% if image.path is not null %}
@@ -79,7 +79,6 @@
                             {{ form_errors(form.images) }}
                         </div>
                     {% endif %}
-                    {{ form_label(form.images) }}
                     {{ form_widget(form.images) }}
                 </div>
                 <div class="controls d-flex justify-content-around mx-md-3 my-3">
