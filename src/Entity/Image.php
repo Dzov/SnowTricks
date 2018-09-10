@@ -112,13 +112,4 @@ class Image
 
         return $this;
     }
-
-    private function getOldPath()
-    {
-        if (null !== $this->getPath()) {
-            return __DIR__ . '/../../public/' . $this->getPath();
-        }
-
-        return __DIR__ . 'img/' . $this->getFileName();
-    }
 }

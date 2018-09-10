@@ -56,8 +56,6 @@ class FileUploadListener
             return;
         }
 
-        dump($entity);
-
         $fileName = $this->fileUploader->upload($entity->getFile());
 
         $entity->setFileName($fileName);
