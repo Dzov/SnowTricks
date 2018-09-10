@@ -21,7 +21,6 @@ class AddTrickController extends Controller
     public function add(Request $request)
     {
         $trick = new Trick();
-        $trick->addImage(new Image());
 
         $form = $this->createForm(TrickFormType::class, $trick);
 
@@ -35,7 +34,7 @@ class AddTrickController extends Controller
 
             $this->addFlash('success', 'La figure a bien été créée');
 
-            return $this->redirect('/');
+            return $this->redirectToRoute('home');
         }
 
         return $this->render(

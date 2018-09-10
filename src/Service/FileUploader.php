@@ -18,7 +18,7 @@ class FileUploader
         $this->targetDirectory = $targetDirectory;
     }
 
-    public function upload(UploadedFile $uploadedFile)
+    public function upload(UploadedFile $uploadedFile = null)
     {
         if (null === $uploadedFile) {
             return null;
