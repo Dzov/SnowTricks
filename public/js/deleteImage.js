@@ -12,7 +12,7 @@ $deleteButtons.forEach(function (element) {
                 document.querySelector('#trick_form_deleteImages').value += ',';
             }
             document.querySelector('#trick_form_deleteImages').value += element.getAttribute('id');
-            element.parentElement.parentElement.classList.add('toDelete');
+            element.parentElement.parentElement.classList.add('hidden');
         }
     });
 });
