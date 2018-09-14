@@ -2,6 +2,7 @@
 
 namespace App\Entity;
 
+use App\Exception\TrickMustContainOneImageException;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
@@ -29,7 +30,7 @@ class Trick
     private $category;
 
     /**
-     * @ORM\OneToMany(targetEntity="App\Entity\Comment", mappedBy="trick")
+     * @ORM\OneToMany(targetEntity="App\Entity\Comment", mappedBy="trick", cascade={"persist", "remove"})
      */
     private $comments;
 
@@ -47,6 +48,8 @@ class Trick
 
     /**
      * @ORM\OneToMany(targetEntity="App\Entity\Image", mappedBy="trick", cascade={"persist", "remove"})
+     *
+     * @Assert\Count(min = 1, minMessage = "Veuillez ajouter au moins une image")
      */
     private $images;
 
@@ -63,7 +66,7 @@ class Trick
     private $updatedAt;
 
     /**
-     * @ORM\OneToMany(targetEntity="App\Entity\Video", mappedBy="trick")
+     * @ORM\OneToMany(targetEntity="App\Entity\Video", mappedBy="trick", cascade={"persist", "remove"})
      */
     private $videos;
 
@@ -163,13 +166,18 @@ class Trick
         return $this->images;
     }
 
+    /**
+     * @throws TrickMustContainOneImageException
+     */
     public function removeImage(Image $image)
     {
-        if ($this->images->contains($image)) {
+        if ($this->images->contains($image) && count($this->images) > 1) {
             $this->images->removeElement($image);
+
+            return $this;
         }
 
-        return $this;
+        throw new TrickMustContainOneImageException();
     }
 
     public function addImage(Image $image): self

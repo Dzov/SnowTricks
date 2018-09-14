@@ -20,6 +20,8 @@ class Image
 
     /**
      * @var UploadedFile
+     *
+     *
      */
     private $file;
 

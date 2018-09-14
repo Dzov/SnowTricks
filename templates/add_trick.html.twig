@@ -19,6 +19,11 @@
                 <h3 class="text-md-center mb-4">Ajouter une figure</h3>
                 {{ form_start(form, {'attr': {'class': 'd-flex flex-column'}}) }}
                 <div class="form-group">
+                    {% if form_errors(form) is not empty %}
+                        <div class="alert alert-danger" role="alert">
+                            {{ form_errors(form) }}
+                        </div>
+                    {% endif %}
                     {% if form_errors(form.name) is not empty %}
                         <div class="alert alert-danger" role="alert">
                             {{ form_errors(form.name) }}
@@ -46,11 +51,6 @@
                     {{ form_widget(form.category) }}
                 </div>
                 <div class="form-group">
-                    {% if form_errors(form.images) is not empty %}
-                        <div class="alert alert-danger" role="alert">
-                            {{ form_errors(form.images) }}
-                        </div>
-                    {% endif %}
                     {{ form_label(form.images) }}
                     {{ form_widget(form.images) }}
                 </div>

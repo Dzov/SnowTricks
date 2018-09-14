@@ -2,12 +2,12 @@
 
 namespace App\Controller;
 
-use App\Entity\Image;
 use App\Entity\Trick;
+use App\Exception\TrickMustContainOneImageException;
 use App\Form\TrickFormType;
-use App\Service\FileUploader;
+use App\Service\DeleteTrickImages;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
-use Symfony\Component\HttpFoundation\File\UploadedFile;
+use Symfony\Component\Form\FormError;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
 
@@ -19,7 +19,7 @@ class EditTrickController extends Controller
     /**
      * @Route("/tricks/{trick}/edit", name="edit_trick", requirements={"trick" = "\d+"})
      */
-    public function edit(Request $request, Trick $trick)
+    public function edit(Request $request, Trick $trick, DeleteTrickImages $deleteService)
     {
         $form = $this->createForm(TrickFormType::class, $trick);
 
@@ -27,6 +27,18 @@ class EditTrickController extends Controller
 
         if ($form->isSubmitted() && $form->isValid()) {
             $trick = $form->getData();
+
+            try {
+                $deleteService->deleteImages($trick, $form);
+            } catch (TrickMustContainOneImageException $e) {
+                $error = new FormError('Une figure doit contenir au moins une image');
+                $form->get('name')->addError($error);
+
+                return $this->render(
+                    'edit_trick.html.twig',
+                    ['trick' => $trick, 'form' => $form->createView()]
+                );
+            }
 
             $trick->setUpdatedAt(new \DateTime());
 

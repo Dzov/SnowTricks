@@ -8,7 +8,9 @@ use App\Form\Type\ImageType;
 use Doctrine\Common\Collections\Collection;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 use Symfony\Component\Form\Extension\Core\Type\CollectionType;
+use Symfony\Component\Form\Extension\Core\Type\HiddenType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
@@ -49,10 +51,9 @@ class TrickFormType extends AbstractType
                 'name',
                 TextType::class,
                 array(
-                    'attr'        => array('class' => 'form-control'),
-                    'label'       => 'Nom de la figure',
-                    'required'    => true,
-                    'constraints' => array(new NotBlank())
+                    'attr'     => array('class' => 'form-control'),
+                    'label'    => 'Nom de la figure',
+                    'required' => true,
                 )
             )
             ->add(
@@ -70,6 +71,7 @@ class TrickFormType extends AbstractType
                     'by_reference'  => false,
                 )
             )
+            ->add('deleteImages', HiddenType::class, array('mapped' => false))
 //            ->add(
 //                'videos',
 //                CollectionType::class,
