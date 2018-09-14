@@ -18,6 +18,10 @@
   object-fit: cover;
 }
 
+.toDelete {
+  opacity: 0.2;
+}
+
 .card-deck {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
@@ -94,7 +98,7 @@ a {
 }
 
 .hidden {
-  display: none;
+  display: none !important;
 }
 
 /*# sourceMappingURL=master.css.map */
