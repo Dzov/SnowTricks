@@ -9,11 +9,7 @@
             <div class="trick_card card mb-3">
                 {% if trick.images is not empty %}
                     {% set image = trick.images.first() %}
-                    {% if image.path is not null %}
-                        <img class="card-img-top" src="{{ asset(image.path) }}" alt="Image de la figure {{ trick.name }}" width="100%" height="150">
-                    {% else %}
-                        <img class="card-img-top" src="img{{ asset(image.fileName) }}" alt="Image de la figure {{ trick.name }}" width="100%" height="150">
-                    {% endif %}
+                    <img class="card-img-top" src="{{ asset(image.path) }}" alt="Image de la figure {{ trick.name }}" width="100%" height="150">
                 {% else %}
                     <img class="card-img-top" src="img/trickPlaceholder.jpg" alt="Image de la figure {{ trick.name }}" width="100%" height="150">
                 {% endif %}
