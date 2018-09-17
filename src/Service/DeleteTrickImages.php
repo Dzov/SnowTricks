@@ -27,14 +27,16 @@ class DeleteTrickImages
     {
         $deletedImagesInputValue = $form->get('deleteImages')->getData();
 
-        $deletedImagesIds = explode(",", $deletedImagesInputValue);
+        $deletedImagesInputValueArray = explode(",", $deletedImagesInputValue);
 
-        foreach ($deletedImagesIds as $deletedImagesId) {
-            /**
-             * @var Image $image
-             */
-            $image = $this->entityManager->getRepository(Image::class)
-                ->findOneBy(['id' => intval($deletedImagesId)]);
+        $deletedImagesIds = [];
+        foreach ($deletedImagesInputValueArray as $deletedImagesId) {
+            array_push($deletedImagesIds, intval($deletedImagesId));
+        }
+
+        $images = $this->entityManager->getRepository(Image::class)->findBy(['id' => $deletedImagesIds]);
+
+        foreach ($images as $image) {
             if (null !== $image) {
                 $trick->removeImage($image);
                 $this->entityManager->remove($image);

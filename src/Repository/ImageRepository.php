@@ -4,6 +4,7 @@ namespace App\Repository;
 
 use App\Entity\Image;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
+use Doctrine\ORM\NoResultException;
 use Symfony\Bridge\Doctrine\RegistryInterface;
 
 /**
@@ -22,29 +23,18 @@ class ImageRepository extends ServiceEntityRepository
 //    /**
 //     * @return Image[] Returns an array of Image objects
 //     */
-    /*
-    public function findByExampleField($value)
-    {
-        return $this->createQueryBuilder('i')
-            ->andWhere('i.exampleField = :val')
-            ->setParameter('val', $value)
-            ->orderBy('i.id', 'ASC')
-            ->setMaxResults(10)
-            ->getQuery()
-            ->getResult()
-        ;
-    }
-    */
-
-    /*
-    public function findOneBySomeField($value): ?Image
-    {
-        return $this->createQueryBuilder('i')
-            ->andWhere('i.exampleField = :val')
-            ->setParameter('val', $value)
-            ->getQuery()
-            ->getOneOrNullResult()
-        ;
-    }
-    */
+//    public function findAllByIds(array $ids)
+//    {
+//        if (empty($ids)) {
+//            return;
+//        }
+//
+//        dump(array_values($ids));
+//
+//        return $this->createQueryBuilder('i')
+//            ->andWhere('i.id IN (:ids)')
+//            ->setParameter('ids', array_values($ids))
+//            ->getQuery()
+//            ->getArrayResult();
+//    }
 }
