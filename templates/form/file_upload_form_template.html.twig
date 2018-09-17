@@ -4,6 +4,7 @@
         {% if image is not null and image.id is not null %}
             {% set publicPath = kernelProjectDir ~ '/public/' %}
             {% set filePath = image.fileName | replace({ (publicPath): "" }) %}
+             {# TODO -> Remove this image, replace by orginal input #}
             <img src="{{ asset(image.path) }}" width="105" height="105" class="card {{ form.vars.id }}_img">
         {% else %}
             <img src="{{ asset('uploads/images/file_upload.png') }}" width="105" height="105" class="{{ form.vars.id }}_img">

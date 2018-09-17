@@ -7,7 +7,6 @@ function previewImage (input) {
     var ext = input.files[0]['name'].substring(input.files[0]['name'].lastIndexOf('.') + 1).toLowerCase();
     if (input.files && input.files[0] && (ext === "png" || ext === "jpeg" || ext === "jpg")) {
         var reader = new FileReader();
-        console.log(input.id + '_img');
         var images = document.querySelectorAll('.' + input.id + '_img');
         reader.onload = function (e) {
             for (var i = 0; i < images.length; i++) {
@@ -36,10 +35,10 @@ for (var i = 0; i < $haystack.length; i++) {
         $imageEditionInputs.push($haystack[i]);
     }
 }
-
-for (var j = 0; j < $imageEditionInputs.length; j++) {
-    $imageEditionInputs[j].className = 'hidden';
-}
+//
+// for (var j = 0; j < $imageEditionInputs.length; j++) {
+//     $imageEditionInputs[j].className = 'hidden';
+// }
 
 id = $imageEditionInputs.length;
 
