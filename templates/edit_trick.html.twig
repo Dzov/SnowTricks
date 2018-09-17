@@ -10,41 +10,42 @@
         <div class="trick_header_image" style="background: url('{{ asset(image.path) }}') center 30%; background-size: cover; height: 300px; width: auto">
             {% include('flash_messages.html.twig') %}
         </div>
+        <h3 class="text-md-center mb-4 trick_form_title">Modifier la figure</h3>
     {% else %}
         {% include('flash_messages.html.twig') %}
     {% endif %}
     <section id="tricks_section" class="mx-md-5 my-md-3">
         <div class="modal-body">
-            {% if trick.images is not empty %}
-                <div class="trick__slider--container">
-                    <div class="trick__slider--images d-flex align-items-center">
-                        {% for image in trick.images | reverse %}
-                            <div class='mr-3'>
-                                <div>
-                                    <img src="{{ asset(image.path) }}" alt="Image de la figure {{ trick.name }}" width="105" height="105" class="card">
-                                </div>
-                                <div class="controls d-flex justify-content-around">
-                                    <label for="trick_form_images_{{ loop.revindex0 }}_file" class="imageEditionPencil">
-                                        <i class="fa fa-pencil"></i>
-                                    </label>
-                                    <label for="deleteInput{{ loop.revindex0 }}" class="imageDeleteButton" id="{{ image.id }}"><i class="fa fa-trash"></i></label>
-                                </div>
-                            </div>
-                        {% endfor %}
-                    </div>
-                </div>
-                <hr>
-            {% endif %}
+            {{ form_start(form, {'attr': {'class': 'd-flex flex-column'}}) }}
             <div class="trick_edit_form d-flex flex-column my-4">
-                <h3 class="text-md-center mb-4">Modifier la figure</h3>
-                {{ form_start(form, {'attr': {'class': 'd-flex flex-column'}}) }}
+                {% if trick.images is not empty %}
+                    <div class="trick__slider--container">
+                        <div class="trick__slider--images d-flex align-items-center">
+                            {{ form_widget(form.images) }}
+                            {% for image in trick.images | reverse %}
+                                <div class='mr-3'>
+                                    <div>
+                                        <img src="{{ asset(image.path) }}" alt="Image de la figure {{ trick.name }}" width="105" height="105" class="card trick_form_images_{{ loop.revindex0 }}_file_img">
+                                    </div>
+                                    <div class="controls d-flex justify-content-around">
+                                        <label for="trick_form_images_{{ loop.revindex0 }}_file" class="imageEditionPencil">
+                                            <i class="fa fa-pencil"></i>
+                                        </label>
+                                        <label for="deleteInput{{ loop.revindex0 }}" class="imageDeleteButton" id="{{ image.id }}"><i class="fa fa-trash"></i></label>
+                                    </div>
+                                </div>
+                            {% endfor %}
+                        </div>
+                    </div>
+                {% endif %}
+
                 <div class="form-group">
                     {% if form_errors(form.images) is not empty %}
                         <div class="alert alert-danger" role="alert">
                             {{ form_errors(form.images) }}
                         </div>
                     {% endif %}
-                    {{ form_widget(form.images) }}
+
                 </div>
                 <div class="form-group">
                     {% if form_errors(form.name) is not empty %}

@@ -13,11 +13,18 @@
     {% else %}
         {% include('flash_messages.html.twig') %}
     {% endif %}
+    <h3 class="text-md-center mb-4 trick_form_title">Ajouter une figure</h3>
     <section id="tricks_section" class="mx-md-5 my-md-3">
         <div class="modal-body">
             <div class="trick_edit_form d-flex flex-column my-4">
-                <h3 class="text-md-center mb-4">Ajouter une figure</h3>
-                {{ form_start(form, {'attr': {'class': 'd-flex flex-column'}}) }}
+                <div class="trick__slider--container">
+                    <div class="trick__slider--images d-flex align-items-center">
+                        {{ form_start(form, {'attr': {'class': 'd-flex flex-column'}}) }}
+                        <div class="form-group">
+                            {{ form_widget(form.images) }}
+                        </div>
+                    </div>
+                </div>
                 <div class="form-group">
                     {% if form_errors(form) is not empty %}
                         <div class="alert alert-danger" role="alert">
@@ -49,10 +56,6 @@
                     {% endif %}
                     {{ form_label(form.category) }}
                     {{ form_widget(form.category) }}
-                </div>
-                <div class="form-group">
-                    {{ form_label(form.images) }}
-                    {{ form_widget(form.images) }}
                 </div>
                 <div class="controls d-flex justify-content-around mx-md-3 my-3">
                     <button type="submit" class="btn btn-success mr-md-3">Enregister</button>

@@ -1,12 +1,10 @@
-.modal-header
-{
+.modal-header {
   img {
     object-fit: cover;
   }
 }
 
-.toDelete
-{
+.toDelete {
   opacity: .2;
 }
 
@@ -19,6 +17,8 @@
   &__slider--images {
     flex-wrap: nowrap;
     overflow-x: auto;
+    margin: auto;
+    width: max-content;
 
     .card {
       flex: 0 0 15% !important;
@@ -60,9 +60,19 @@
   }
 }
 
+.trick_form_title {
+  border-top: 2px solid #343a40;
+  border-bottom: 2px solid #343a40;
+  color: #343a40;
+  margin: 20px auto;
+  width: 70%;
+  text-align: center;
+  padding: 10px 0;
+}
+
 @media (min-width: 640px) {
   .comments__section, .trick_edit_form {
-    width: 55%;
+    width: 75%;
     margin: auto;
 
     h5 {
@@ -72,7 +82,7 @@
 
   .trick_edit_form {
     button {
-      width: 50%;
+      width: 35%;
       margin: auto;
     }
   }

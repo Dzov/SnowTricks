@@ -3,10 +3,27 @@ String.prototype.replaceAll = function (search, replacement) {
     return target.replace(new RegExp(search, 'g'), replacement);
 };
 
-var $imagesForm = document.querySelector('#trick_form_images').parentElement;
-$imagesForm.classList += ' d-flex flex-column';
+function previewImage (input) {
+    var ext = input.files[0]['name'].substring(input.files[0]['name'].lastIndexOf('.') + 1).toLowerCase();
+    if (input.files && input.files[0] && (ext === "png" || ext === "jpeg" || ext === "jpg")) {
+        var reader = new FileReader();
+        console.log(input.id + '_img');
+        var images = document.querySelectorAll('.' + input.id + '_img');
+        reader.onload = function (e) {
+            for (var i = 0; i < images.length; i++) {
+                images[i].setAttribute('src', e.target.result);
+            }
+        }
+
+        reader.readAsDataURL(input.files[0]);
+    } else {
+        document.getElementById(input.id + '_img').setAttribute('src', 'uploads/images/file_upload.png');
+    }
+
+}
+
 var $imageFormInputs = document.querySelector('#trick_form_images');
-$imageFormInputs.classList += ' hidden d-flex flex-column align-items-center';
+$imageFormInputs.classList += '  d-flex flex-column align-items-center';
 $imageFormInputs.style.border = 'none';
 var template = $imageFormInputs.getAttribute('data-prototype');
 
@@ -20,27 +37,15 @@ for (var i = 0; i < $haystack.length; i++) {
     }
 }
 
-
 for (var j = 0; j < $imageEditionInputs.length; j++) {
     $imageEditionInputs[j].className = 'hidden';
-    $imageEditionInputs[j].id = 'trick_form_images_' + j;
 }
 
-id = $imageEditionInputs.length + 1;
+id = $imageEditionInputs.length;
 
-var $button = document.createElement('div');
-$button.innerText = 'Ajouter une image';
-$button.classList = 'btn btn-primary mt-3';
-$button.type = 'addImage';
-$button.addEventListener('click', function () {
-    $imageFormInputs.classList.remove('hidden');
-    addInput(id++);
-});
-$imagesForm.appendChild($button);
-
+addInput(id);
 
 function addInput (id) {
-    console.log(id);
     var newTemplate = template.replaceAll('__name__label__', 'Image').replaceAll('__name__', id).trim();
 
     var $div = document.createElement('div');
