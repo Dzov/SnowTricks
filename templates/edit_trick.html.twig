@@ -24,9 +24,7 @@
                             {{ form_widget(form.images) }}
                             {% for image in trick.images | reverse %}
                                 <div class='mr-3'>
-                                    <div>
-                                        <img src="{{ asset(image.path) }}" alt="Image de la figure {{ trick.name }}" width="105" height="105" class="card trick_form_images_{{ loop.revindex0 }}_file_img">
-                                    </div>
+                                    <img src="{{ asset(image.path) }}" alt="Image de la figure {{ trick.name }}" width="105" height="105" class="card trick_form_images_{{ loop.revindex0 }}_file_img">
                                     <div class="controls d-flex justify-content-around">
                                         <label for="trick_form_images_{{ loop.revindex0 }}_file" class="imageEditionPencil">
                                             <i class="fa fa-pencil"></i>

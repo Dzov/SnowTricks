@@ -1,14 +1,14 @@
 {% block file_widget %}
     <label for="{{ form.vars.id }}" class="mb-0 mt-2">
         {% set image = form.parent.vars.data %}
-        {% if image is not null and image.id is not null %}
-            {% set publicPath = kernelProjectDir ~ '/public/' %}
-            {% set filePath = image.fileName | replace({ (publicPath): "" }) %}
+        {#{% if image is not null and image.id is not null %}#}
+            {#{% set publicPath = kernelProjectDir ~ '/public/' %}#}
+            {#{% set filePath = image.fileName | replace({ (publicPath): "" }) %}#}
              {# TODO -> Remove this image, replace by orginal input #}
-            <img src="{{ asset(image.path) }}" width="105" height="105" class="card {{ form.vars.id }}_img">
-        {% else %}
+            {#<img src="{{ asset(image.path) }}" width="105" height="105" class="card {{ form.vars.id }}_img">#}
+        {#{% else %}#}
             <img src="{{ asset('uploads/images/file_upload.png') }}" width="105" height="105" class="{{ form.vars.id }}_img">
-        {% endif %}
+        {#{% endif %}#}
     </label>
     <input type="file" hidden id="{{ form.vars.id }}" name="{{ form.vars.full_name }}" onchange="previewImage(this)">
 {% endblock file_widget %}
