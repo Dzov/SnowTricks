@@ -21,9 +21,7 @@ class Image
     /**
      * @var UploadedFile
      *
-     * @Assert\File(
-     *     mimeTypes = {"image/jpeg", "image/png"},
-     * )
+     * @Assert\File(mimeTypes = {"image/jpeg", "image/png"})
      */
     private $file;
 

@@ -1,7 +1,7 @@
-<section id="tricks_section" class="mx-3 my-4 d-flex flex-column align-items-center">
+<section id="tricks_section" class="mx-4 my-4 d-flex flex-column">
     {% if app.user is not null %}
         {% if app.user.activated == true %}
-            <a href="{{ path('add_trick') }}" class="btn btn-success mb-3">Ajouter une figure</a>
+            <a href="{{ path('add_trick') }}" class="btn btn-success mb-3 align-self-center">Ajouter une figure</a>
         {% endif %}
     {% endif %}
     <div class="card-deck">

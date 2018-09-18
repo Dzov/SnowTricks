@@ -1,5 +1,4 @@
-.home__jumbotron
-{
+.home__jumbotron {
   background: url("../uploads/images/jumbo.jpg") no-repeat 80%;
   height: 95vh;
   background-size: cover;
@@ -9,9 +8,13 @@
     top: 50%;
     left: 5%;
     right: 5%;
-    background-color: rgba( grey, .4);
+    background-color: rgba(grey, .4);
     color: #ffffff;
     text-align: center;
     padding: 2% 0;
   }
+}
+
+.trick_card {
+  flex: 1 0 15% !important;
 }
