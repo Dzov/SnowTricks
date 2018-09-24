@@ -22,8 +22,6 @@ class EditTrickController extends Controller
      */
     public function edit(Request $request, Trick $trick, DeleteTrickImages $deleteService)
     {
-        $trick->addVideo(new Video);
-
         $form = $this->createForm(TrickFormType::class, $trick);
 
         $form->handleRequest($request);

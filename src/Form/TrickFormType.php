@@ -62,7 +62,7 @@ class TrickFormType extends AbstractType
                 'images',
                 CollectionType::class,
                 array(
-                    'attr'          => array('class' => 'form-control'),
+                    'attr'          => array('class' => 'form-control d-flex align-items-center'),
                     'entry_type'    => ImageType::class,
                     'entry_options' => array(
                         'label' => false,
@@ -78,6 +78,7 @@ class TrickFormType extends AbstractType
                 'videos',
                 CollectionType::class,
                 array(
+                    'attr'          => array('class' => 'd-flex flex-column'),
                     'entry_type'    => VideoType::class,
                     'entry_options' => array(
                         'label' => false,

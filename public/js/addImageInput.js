@@ -24,8 +24,8 @@ String.prototype.replaceAll = function (search, replacement) {
 
 var imageFormInputs = document.querySelector('#trick_form_images');
 var template = imageFormInputs.getAttribute('data-prototype');
-imageFormInputs.classList += ' d-flex align-items-center';
 imageFormInputs.style.border = 'none';
+imageFormInputs.style.width = 'auto';
 
 for (var j = 0; j < imageFormInputs.childElementCount - 1; j++) {
     imageFormInputs.children[j].classList.add('hidden');
