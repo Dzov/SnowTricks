@@ -16,9 +16,8 @@
 .trick {
   &__slider--images {
     flex-wrap: nowrap;
-    overflow-x: auto;
+    overflow-x: scroll;
     margin: auto;
-    width: max-content;
 
     .card {
       flex: 0 0 15% !important;

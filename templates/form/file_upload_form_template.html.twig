@@ -1,5 +1,5 @@
 {% block file_widget %}
-    <label for="{{ form.vars.id }}" class="mb-0 mt-2">
+    <label for="{{ form.vars.id }}" class="mb-0">
         {% set image = form.parent.vars.data %}
         {#{% if image is not null and image.id is not null %}#}
             {#{% set publicPath = kernelProjectDir ~ '/public/' %}#}
@@ -11,4 +11,10 @@
         {#{% endif %}#}
     </label>
     <input type="file" hidden id="{{ form.vars.id }}" name="{{ form.vars.full_name }}" onchange="previewImage(this)">
+    <div class="controls d-flex justify-content-around hidden">
+        <label for="{{ form.vars.id }}" class="imageEditionPencil">
+            <i class="fa fa-pencil"></i>
+        </label>
+        <label for="deleteInput" class="imageDeleteButton" ><i class="fa fa-trash"></i></label>
+    </div>
 {% endblock file_widget %}

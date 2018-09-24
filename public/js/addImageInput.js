@@ -1,34 +1,11 @@
-// String.prototype.replaceAll = function (search, replacement) {
-//     var target = this;
-//     return target.replace(new RegExp(search, 'g'), replacement);
-// };
-//
-// var $imageFormInputs = document.querySelector('#trick_form_images');
-// $imageFormInputs.classList += '  d-flex flex-column align-items-center';
-// $imageFormInputs.style.border = 'none';
-// var template = $imageFormInputs.getAttribute('data-prototype');
-//
-
-//
-// for (var i = 0; i < $haystack.length; i++) {
-//     if ($regex.test($haystack[i].id)) {
-//         $imageEditionInputs.push($haystack[i]);
-//     }
-// }
-//
-// // TODO -> see if can replace images with original input, if yes, remove hidden class
-//
-// for (var j = 0; j < $imageEditionInputs.length; j++) {
-//     $imageEditionInputs[j].className = 'hidden';
-// }
-//
-function getNextInputId () {
+var nextId = function () {
     var imageInputNumbers = [];
     var regex = new RegExp('trick_form_images_(\\d)_file');
     var haystack = document.querySelectorAll('[id^=trick_form_images]');
 
     haystack.forEach(function (element) {
         if (regex.test(element.id)) {
+
             imageInputNumbers.push(parseInt(element.id.replace(/[^\d.]/g, '')));
         }
     });
@@ -38,23 +15,29 @@ function getNextInputId () {
     });
 
     return imageInputNumbers.pop() + 1;
-}
+};
 
 String.prototype.replaceAll = function (search, replacement) {
     var target = this;
     return target.replace(new RegExp(search, 'g'), replacement);
 };
 
+var imageFormInputs = document.querySelector('#trick_form_images');
+var template = imageFormInputs.getAttribute('data-prototype');
+imageFormInputs.classList += ' d-flex align-items-center';
+imageFormInputs.style.border = 'none';
+
+for (var j = 0; j < imageFormInputs.childElementCount - 1; j++) {
+    imageFormInputs.children[j].classList.add('hidden');
+}
+
 function addInput () {
-    var imageFormInputs = document.querySelector('#trick_form_images');
-    var template = imageFormInputs.getAttribute('data-prototype');
-    // $imageFormInputs.classList += '  d-flex flex-column align-items-center';
-    // $imageFormInputs.style.border = 'none';
-    var newTemplate = template.replaceAll('__name__label__', 'Image').replaceAll('__name__', getNextInputId()).trim();
+    var newTemplate = template.replaceAll('__name__label__', 'Image').replaceAll('__name__', nextId()).trim();
 
     var div = document.createElement('div');
+    div.classList.add('mr-3');
     div.innerHTML = newTemplate;
-    imageFormInputs.appendChild(div);
+    imageFormInputs.insertBefore(div, imageFormInputs.firstChild);
 }
 
 function previewImage (input) {
@@ -67,10 +50,32 @@ function previewImage (input) {
     };
 
     reader.readAsDataURL(input.files[0]);
-    if (input.id === ('trick_form_images_' + (getNextInputId() - 1) + '_file')) {
-        console.log('poop');
-        addInput(getNextInputId());
+    if (input.id === ('trick_form_images_' + (nextId() - 1) + '_file')) {
+        addInput(nextId());
     }
 }
 
-
+// function addControls (input) {
+//     var controlsDiv = document.createElement('div');
+//     controlsDiv.classList += 'controls d-flex justify-content-around';
+//
+//     var editLabel = document.createElement('label');
+//     editLabel.htmlFor = input.id;
+//     editLabel.classList.add('imageEditionPencil');
+//     var pencilIcon = document.createElement('i');
+//     pencilIcon.classList += "fa fa-pencil";
+//     editLabel.appendChild(pencilIcon);
+//
+//     var deleteLabel = document.createElement('label');
+//     deleteLabel.classList.add('imageDeleteButton');
+//     var deleteIcon = document.createElement('i');
+//     deleteIcon.classList += 'fa fa-trash';
+//     deleteLabel.appendChild(deleteIcon);
+//
+//     controlsDiv.appendChild(editLabel);
+//     controlsDiv.appendChild(deleteLabel);
+//
+//     if (input.parentElement.nextSibling)
+//
+//     input.parentElement.parentElement.appendChild(controlsDiv);
+// }
