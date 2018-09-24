@@ -33,6 +33,19 @@
                                     </div>
                                 </div>
                             {% endfor %}
+                            {% for video in trick.videos | reverse %}
+                                {% if video.identifier is not null and video.platformName is not null %}
+                                    <div class='mr-3'>
+                                        <iframe width="105" height="105" src="https://www.{{ video.platformName }}.com/embed/{{ video.identifier }}" frameborder="0" allowfullscreen></iframe>
+                                        <div class="controls d-flex justify-content-around">
+                                            <label for="trick_form_images_{{ loop.revindex0 }}_file" class="imageEditionPencil">
+                                                <i class="fa fa-pencil"></i>
+                                            </label>
+                                            <label for="deleteInput{{ loop.revindex0 }}" class="imageDeleteButton" id="{{ image.id }}"><i class="fa fa-trash"></i></label>
+                                        </div>
+                                    </div>
+                                {% endif %}
+                            {% endfor %}
                         </div>
                     </div>
                 {% endif %}
@@ -71,6 +84,15 @@
                     {% endif %}
                     {{ form_label(form.category) }}
                     {{ form_widget(form.category) }}
+                </div>
+                <div class="form-group">
+                    {% if form_errors(form.videos) is not empty %}
+                        <div class="alert alert-danger" role="alert">
+                            {{ form_errors(form.videos) }}
+                        </div>
+                    {% endif %}
+                    {{ form_label(form.videos) }}
+                    {{ form_widget(form.videos) }}
                 </div>
                 <div class="controls d-flex justify-content-around mx-md-3 my-3">
                     <button type="submit" class="btn btn-success mr-md-3">Enregister</button>

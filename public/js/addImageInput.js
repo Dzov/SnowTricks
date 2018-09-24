@@ -31,8 +31,8 @@ for (var j = 0; j < imageFormInputs.childElementCount - 1; j++) {
     imageFormInputs.children[j].classList.add('hidden');
 }
 
-function addInput () {
-    var newTemplate = template.replaceAll('__name__label__', 'Image').replaceAll('__name__', nextId()).trim();
+function addInput (id) {
+    var newTemplate = template.replaceAll('__name__label__', 'Image').replaceAll('__name__', id).trim();
 
     var div = document.createElement('div');
     div.classList.add('mr-3');
@@ -54,6 +54,12 @@ function previewImage (input) {
         addInput(nextId());
     }
 }
+
+if (isNaN(nextId() ))
+{
+    addInput(0);
+}
+
 
 // function addControls (input) {
 //     var controlsDiv = document.createElement('div');

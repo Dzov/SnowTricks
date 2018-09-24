@@ -50,7 +50,7 @@ class Trick
      * @ORM\OneToMany(targetEntity="App\Entity\Image", mappedBy="trick", cascade={"persist", "remove"})
      *
      * @Assert\Count(min = 1, minMessage = "Veuillez ajouter au moins une image")
-     * @Assert\Valid()
+     * @Assert\Valid
      */
     private $images;
 
@@ -194,14 +194,26 @@ class Trick
     /**
      * @return Collection|Video[]
      */
-    public function getVideos(): ArrayCollection
+    public function getVideos()
     {
         return $this->videos;
     }
 
-    public function setVideos(ArrayCollection $videos): self
+    public function removeVideo(Video $video)
     {
-        $this->videos = $videos;
+        if ($this->videos->contains($video)) {
+            $this->videos->removeElement($video);
+
+            return $this;
+        }
+    }
+
+    public function addVideo(Video $video): self
+    {
+        if (!$this->videos->contains($video)) {
+            $this->videos->add($video);
+            $video->setTrick($this);
+        }
 
         return $this;
     }

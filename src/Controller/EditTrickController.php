@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Entity\Trick;
+use App\Entity\Video;
 use App\Exception\TrickMustContainOneImageException;
 use App\Form\TrickFormType;
 use App\Service\DeleteTrickImages;
@@ -21,6 +22,8 @@ class EditTrickController extends Controller
      */
     public function edit(Request $request, Trick $trick, DeleteTrickImages $deleteService)
     {
+        $trick->addVideo(new Video);
+
         $form = $this->createForm(TrickFormType::class, $trick);
 
         $form->handleRequest($request);

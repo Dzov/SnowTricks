@@ -3,16 +3,6 @@
 {% form_theme form 'form/file_upload_form_template.html.twig' %}
 
 {% block body %}
-    {% if trick.images is not empty %}
-        {% set image = trick.images.first() %}
-        {% if image.fileName is not null %}
-            <div class="trick_header_image" style="background: url('/img/{{ asset(image.fileName) }}') center 30%; background-size: cover; height: 300px; width: auto">
-                {% include('flash_messages.html.twig') %}
-            </div>
-        {% endif %}
-    {% else %}
-        {% include('flash_messages.html.twig') %}
-    {% endif %}
     <div class="trick_header_image" style="background: url('{{ asset('uploads/images/placeholder.jpg') }}') center 50%; background-size: cover; height: 300px; width: auto">
         {% include('flash_messages.html.twig') %}
     </div>
@@ -59,6 +49,15 @@
                     {% endif %}
                     {{ form_label(form.category) }}
                     {{ form_widget(form.category) }}
+                </div>
+                <div class="form-group">
+                    {% if form_errors(form.videos) is not empty %}
+                        <div class="alert alert-danger" role="alert">
+                            {{ form_errors(form.videos) }}
+                        </div>
+                    {% endif %}
+                    {{ form_label(form.videos) }}
+                    {{ form_widget(form.videos) }}
                 </div>
                 <div class="controls d-flex justify-content-around mx-md-3 my-3">
                     <button type="submit" class="btn btn-success mr-md-3">Enregister</button>
