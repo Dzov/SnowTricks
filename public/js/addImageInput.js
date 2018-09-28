@@ -12,18 +12,21 @@ var template = $imageFormInputs.getAttribute('data-prototype');
 
 $imageEditionInputs = [];
 $regex = new RegExp('trick_form_images_[\\d]+$');
-$haystack = document.querySelectorAll('[id^=trick_form_images]');
+$inputHaystack = document.querySelectorAll('[id^=trick_form_images]');
+$labels = document.querySelectorAll('[for^=trick_form_images]');
+$labelHaystack = [];
 
-for (var i = 0; i < $haystack.length; i++) {
-    if ($regex.test($haystack[i].id)) {
-        $imageEditionInputs.push($haystack[i]);
+
+for (var i = 0; i < $inputHaystack.length; i++) {
+    if ($regex.test($inputHaystack[i].id)) {
+        $imageEditionInputs.push($inputHaystack[i]);
     }
 }
 
 
 for (var j = 0; j < $imageEditionInputs.length; j++) {
     $imageEditionInputs[j].className = 'hidden';
-    $imageEditionInputs[j].id = 'trick_form_images_' + j;
+    template.replaceAll('__name__label__', 'Image').replaceAll('__name__', j).trim();
 }
 
 id = $imageEditionInputs.length + 1;
@@ -40,7 +43,6 @@ $imagesForm.appendChild($button);
 
 
 function addInput (id) {
-    console.log(id);
     var newTemplate = template.replaceAll('__name__label__', 'Image').replaceAll('__name__', id).trim();
 
     var $div = document.createElement('div');
