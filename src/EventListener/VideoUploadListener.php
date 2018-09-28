@@ -22,6 +22,9 @@ class VideoUploadListener
         $this->videoUploader = $videoUploader;
     }
 
+    /**
+     * @throws \App\Exception\InvalidVideoUrlException
+     */
     public function prePersist(LifecycleEventArgs $eventArgs)
     {
         $entity = $eventArgs->getEntity();
@@ -29,6 +32,9 @@ class VideoUploadListener
         $this->uploadVideo($entity);
     }
 
+    /**
+     * @throws \App\Exception\InvalidVideoUrlException
+     */
     public function preUpdate(PreUpdateEventArgs $args)
     {
         $entity = $args->getEntity();
@@ -36,6 +42,9 @@ class VideoUploadListener
         $this->uploadVideo($entity);
     }
 
+    /**
+     * @throws \App\Exception\InvalidVideoUrlException
+     */
     private function uploadVideo($entity)
     {
         if (!$entity instanceof Video) {
