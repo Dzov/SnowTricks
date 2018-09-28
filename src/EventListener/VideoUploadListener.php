@@ -3,6 +3,7 @@
 namespace App\EventListener;
 
 use App\Entity\Video;
+use App\Service\VideoUploader;
 use Doctrine\ORM\Event\LifecycleEventArgs;
 use Doctrine\ORM\Event\PreUpdateEventArgs;
 
@@ -11,6 +12,16 @@ use Doctrine\ORM\Event\PreUpdateEventArgs;
  */
 class VideoUploadListener
 {
+    /**
+     * @var VideoUploader
+     */
+    private $videoUploader;
+
+    public function __construct(VideoUploader $videoUploader)
+    {
+        $this->videoUploader = $videoUploader;
+    }
+
     public function prePersist(LifecycleEventArgs $eventArgs)
     {
         $entity = $eventArgs->getEntity();
@@ -25,26 +36,16 @@ class VideoUploadListener
         $this->uploadVideo($entity);
     }
 
-//    public function postLoad(LifecycleEventArgs $eventArgs)
-//    {
-//        $entity = $eventArgs->getEntity();
-//
-//        if (!$entity instanceof Video) {
-//            return;
-//        }
-//    }
-
     private function uploadVideo($entity)
     {
         if (!$entity instanceof Video) {
             return;
         }
 
-        $parsed_url = parse_url($entity->getUrl());
+        if (null !== $entity->getUrl()) {
+            $iframePath = $this->videoUploader->parseUrl($entity->getUrl());
 
-        if (isset($parsed_url['host']) && isset($parsed_url['query'])) {
-            $entity->setPlatformName($parsed_url['host']);
-            $entity->setIdentifier(substr($parsed_url['query'], 2));
+            $entity->setIframePath($iframePath);
         }
     }
 }
