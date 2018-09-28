@@ -15,7 +15,7 @@
                 {% endif %}
                 <div class="card-body d-flex justify-content-between">
                     <h5 class="card-title align-self-center mb-0">
-                        <a href="#{{ trick.id }}" data-toggle="modal"> {{ trick.name | capitalize }}</a>
+                        <a href="{{ path( 'show_trick', {'trick': trick.id} ) }}"> {{ trick.name | capitalize }}</a>
                     </h5>
                     {% if app.user is not null %}
                         {% if app.user.activated == true %}

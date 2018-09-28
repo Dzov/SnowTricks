@@ -1,0 +1,53 @@
+{% extends('base.html.twig') %}
+
+{% block title %}SnowTricks - {{ trick.name }}{% endblock %}
+
+{% block body %}
+    {% if trick.images is not empty %}
+        {% set image = trick.images.first() %}
+        <div class="trick_header_image" style="background: url('{{ asset(image.path) }}') center 30%; background-size: cover; height: 300px; width: auto">
+            {% include('flash_messages.html.twig') %}
+        </div>
+        <h3 class="text-md-center mb-4 trick_form_title">{{ trick.name | upper }}</h3>
+    {% else %}
+        {% include('flash_messages.html.twig') %}
+    {% endif %}
+    <div class="modal-body">
+        <div class="trick__slider--container">
+            <div class="trick__slider--images d-flex align-items-center">
+                {% for image in trick.images %}
+                    <div class='d-flex flex-column align-items-center'>
+                        <div>
+                            <img src="{{ asset(image.path) }}" alt="Image de la figure {{ trick.name }}" width="105" height="105" class="card">
+                        </div>
+                        {% if app.user is not null %}
+                            {% if app.user.activated == true %}
+                                <div class="controls">
+                                    <a href="{{ path( 'edit_trick', {'trick': trick.id} ) }}"><i class="fa fa-pencil mr-2"></i></a>
+                                    <a href=""><i class="fa fa-trash"></i></a>
+                                </div>
+                            {% endif %}
+                        {% endif %}
+                    </div>
+                {% endfor %}
+            </div>
+        </div>
+        <div class="trick__information--container d-flex flex-column">
+            <p class="mx-4 my-3 text-justify">{{ trick.description }}</p>
+            <ul class=" d-flex justify-content-around">
+                <li>
+                    <small class="text-muted">Groupe: {{ trick.category.name }}</small>
+                </li>
+                <li>
+                    <small class="text-muted">Créé le {{ trick.createdAt | date("d/m/Y") }}</small>
+                </li>
+                <li>
+                    <small class="text-muted">Modifié le {{ trick.updatedAt | date("d/m/Y") }}</small>
+                </li>
+            </ul>
+        </div>
+
+        <hr>
+        {% include('trick_comment_section.html.twig') %}
+    </div>
+{% endblock body %}
