@@ -50,6 +50,7 @@ class Trick
      * @ORM\OneToMany(targetEntity="App\Entity\Image", mappedBy="trick", cascade={"persist", "remove"})
      *
      * @Assert\Count(min = 1, minMessage = "Veuillez ajouter au moins une image")
+     * @Assert\Valid()
      */
     private $images;
 
@@ -144,7 +145,7 @@ class Trick
     }
 
     /**
-     * @return Collection|Comment
+     * @return Collection|Comment[]
      */
     public function getComments(): Collection
     {

@@ -14,10 +14,14 @@
                                 <div>
                                     <img src="{{ asset(image.path) }}" alt="Image de la figure {{ trick.name }}" width="105" height="105" class="card">
                                 </div>
-                                <div class="controls">
-                                    <a href="{{ path( 'edit_trick', {'trick': trick.id} ) }}"><i class="fa fa-pencil mr-2"></i></a>
-                                    <a href=""><i class="fa fa-trash"></i></a>
-                                </div>
+                                {% if app.user is not null %}
+                                    {% if app.user.activated == true %}
+                                        <div class="controls">
+                                            <a href="{{ path( 'edit_trick', {'trick': trick.id} ) }}"><i class="fa fa-pencil mr-2"></i></a>
+                                            <a href=""><i class="fa fa-trash"></i></a>
+                                        </div>
+                                    {% endif %}
+                                {% endif %}
                             </div>
                         {% endfor %}
                     </div>
