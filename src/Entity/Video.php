@@ -26,6 +26,8 @@ class Video
      */
     private $platformName;
 
+    private $url;
+
     /**
      * @ORM\ManyToOne(targetEntity="App\Entity\Trick", cascade={"persist"}, inversedBy="videos")
      * @ORM\JoinColumn(nullable=false)
@@ -69,6 +71,18 @@ class Video
     public function setTrick(Trick $trick): self
     {
         $this->trick = $trick;
+
+        return $this;
+    }
+
+    public function getUrl(): ?string
+    {
+        return $this->url;
+    }
+
+    public function setUrl(string $url = null)
+    {
+        $this->url = $url;
 
         return $this;
     }

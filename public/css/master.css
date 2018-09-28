@@ -114,7 +114,7 @@ a {
 }
 
 .hidden {
-  display: none;
+  display: none !important;
 }
 
 /*# sourceMappingURL=master.css.map */

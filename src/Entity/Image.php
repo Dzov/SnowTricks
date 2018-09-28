@@ -21,7 +21,8 @@ class Image
     /**
      * @var UploadedFile
      *
-     * @Assert\File(mimeTypes = {"image/jpeg", "image/png"})
+     * @Assert\File(mimeTypes = {"image/jpeg", "image/png"},
+     * )
      */
     private $file;
 
@@ -34,11 +35,6 @@ class Image
      * @ORM\Column(type="string", length=255)
      */
     private $path;
-
-    /**
-     * @var string
-     */
-    private $tempFileName;
 
     /**
      * @ORM\ManyToOne(targetEntity="App\Entity\Trick", inversedBy="images")
@@ -99,18 +95,6 @@ class Image
     public function setPath(string $path = null): self
     {
         $this->path = $path;
-
-        return $this;
-    }
-
-    public function getTempFileName(): ?string
-    {
-        return $this->tempFileName;
-    }
-
-    public function setTempFileName(string $tempFileName = null): self
-    {
-        $this->tempFileName = $tempFileName;
 
         return $this;
     }

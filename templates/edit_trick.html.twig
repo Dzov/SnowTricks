@@ -33,23 +33,29 @@
                                     </div>
                                 </div>
                             {% endfor %}
+                        </div>
+                    </div>
+                {% endif %}
+                {% if trick.videos is not null %}
+                    <div class="trick__slider--container">
+                        <div class="trick__slider--images d-flex align-items-center">
                             {% for video in trick.videos | reverse %}
                                 {% if video.identifier is not null and video.platformName is not null %}
                                     <div class='mr-3'>
                                         <iframe width="105" height="105" src="https://www.{{ video.platformName }}.com/embed/{{ video.identifier }}" frameborder="0" allowfullscreen></iframe>
                                         <div class="controls d-flex justify-content-around">
-                                            <label for="trick_form_images_{{ loop.revindex0 }}_file" class="imageEditionPencil">
+                                            <label for="trick_form_videos_{{ loop.revindex0 }}_url" class="videoEditionPencil">
                                                 <i class="fa fa-pencil"></i>
                                             </label>
-                                            <label for="deleteInput{{ loop.revindex0 }}" class="imageDeleteButton" id="{{ image.id }}"><i class="fa fa-trash"></i></label>
+                                            <label for="deleteInput{{ loop.revindex0 }}" class="videoDeleteButton" id="{{ video.id }}"><i class="fa fa-trash"></i></label>
                                         </div>
                                     </div>
                                 {% endif %}
                             {% endfor %}
+
                         </div>
                     </div>
                 {% endif %}
-
                 <div class="form-group">
                     {% if form_errors(form.images) is not empty %}
                         <div class="alert alert-danger" role="alert">

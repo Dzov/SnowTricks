@@ -3,7 +3,7 @@ var template = videoFormInputs.getAttribute('data-prototype');
 
 var nextId = function () {
     var videoInputNumbers = [];
-    var regex = new RegExp('trick_form_videos_(\\d)_identifier');
+    var regex = new RegExp('trick_form_videos_(\\d)_url');
     var haystack = document.querySelectorAll('[id^=trick_form_videos]');
 
     haystack.forEach(function (element) {
@@ -17,6 +17,8 @@ var nextId = function () {
         return a - b;
     });
 
+    console.log(videoInputNumbers);
+
     return videoInputNumbers.pop() + 1;
 };
 
@@ -29,9 +31,9 @@ function addInput (id) {
     var newTemplate = template.replaceAll('__name__label__', 'Video').replaceAll('__name__', id).trim();
 
     var div = document.createElement('div');
-    div.classList.add('mb-1');
+    div.classList.add('mt-1');
     div.innerHTML = newTemplate;
-    videoFormInputs.insertBefore(div, videoFormInputs.firstChild);
+    videoFormInputs.appendChild(div);
 }
 
 if (isNaN(nextId())) {
@@ -46,4 +48,4 @@ $button.addEventListener('click', function () {
     addInput(nextId());
 });
 
-videoFormInputs.appendChild($button);
+videoFormInputs.parentElement.appendChild($button);

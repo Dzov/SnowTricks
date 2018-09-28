@@ -59,29 +59,3 @@ if (isNaN(nextId() ))
 {
     addInput(0);
 }
-
-
-// function addControls (input) {
-//     var controlsDiv = document.createElement('div');
-//     controlsDiv.classList += 'controls d-flex justify-content-around';
-//
-//     var editLabel = document.createElement('label');
-//     editLabel.htmlFor = input.id;
-//     editLabel.classList.add('imageEditionPencil');
-//     var pencilIcon = document.createElement('i');
-//     pencilIcon.classList += "fa fa-pencil";
-//     editLabel.appendChild(pencilIcon);
-//
-//     var deleteLabel = document.createElement('label');
-//     deleteLabel.classList.add('imageDeleteButton');
-//     var deleteIcon = document.createElement('i');
-//     deleteIcon.classList += 'fa fa-trash';
-//     deleteLabel.appendChild(deleteIcon);
-//
-//     controlsDiv.appendChild(editLabel);
-//     controlsDiv.appendChild(deleteLabel);
-//
-//     if (input.parentElement.nextSibling)
-//
-//     input.parentElement.parentElement.appendChild(controlsDiv);
-// }
