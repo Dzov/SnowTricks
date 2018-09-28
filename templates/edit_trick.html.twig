@@ -16,3 +16,10 @@
     {% endif %}
     {% include('trick_form.html.twig') %}
 {% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+    <script src="{{ asset('js/addImageInput.js') }}"></script>
+    <script src="{{ asset('js/deleteImage.js') }}"></script>
+    <script src="{{ asset('js/addVideo.js') }}"></script>
+{% endblock %}

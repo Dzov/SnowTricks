@@ -1,6 +1,6 @@
 {% extends("base.html.twig") %}
 
-{% block body %}
+{% block main %}
     <section class="home__jumbotron">
         {% include('flash_messages.html.twig') %}
         <p class="home__jumbotron--slogan">SnowTricks <br> Rejoignez la communauté des passionnés de snowboard !</p>
@@ -8,9 +8,4 @@
 
     {% include('trick_card.html.twig') %}
 
-    <section class="d-flex justify-content-center">
-        <button type="button" class="btn btn-outline-primary mb-3">Voir plus</button>
-    </section>
-
-    {% include('responsive_header.html.twig') %}
 {% endblock %}

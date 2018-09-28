@@ -7,7 +7,7 @@
                     {{ form_widget(form.images) }}
                     {% for image in trick.images | reverse %}
                         <div class='mr-3'>
-                            <img src="{{ asset(image.path) }}" alt="Image de la figure {{ trick.name }}" width="105" height="105" class="card trick_form_images_{{ loop.revindex0 }}_file_img">
+                            <img src="{{ asset(image.path) }}" alt="Image de la figure {{ trick.name }}" width="150" height="150" class="card trick_form_images_{{ loop.revindex0 }}_file_img">
                             <div class="controls d-flex justify-content-around">
                                 <label for="trick_form_images_{{ loop.revindex0 }}_file" class="imageEditionPencil">
                                     <i class="fa fa-pencil"></i>
@@ -24,7 +24,7 @@
                         {% for video in trick.videos | reverse %}
                             {% if video.iframePath is not null %}
                                 <div class='mr-3'>
-                                    <iframe width="105" height="105" src="{{ video.iframePath }}" frameborder="0" allowfullscreen></iframe>
+                                    <iframe width="200" height="150" src="{{ video.iframePath }}" frameborder="0" allowfullscreen></iframe>
                                     <div class="controls d-flex justify-content-around">
                                         <label for="trick_form_videos_{{ loop.revindex0 }}_url" class="videoEditionPencil">
                                             <i class="fa fa-pencil"></i>

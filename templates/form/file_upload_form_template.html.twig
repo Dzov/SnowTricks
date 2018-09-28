@@ -1,7 +1,7 @@
 {% block file_widget %}
     <label for="{{ form.vars.id }}" class="mb-0">
         {% set image = form.parent.vars.data %}
-        <img src="{{ asset('uploads/images/file_upload.png') }}" width="105" height="105" class="{{ form.vars.id }}_img">
+        <img src="{{ asset('uploads/images/file_upload.png') }}" width="150" height="150" class="{{ form.vars.id }}_img">
     </label>
     <input type="file" hidden id="{{ form.vars.id }}" name="{{ form.vars.full_name }}" onchange="previewImage(this)">
     <div class="controls hidden d-flex justify-content-around">
