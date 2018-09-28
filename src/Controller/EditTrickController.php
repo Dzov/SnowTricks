@@ -21,7 +21,7 @@ class EditTrickController extends Controller
     /**
      * @Route("/tricks/{trick}/edit", name="edit_trick", requirements={"trick" = "\d+"})
      */
-    public function edit(Request $request, Trick $trick, DeleteTrickImages $deleteService, VideoUploader $videoService)
+    public function edit(Request $request, Trick $trick, DeleteTrickImages $deleteService)
     {
         $form = $this->createForm(TrickFormType::class, $trick);
 
