@@ -117,15 +117,20 @@ a {
   display: none !important;
 }
 
-@media (max-width: 992px) {
+@media (max-width: 500px) {
   #main-header .navbar-collapse .nav {
     justify-content: flex-end;
   }
 
   #responsive-header {
-    position: absolute;
+    position: fixed;
     bottom: 0;
     width: 100%;
+  }
+}
+@media (min-width: 501px) {
+  #responsive-header {
+    display: none;
   }
 }
 @media (max-width: 500px) {
@@ -138,6 +143,15 @@ a {
 }
 .nav-link:hover {
   color: #007bff;
+}
+.nav-link i {
+  font-size: 40px;
+}
+
+@media (max-width: 350px) {
+  .nav-link i {
+    font-size: 30px;
+  }
 }
 
 /*# sourceMappingURL=master.css.map */
