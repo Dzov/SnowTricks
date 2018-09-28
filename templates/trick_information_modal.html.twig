@@ -3,11 +3,7 @@
         <div class="modal-content">
             <div class="modal-header">
                 {% for image in trick.images | slice(0,1) %}
-                    {% if image.path is not null %}
-                        <img src="{{ asset(image.path) }}" alt="Image de la figure {{ trick.name }}" width="100%" height="300">
-                    {% else %}
-                        <img src="img{{ asset(image.fileName) }}" alt="Image de la figure {{ trick.name }}" width="100%" height="300">
-                    {% endif %}
+                    <img src="{{ asset(image.path) }}" alt="Image de la figure {{ trick.name }}" width="100%" height="300">
                 {% endfor %}
             </div>
             <div class="modal-body">
@@ -16,16 +12,16 @@
                         {% for image in trick.images %}
                             <div class='d-flex flex-column align-items-center'>
                                 <div>
-                                    {% if image.path is not null %}
-                                        <img src="{{ asset(image.path) }}" alt="Image de la figure {{ trick.name }}" width="105" height="105" class="card">
-                                    {% else %}
-                                        <img src="img/{{ asset(image.fileName) }}" alt="Image de la figure {{ trick.name }}" width="105" height="105">
+                                    <img src="{{ asset(image.path) }}" alt="Image de la figure {{ trick.name }}" width="105" height="105" class="card">
+                                </div>
+                                {% if app.user is not null %}
+                                    {% if app.user.activated == true %}
+                                        <div class="controls">
+                                            <a href="{{ path( 'edit_trick', {'trick': trick.id} ) }}"><i class="fa fa-pencil mr-2"></i></a>
+                                            <a href=""><i class="fa fa-trash"></i></a>
+                                        </div>
                                     {% endif %}
-                                </div>
-                                <div class="controls">
-                                    <a href="{{ path( 'edit_trick', {'trick': trick.id} ) }}"><i class="fa fa-pencil mr-2"></i></a>
-                                    <a href=""><i class="fa fa-trash"></i></a>
-                                </div>
+                                {% endif %}
                             </div>
                         {% endfor %}
                     </div>

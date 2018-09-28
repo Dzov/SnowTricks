@@ -1,5 +1,5 @@
 .home__jumbotron {
-  background: url("../img/jumbo.jpg") no-repeat 80%;
+  background: url("../uploads/images/jumbo.jpg") no-repeat 80%;
   height: 95vh;
   background-size: cover;
 }
@@ -14,8 +14,16 @@
   padding: 2% 0;
 }
 
+.trick_card {
+  flex: 1 0 15% !important;
+}
+
 .modal-header img {
   object-fit: cover;
+}
+
+.toDelete {
+  opacity: 0.2;
 }
 
 .card-deck {
@@ -26,6 +34,8 @@
 .trick__slider--images {
   flex-wrap: nowrap;
   overflow-x: auto;
+  margin: auto;
+  width: max-content;
 }
 .trick__slider--images .card {
   flex: 0 0 15% !important;
@@ -57,9 +67,20 @@
   font-size: 15px;
 }
 
+.trick_form_title {
+  border-top: 2px solid #343a40;
+  border-bottom: 2px solid #343a40;
+  color: white;
+  margin: auto;
+  width: 100%;
+  background: #343a40;
+  text-align: center;
+  padding: 10px 0;
+}
+
 @media (min-width: 640px) {
   .comments__section, .trick_edit_form {
-    width: 55%;
+    width: 75%;
     margin: auto;
   }
   .comments__section h5, .trick_edit_form h5 {
@@ -67,7 +88,7 @@
   }
 
   .trick_edit_form button {
-    width: 50%;
+    width: 35%;
     margin: auto;
   }
 }
