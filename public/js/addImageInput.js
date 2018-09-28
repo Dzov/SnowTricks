@@ -51,11 +51,10 @@ function previewImage (input) {
 
     reader.readAsDataURL(input.files[0]);
     if (input.id === ('trick_form_images_' + (nextId() - 1) + '_file')) {
-        addInput(nextId());
+        addInput(nextId() + 1);
     }
 }
 
-if (isNaN(nextId() ))
-{
+if (isNaN(nextId())) {
     addInput(0);
 }

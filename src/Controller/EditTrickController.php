@@ -7,7 +7,7 @@ use App\Entity\Video;
 use App\Exception\TrickMustContainOneImageException;
 use App\Form\TrickFormType;
 use App\Service\DeleteTrickImages;
-use App\Service\UploadVideo;
+use App\Service\VideoUploader;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\Form\FormError;
 use Symfony\Component\HttpFoundation\Request;
@@ -21,7 +21,7 @@ class EditTrickController extends Controller
     /**
      * @Route("/tricks/{trick}/edit", name="edit_trick", requirements={"trick" = "\d+"})
      */
-    public function edit(Request $request, Trick $trick, DeleteTrickImages $deleteService, UploadVideo $videoService)
+    public function edit(Request $request, Trick $trick, DeleteTrickImages $deleteService)
     {
         $form = $this->createForm(TrickFormType::class, $trick);
 

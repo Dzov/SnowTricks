@@ -19,13 +19,11 @@ class Video
     /**
      * @ORM\Column(type="string", length=255)
      */
-    private $identifier;
+    private $iframePath;
 
     /**
      * @ORM\Column(type="string", length=255)
      */
-    private $platformName;
-
     private $url;
 
     /**
@@ -39,26 +37,14 @@ class Video
         return $this->id;
     }
 
-    public function getIdentifier(): ?string
+    public function getIframePath(): string
     {
-        return $this->identifier;
+        return $this->iframePath;
     }
 
-    public function setIdentifier(string $identifier): self
+    public function setIframePath(string $iframePath)
     {
-        $this->identifier = $identifier;
-
-        return $this;
-    }
-
-    public function getPlatformName(): ?string
-    {
-        return $this->platformName;
-    }
-
-    public function setPlatformName(string $platformName): self
-    {
-        $this->platformName = $platformName;
+        $this->iframePath = $iframePath;
 
         return $this;
     }
