@@ -117,4 +117,27 @@ a {
   display: none !important;
 }
 
+@media (max-width: 992px) {
+  #main-header .navbar-collapse .nav {
+    justify-content: flex-end;
+  }
+
+  #responsive-header {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+  }
+}
+@media (max-width: 500px) {
+  #main-header {
+    display: none;
+  }
+}
+.nav-link {
+  color: white;
+}
+.nav-link:hover {
+  color: #007bff;
+}
+
 /*# sourceMappingURL=master.css.map */
