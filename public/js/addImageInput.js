@@ -26,12 +26,13 @@ function getNextInputId () {
     var imageInputNumbers = [];
     var regex = new RegExp('trick_form_images_(\\d)_file');
     var haystack = document.querySelectorAll('[id^=trick_form_images]');
-
+  
     haystack.forEach(function (element) {
         if (regex.test(element.id)) {
             imageInputNumbers.push(parseInt(element.id.replace(/[^\d.]/g, '')));
         }
     });
+
 
     imageInputNumbers.sort(function (a, b) {
         return a - b;
