@@ -4,7 +4,7 @@
 
 {% block title %}SnowTricks - Modifier la figure{% endblock %}
 
-{% block body %}
+{% block main %}
     {% if trick.images is not empty %}
         {% set image = trick.images.first() %}
         <div class="trick_header_image" style="background: url('{{ asset(image.path) }}') center 30%; background-size: cover; height: 300px; width: auto">
