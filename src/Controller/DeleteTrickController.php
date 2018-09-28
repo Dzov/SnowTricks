@@ -19,9 +19,11 @@ class DeleteTrickController extends Controller
     {
         $em = $this->getDoctrine()->getManager();
         $trick = $em->getRepository(Trick::class)->find($trickId);
+
         if (!$trick) {
             $this->createNotFoundException();
         }
+
         $submittedToken = $request->request->get('token');
         if ($this->isCsrfTokenValid('delete-trick', $submittedToken)) {
             $em->remove($trick);
@@ -30,6 +32,7 @@ class DeleteTrickController extends Controller
 
             return $this->redirectToRoute('home');
         }
+        
         $this->addFlash('danger', 'Une erreur est survenue, la figure n\'a pas été supprimée');
 
         return $this->redirect('/');
