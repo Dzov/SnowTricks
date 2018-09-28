@@ -46,7 +46,7 @@ class Trick
     private $description;
 
     /**
-     * @ORM\OneToMany(targetEntity="App\Entity\Image", mappedBy="trick", cascade={"persist"})
+     * @ORM\OneToMany(targetEntity="App\Entity\Image", mappedBy="trick", cascade={"persist", "remove"})
      */
     private $images;
 
@@ -72,6 +72,7 @@ class Trick
         $this->comments = new ArrayCollection();
         $this->images = new ArrayCollection();
         $this->videos = new ArrayCollection();
+        $this->createdAt = new \DateTime();
     }
 
     public function getId()
@@ -162,17 +163,21 @@ class Trick
         return $this->images;
     }
 
-    public function removeImage($image)
+    public function removeImage(Image $image)
     {
-        $this->images->remove($image);
+        if ($this->images->contains($image)) {
+            $this->images->removeElement($image);
+        }
 
         return $this;
     }
 
-    public function addImage($image): self
+    public function addImage(Image $image): self
     {
-        $this->images->add($image);
-        $image->setTrick($this);
+        if (!$this->images->contains($image)) {
+            $this->images->add($image);
+            $image->setTrick($this);
+        }
 
         return $this;
     }

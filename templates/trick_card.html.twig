@@ -5,12 +5,15 @@
         {% endif %}
     {% endif %}
     <div class="card-deck">
-        {% for trick in tricks | slice(0, 15) %}
+        {% for trick in tricks | sort | reverse %}
             <div class="trick_card card mb-3">
                 {% if trick.images is not empty %}
-                    {% for image in trick.images | slice(0) %}
+                    {% set image = trick.images.first() %}
+                    {% if image.path is not null %}
+                        <img class="card-img-top" src="{{ asset(image.path) }}" alt="Image de la figure {{ trick.name }}" width="100%" height="150">
+                    {% else %}
                         <img class="card-img-top" src="img{{ asset(image.fileName) }}" alt="Image de la figure {{ trick.name }}" width="100%" height="150">
-                    {% endfor %}
+                    {% endif %}
                 {% else %}
                     <img class="card-img-top" src="img/trickPlaceholder.jpg" alt="Image de la figure {{ trick.name }}" width="100%" height="150">
                 {% endif %}
@@ -21,7 +24,7 @@
                     {% if app.user is not null %}
                         {% if app.user.activated == true %}
                             <div class="controls d-flex align-self-center justify-content-between">
-                                <a href="{{ path( 'edit_trick', {'trickId': trick.id} ) }}"><i class="fa fa-pencil mr-2"></i></a>
+                                <a href="{{ path( 'edit_trick', {'trick': trick.id} ) }}"><i class="fa fa-pencil mr-2"></i></a>
                                 <a href="#{{ trick.id }}_delete" data-toggle="modal"><i class="fa fa-trash"></i></a>
                             </div>
                         {% endif %}

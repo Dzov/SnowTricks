@@ -34,7 +34,7 @@ class DeleteTrickController extends Controller
 
             $this->addFlash('success', 'La figure a bien été supprimée');
 
-            return $this->redirect('/');
+            return $this->redirectToRoute('home');
         }
 
         $this->addFlash('danger', 'Une erreur est survenue, la figure n\'a pas été supprimée');

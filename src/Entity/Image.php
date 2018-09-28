@@ -3,6 +3,7 @@
 namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\HttpFoundation\File\File;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
 
 /**
@@ -28,6 +29,16 @@ class Image
     private $fileName;
 
     /**
+     * @ORM\Column(type="string", length=255)
+     */
+    private $path;
+
+    /**
+     * @var string
+     */
+    private $tempFileName;
+
+    /**
      * @ORM\ManyToOne(targetEntity="App\Entity\Trick", inversedBy="images")
      * @ORM\JoinColumn(nullable=false)
      */
@@ -38,14 +49,18 @@ class Image
         return $this->id;
     }
 
-    public function getFile(): ?UploadedFile
+    public function getFile()
     {
         return $this->file;
     }
 
-    public function setFile(UploadedFile $file = null): self
+    public function setFile($file = null): self
     {
         $this->file = $file;
+
+        if ($file instanceof UploadedFile) {
+            $this->setFileName(null);
+        }
 
         return $this;
     }
@@ -55,7 +70,7 @@ class Image
         return $this->fileName;
     }
 
-    public function setFileName(string $fileName): self
+    public function setFileName(string $fileName = null): self
     {
         $this->fileName = $fileName;
 
@@ -70,6 +85,30 @@ class Image
     public function setTrick(Trick $trick): self
     {
         $this->trick = $trick;
+
+        return $this;
+    }
+
+    public function getPath(): ?string
+    {
+        return $this->path;
+    }
+
+    public function setPath(string $path = null): self
+    {
+        $this->path = $path;
+
+        return $this;
+    }
+
+    public function getTempFileName(): ?string
+    {
+        return $this->tempFileName;
+    }
+
+    public function setTempFileName(string $tempFileName = null): self
+    {
+        $this->tempFileName = $tempFileName;
 
         return $this;
     }

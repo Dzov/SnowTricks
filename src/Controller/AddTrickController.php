@@ -4,7 +4,8 @@ namespace App\Controller;
 
 use App\Entity\Image;
 use App\Entity\Trick;
-use App\Form\EditTrickFormType;
+use App\Form\TrickFormType;
+use App\Service\FileUploader;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
@@ -20,15 +21,12 @@ class AddTrickController extends Controller
     public function add(Request $request)
     {
         $trick = new Trick();
-        $trick->addImage(new Image());
-        $trick->addImage(new Image());
 
-        $form = $this->createForm(EditTrickFormType::class, $trick);
+        $form = $this->createForm(TrickFormType::class, $trick);
 
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $trick->setCreatedAt(new \DateTime());
 
             $em = $this->getDoctrine()->getManager();
             $em->persist($trick);
@@ -36,7 +34,7 @@ class AddTrickController extends Controller
 
             $this->addFlash('success', 'La figure a bien été créée');
 
-            return $this->redirect('/');
+            return $this->redirectToRoute('edit_trick', ['trick' => $trick->getId()]);
         }
 
         return $this->render(
