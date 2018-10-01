@@ -24,7 +24,6 @@ document.addEventListener('DOMContentLoaded', function () {
                 displayedCards.push(remainingCards[i]);
                 remainingCards.splice(i, 1);
                 if (remainingCards.length === 0) {
-                    console.log('poop');
                     loadMoreButton.classList.add('hidden');
                 }
             }
@@ -33,7 +32,6 @@ document.addEventListener('DOMContentLoaded', function () {
 
     loadMoreButton.addEventListener('click', function (e) {
         e.preventDefault();
-        console.log(remainingCards);
         displayMore();
     });
 });
