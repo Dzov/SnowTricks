@@ -1,0 +1,39 @@
+var trickCards = [];
+var displayedCards = [];
+document.addEventListener('DOMContentLoaded', function () {
+    trickCards = Array.prototype.slice.call(document.querySelectorAll('.trick_card'));
+
+    for (var i = 0; i < 15; i++) {
+        trickCards[i].classList.remove('hidden');
+        displayedCards.push(trickCards[i]);
+    }
+
+    Array.prototype.diff = function (a) {
+        return this.filter(function (i) {
+            return a.indexOf(i) < 0;
+        });
+    };
+
+    var remainingCards = trickCards.diff(displayedCards);
+    var loadMoreButton = document.querySelector('#load_more_button');
+
+    function displayMore () {
+        if (remainingCards.length > 0) {
+            for (i = 0; i < 15; i++) {
+                remainingCards[i].classList.remove('hidden');
+                displayedCards.push(remainingCards[i]);
+                remainingCards.splice(i, 1);
+                if (remainingCards.length === 0) {
+                    console.log('poop');
+                    loadMoreButton.classList.add('hidden');
+                }
+            }
+        }
+    }
+
+    loadMoreButton.addEventListener('click', function (e) {
+        e.preventDefault();
+        console.log(remainingCards);
+        displayMore();
+    });
+});

@@ -9,3 +9,8 @@
     {% include('trick_card.html.twig') %}
 
 {% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+    <script src="{{ asset('js/loadMore.js') }}"></script>
+{% endblock %}
