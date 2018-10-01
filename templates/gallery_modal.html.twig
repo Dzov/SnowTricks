@@ -1,0 +1,54 @@
+<div class="gallery-modal modal fade" id="gallery-modal" tabindex="-1" role="dialog" aria-labelledby="gallery-modal" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Galerie</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body m-2">
+                <div>
+                    <h5>Images</h5>
+                    <div class="d-flex flex-wrap">
+                        {% for image in trick.images | reverse %}
+                            <div class='mr-3'>
+                                <img src="{{ asset(image.path) }}" alt="Image de la figure {{ trick.name }}" width="150" height="150" class="card trick_form_images_{{ loop.revindex0 }}_file_img">
+                                <div class="controls d-flex justify-content-around">
+                                    <label for="trick_form_images_{{ loop.revindex0 }}_file" class="imageEditionPencil">
+                                        <i class="fa fa-pencil"></i>
+                                    </label>
+                                    <label for="deleteInput{{ loop.revindex0 }}" class="imageDeleteButton" id="{{ image.id }}"><i class="fa fa-trash"></i></label>
+                                </div>
+                            </div>
+                        {% endfor %}
+                    </div>
+                </div>
+                <div class="">
+                    {% if trick.videos is not null %}
+                        <h5>Vidéos</h5>
+                        <div class="d-flex flex-wrap">
+                            {% for video in trick.videos | reverse %}
+                                {% if video.iframePath is not null %}
+                                    <div class='mr-3 '>
+                                        <iframe width="200" height="150" src="{{ video.iframePath }}" frameborder="0" allowfullscreen></iframe>
+                                        <div class="controls d-flex justify-content-around">
+                                            <label for="trick_form_videos_{{ loop.revindex0 }}_url" class="videoEditionPencil">
+                                                <i class="fa fa-pencil"></i>
+                                            </label>
+                                            <label for="deleteInput{{ loop.revindex0 }}" class="videoDeleteButton" id="{{ video.id }}"><i class="fa fa-trash"></i></label>
+                                        </div>
+                                    </div>
+                                {% endif %}
+                            {% endfor %}
+                        </div>
+                    {% endif %}
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary">Save changes</button>
+            </div>
+        </div>
+    </div>
+</div>
