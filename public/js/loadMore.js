@@ -1,6 +1,5 @@
 var trickCards = [];
 var displayedCards = [];
-var remainingCards = [];
 document.addEventListener('DOMContentLoaded', function () {
     trickCards = Array.prototype.slice.call(document.querySelectorAll('.trick_card'));
 
