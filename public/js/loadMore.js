@@ -1,5 +1,6 @@
 var trickCards = [];
 var displayedCards = [];
+var remainingCards = [];
 document.addEventListener('DOMContentLoaded', function () {
     trickCards = Array.prototype.slice.call(document.querySelectorAll('.trick_card'));
 
@@ -14,8 +15,12 @@ document.addEventListener('DOMContentLoaded', function () {
         });
     };
 
-    var remainingCards = trickCards.diff(displayedCards);
     var loadMoreButton = document.querySelector('#load_more_button');
+    var remainingCards = trickCards.diff(displayedCards);
+
+    if (remainingCards.length > 0) {
+        loadMoreButton.classList.remove('hidden');
+    }
 
     function displayMore () {
         if (remainingCards.length > 0) {
