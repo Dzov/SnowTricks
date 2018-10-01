@@ -87,7 +87,7 @@
             </div>
             <div class="controls d-flex justify-content-around mx-md-3 my-3">
                 <button type="submit" class="btn btn-success mr-md-3">Enregister</button>
-                <button class="btn btn-danger">Supprimer</button>
+                <button class="btn btn-danger" data-toggle="modal" data-target="#{{ trick.id }}_delete">Supprimer</button>
             </div>
             {{ form_end(form) }}
 
@@ -95,4 +95,5 @@
     </div>
 </section>
 
+{% include('delete_confirmation.html.twig') %}
 {% include('gallery_modal.html.twig') %}
