@@ -24,8 +24,8 @@
                         {% endfor %}
                     </div>
                 </div>
-                <div class="">
-                    {% if trick.videos is not null %}
+                <div>
+                    {% if trick.videos | length > 0 %}
                         <h5>Vidéos</h5>
                         <div class="d-flex flex-wrap">
                             {% for video in trick.videos | reverse %}
@@ -47,7 +47,6 @@
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                <button type="button" class="btn btn-primary">Save changes</button>
             </div>
         </div>
     </div>

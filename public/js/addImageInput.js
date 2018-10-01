@@ -23,6 +23,7 @@ String.prototype.replaceAll = function (search, replacement) {
 };
 
 var imageFormInputs = document.querySelector('#trick_form_images');
+
 var template = imageFormInputs.getAttribute('data-prototype');
 imageFormInputs.style.border = 'none';
 imageFormInputs.style.width = 'auto';
@@ -51,10 +52,21 @@ function previewImage (input) {
 
     reader.readAsDataURL(input.files[0]);
     if (input.id === ('trick_form_images_' + (nextId() - 1) + '_file')) {
-        addInput(nextId() + 1);
+        addInput(nextId());
     }
 }
 
-if (isNaN(nextId())) {
-    addInput(0);
-}
+document.addEventListener("DOMContentLoaded", function () {
+    if (isNaN(nextId())) {
+        addInput(0);
+    }
+
+    var uploadIcon = document.querySelectorAll('[src="/OpenClassrooms/P5-SnowTricks/SnowTricks/snow-tricks/public/uploads/images/file_upload.png"]');
+    if (uploadIcon.length === 0) {
+        addInput(nextId());
+    }
+});
+
+
+
+console.log(nextId());
