@@ -5,7 +5,7 @@
             <img src="{{ asset('uploads/images/file_upload.png') }}" width="125" height="125" class="{{ form.vars.id }}_img">
         </label>
     {% endif %}
-    <input type="file" hidden id="{{ form.vars.id }}" name="{{ form.vars.full_name }}" onchange="previewImage(this)">
+    <input type="file" hidden id="{{ form.vars.id }}" class="imageInput" name="{{ form.vars.full_name }}" onchange="previewImage(this)">
 {% endblock file_widget %}
 
 
