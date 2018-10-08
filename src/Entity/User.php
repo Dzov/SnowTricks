@@ -14,59 +14,59 @@ class User implements UserInterface
     /**
      * @ORM\Column(type="boolean")
      */
-    private $activated;
+    protected $activated;
 
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
      */
-    private $avatar;
+    protected $avatar;
 
     /**
      * @ORM\Column(type="string", length=255)
      */
-    private $email;
+    protected $email;
 
     /**
      * @ORM\Column(type="string", length=255)
      */
-    private $firstName;
+    protected $firstName;
 
     /**
      * @ORM\Id()
      * @ORM\GeneratedValue()
      * @ORM\Column(type="integer")
      */
-    private $id;
+    protected $id;
 
     /**
      * @ORM\Column(type="string", length=255)
      */
-    private $lastName;
+    protected $lastName;
 
     /**
      * @ORM\Column(type="string", length=255)
      */
-    private $password;
+    protected $password;
 
     /**
      * @ORM\Column(type="datetime")
      */
-    private $registeredAt;
+    protected $registeredAt;
 
     /**
      * @ORM\Column(type="json")
      */
-    private $roles = [];
+    protected $roles = [];
 
     /**
      * @ORM\Column(type="string")
      */
-    private $token;
+    protected $token;
 
     /**
      * @var string
      */
-    private $username;
+    protected $username;
 
     public function __construct()
     {
