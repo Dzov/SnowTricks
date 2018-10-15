@@ -2,26 +2,42 @@
 
 namespace App\Controller;
 
+use App\Form\ForgotPasswordFormType;
+use App\Service\ResetPasswordService;
+use DateTime;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\Security\Csrf\TokenGenerator\TokenGeneratorInterface;
+use Symfony\Component\Security\Csrf\TokenStorage\TokenStorageInterface;
 
 /**
  * @author Amélie-Dzovinar Haladjian
  */
 class ForgotPasswordController extends Controller
 {
-    public function forgotPassword(Request $request): Response
+    /**
+     * @Route("/forgot-password", name="forgot_password")
+     */
+    public function forgotPassword(
+        Request $request,
+        ResetPasswordService $resetPasswordService
+    ): Response
     {
-        $form = $this->buildForm();
+        $form = $this->createForm(ForgotPasswordFormType::class);
 
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $data = $form->getData();
+            $email = $form->get('email')->getData();
 
-            return $this->render('reset_mail_confirmation.html.twig');
+            $resetPasswordService->send($email);
+
+            return $this->render(
+                'reset_mail_confirmation.html.twig',
+                ['email' => $email]
+            );
         }
 
         return $this->render(

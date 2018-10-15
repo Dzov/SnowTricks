@@ -20,7 +20,7 @@
                     {% if app.user is not null %}
                         {% if app.user.activated == true %}
                             <div class="controls d-flex align-self-center justify-content-between">
-                                <a href="{{ path( 'edit_trick', {'trick': trick.id} ) }}"><i class="fa fa-pencil mr-2"></i></a>
+                                <a href="{{ path( 'edit_trick', {'trick_id': trick.id} ) }}"><i class="fa fa-pencil mr-2"></i></a>
                                 <a href="#{{ trick.id }}_delete" data-toggle="modal"><i class="fa fa-trash"></i></a>
                             </div>
                         {% endif %}
