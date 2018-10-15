@@ -32,10 +32,12 @@ class DeleteTrickVideos
 
         $videos = $this->entityManager->getRepository(Video::class)->findBy(['id' => $deletedVideosIds]);
 
+        dump($videos);
         foreach ($videos as $video) {
             if (null !== $video) {
                 $trick->removeVideo($video);
                 $this->entityManager->remove($video);
+//                $this->entityManager->flush();
             }
         }
     }
