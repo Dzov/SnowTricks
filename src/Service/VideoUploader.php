@@ -12,50 +12,44 @@ use Symfony\Component\Form\FormInterface;
  */
 class VideoUploader
 {
+    const YOUTUBE_PATTERN = "/^((https)?(.*)(youtu.?be)(\.?[a-z]+)?\/([a-z]+)?(\??[a-z]=)?\/?)([a-zA-Z0-9]+)$/";
+
+    const DAILYMOTION_PATTERN = "/^((https)?(.*)(dai.?ly)(motion.com)?\/(([^0-9][a-z]+)([^0-9][a-z]+)?\/)?)([a-zA-Z0-9]+)$/";
+
+    const VIMEO_PATTERN = "/^(https)?(.*)(player.vimeo|vimeo)(.*)\/([^0-9][a-z]+\/)?([a-zA-Z0-9]+)$/";
+
     /**
      * @throws InvalidVideoUrlException
      */
     public function parseUrl(string $url)
     {
-        $parsed_url = parse_url($url);
-
-        preg_match("/\.(.*)\./", $parsed_url['host'], $match);
-        if (isset($match[1])) {
-            $platformName = $match[1];
-        } else {
-            preg_match("/(.*)\./", $parsed_url['host'], $match2);
-            $platformName = $match2[1];
-        }
-
-        switch ($platformName) {
-            case 'youtube':
-                return $this->handleYoutubeVideos($parsed_url);
+        switch (true) {
+            case (preg_match(self::YOUTUBE_PATTERN, $url, $matches)):
+                return $this->handleYoutubeVideos(array_pop($matches));
                 break;
-            case 'dailymotion':
-                return $this->handleDailymotionVideos($parsed_url);
+            case (preg_match(self::DAILYMOTION_PATTERN, $url, $matches)):
+                return $this->handleDailymotionVideos(array_pop($matches));
                 break;
-            case 'vimeo':
-                return $this->handleVimeoVideos($parsed_url);
+            case (preg_match(self::VIMEO_PATTERN, $url, $matches)):
+                return $this->handleVimeoVideos(array_pop($matches));
                 break;
             default :
                 throw new InvalidVideoUrlException();
         }
     }
 
-    private function handleYoutubeVideos(array $parsed_url)
+    private function handleYoutubeVideos(string $identifier)
     {
-        $identifier = substr($parsed_url['query'], 2);
-
-        return 'https://' . $parsed_url['host'] . '/embed/' . $identifier;
+        return 'https://www.youtube.com/embed/' . $identifier;
     }
 
-    private function handleDailymotionVideos(array $parsed_url)
+    private function handleDailymotionVideos(string $identifier)
     {
-        return 'https://' . $parsed_url['host'] . '/embed/' . $parsed_url['path'];
+        return 'www.dailymotion/embed/video/' . $identifier;
     }
 
-    private function handleVimeoVideos(array $parsed_url)
+    private function handleVimeoVideos(string $identifier)
     {
-        return 'https://player.vimeo.com/video' . $parsed_url['path'];
+        return 'https://player.vimeo.com/video/' . $identifier;
     }
 }

@@ -64,7 +64,3 @@ document.addEventListener("DOMContentLoaded", function () {
         addInput(nextId());
     }
 });
-
-
-
-console.log(nextId());
