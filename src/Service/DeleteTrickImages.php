@@ -25,12 +25,12 @@ class DeleteTrickImages
      */
     public function deleteImages(Trick $trick, FormInterface $form): void
     {
-        $deletedImagesInputValue = $form->get('deleteImages')->getData();
+        $inputValue = $form->get('deleteImages')->getData();
 
-        $deletedImagesInputValueArray = explode(",", $deletedImagesInputValue);
+        $inputValueArray = explode(",", $inputValue);
 
         $deletedImagesIds = [];
-        foreach ($deletedImagesInputValueArray as $deletedImagesId) {
+        foreach ($inputValueArray as $deletedImagesId) {
             array_push($deletedImagesIds, intval($deletedImagesId));
         }
 
