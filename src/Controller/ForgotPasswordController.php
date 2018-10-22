@@ -2,6 +2,8 @@
 
 namespace App\Controller;
 
+use App\Entity\User;
+use App\Exception\PasswordResetTokenNotFoundException;
 use App\Form\ForgotPasswordFormType;
 use App\Service\ResetPasswordService;
 use DateTime;
@@ -22,7 +24,8 @@ class ForgotPasswordController extends Controller
      */
     public function forgotPassword(
         Request $request,
-        ResetPasswordService $resetPasswordService
+        ResetPasswordService $resetPasswordService,
+        TokenGeneratorInterface $tokenGenerator
     ): Response
     {
         $form = $this->createForm(ForgotPasswordFormType::class);
@@ -31,8 +34,22 @@ class ForgotPasswordController extends Controller
 
         if ($form->isSubmitted() && $form->isValid()) {
             $email = $form->get('email')->getData();
+            $token = $tokenGenerator->generateToken();
 
-            $resetPasswordService->send($email);
+            /** @var User $user */
+            $em = $this->getDoctrine()->getManager();
+            $user = $em->getRepository(User::class)->loadUserByUsername($email);
+
+            if (null === $user) {
+                throw $this->createNotFoundException("L'utilisateur n'existe pas");
+            }
+
+            $user->setPasswordResetToken($token);
+            $user->setPasswordResetDate(new \DateTime());
+
+            $em->flush();
+
+            $resetPasswordService->send($email, $token);
 
             $this->addFlash(
                 'success',

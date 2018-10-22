@@ -3,7 +3,10 @@
 namespace App\Repository;
 
 use App\Entity\User;
+use App\Exception\PasswordResetTokenNotFoundException;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
+use Doctrine\ORM\NonUniqueResultException;
+use Doctrine\ORM\NoResultException;
 use Symfony\Bridge\Doctrine\RegistryInterface;
 use Symfony\Bridge\Doctrine\Security\User\UserLoaderInterface;
 
@@ -22,7 +25,7 @@ class UserRepository extends ServiceEntityRepository implements UserLoaderInterf
 
     /**
      * @return mixed|null|\Symfony\Component\Security\Core\User\UserInterface
-     * @throws \Doctrine\ORM\NonUniqueResultException
+     * @throws NonUniqueResultException
      */
     public function loadUserByUsername($username)
     {
@@ -31,5 +34,22 @@ class UserRepository extends ServiceEntityRepository implements UserLoaderInterf
             ->setParameter('email', $username)
             ->getQuery()
             ->getOneOrNullResult();
+    }
+
+    /**
+     * @throws NonUniqueResultException
+     * @throws PasswordResetTokenNotFoundException
+     */
+    public function findByPasswordResetToken(string $token)
+    {
+        try {
+            return $this->createQueryBuilder('u')
+                ->where('u.passwordResetToken = :token')
+                ->setParameter('token', $token)
+                ->getQuery()
+                ->getSingleResult();
+        } catch (NoResultException $e) {
+            throw new PasswordResetTokenNotFoundException();
+        }
     }
 }

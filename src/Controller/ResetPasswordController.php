@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Entity\User;
+use App\Exception\PasswordResetTokenNotFoundException;
 use App\Form\ResetPasswordFormType;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\Form\FormInterface;
@@ -19,30 +20,25 @@ class ResetPasswordController extends Controller
     /**
      * @Route("/reset-password", name="reset_password")
      */
-    public function reset(
-        Request $request,
-        TokenStorageInterface $tokenStorage,
-        UserPasswordEncoderInterface $passwordEncoder
-    )
+    public function reset(Request $request, UserPasswordEncoderInterface $passwordEncoder)
     {
         $form = $this->createForm(ResetPasswordFormType::class);
 
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $token = $tokenStorage->getToken($request->get('u'));
-            if ($token === $request->get('t')) {
-                $this->setNewPassword($request, $passwordEncoder, $form);
+
+            if ($this->tokenIsValid($request->get('t'))) {
+                $this->setNewPassword($passwordEncoder, $form, $this->getTokenUser($request->get('t')));
 
                 $this->addFlash('success', 'Votre mot de passe a bien été enregistré');
 
                 return $this->redirectToRoute('login');
             } else {
-                $this->addFlash('Notice', 'Le lien a expiré, veuillez refaire une demande');
+                $this->addFlash('warning', 'Le lien a expiré, veuillez refaire une demande');
 
                 return $this->redirectToRoute('forgot_password');
             }
-
         }
 
         return $this->render(
@@ -53,20 +49,39 @@ class ResetPasswordController extends Controller
         );
     }
 
+    private function tokenIsValid(string $token)
+    {
+        $user = $this->getTokenUser($token);
+
+        $now = new \DateTime();
+        $duration = date_diff($user->getPasswordResetDate(), $now);
+        if ($duration->i > 10) {
+            return false;
+        }
+
+        return true;
+    }
+
     private function setNewPassword(
-        Request $request,
         UserPasswordEncoderInterface $passwordEncoder,
-        FormInterface $form
+        FormInterface $form,
+        User $user
     ): void
     {
-        $em = $this->getDoctrine()->getManager();
-        $user = $em->getRepository(User::class)->loadUserByUsername($request->get('u'));
-        /**
-         * @var User $user
-         */
         $password = $passwordEncoder->encodePassword($user, $form->get('password')->getData());
         $user->setPassword($password);
 
         $this->getDoctrine()->getManager()->flush();
+    }
+
+    private function getTokenUser(string $token): ?User
+    {
+        try {
+            $em = $this->getDoctrine()->getManager();
+
+            return $em->getRepository(User::class)->findByPasswordResetToken($token);
+        } catch (PasswordResetTokenNotFoundException $e) {
+            throw $this->createNotFoundException('Cette demande ne correspond à aucun utilisateur');
+        }
     }
 }
