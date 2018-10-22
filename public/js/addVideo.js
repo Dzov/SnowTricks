@@ -1,10 +1,10 @@
-var videoFormInputs = document.querySelector('#trick_form_videos');
-var videoTemplate = videoFormInputs.getAttribute('data-prototype');
+let videoFormInputs = document.querySelector('#trick_form_videos');
+let videoTemplate = videoFormInputs.getAttribute('data-prototype');
 
-var nextVideoId = function () {
-    var videoInputNumbers = [];
-    var regex = new RegExp('trick_form_videos_(\\d)_url');
-    var haystack = document.querySelectorAll('[id^=trick_form_videos]');
+let nextVideoId = function () {
+    let videoInputNumbers = [];
+    let regex = new RegExp('trick_form_videos_(\\d)_url');
+    let haystack = document.querySelectorAll('[id^=trick_form_videos]');
 
     haystack.forEach(function (element) {
         if (regex.test(element.id)) {
@@ -21,14 +21,14 @@ var nextVideoId = function () {
 };
 
 String.prototype.replaceAll = function (search, replacement) {
-    var target = this;
+    let target = this;
     return target.replace(new RegExp(search, 'g'), replacement);
 };
 
 function addVideoInput (id) {
-    var newVideoTemplate = videoTemplate.replaceAll('__name__label__', 'Video').replaceAll('__name__', id).trim();
+    let newVideoTemplate = videoTemplate.replaceAll('__name__label__', 'Video').replaceAll('__name__', id).trim();
 
-    var div = document.createElement('div');
+    let div = document.createElement('div');
     div.classList.add('mt-1');
     div.innerHTML = newVideoTemplate;
     videoFormInputs.appendChild(div);
@@ -38,7 +38,7 @@ if (isNaN(nextVideoId())) {
     addVideoInput(0);
 }
 
-var $button = document.createElement('div');
+let $button = document.createElement('div');
 $button.innerText = 'Ajouter une video';
 $button.classList = 'btn btn-primary mt-3';
 $button.type = 'addVideo';

@@ -31,14 +31,13 @@
   }
 }
 
-
 .nav-link {
   color: white;
 
   &:hover {
     color: #007bff;
   }
-  
+
   i {
     font-size: 40px;
   }
@@ -47,5 +46,18 @@
 @media (max-width: 350px) {
   .nav-link i {
     font-size: 30px;
+  }
+}
+
+.alert {
+  position: absolute;
+  top: 10%!important;
+}
+
+@media (min-width: 575px) {
+  .alert {
+    left: 5%;
+    right: 5%;
+    width: auto;
   }
 }

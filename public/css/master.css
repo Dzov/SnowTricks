@@ -171,5 +171,17 @@ a {
     font-size: 30px;
   }
 }
+.alert {
+  position: absolute;
+  top: 10% !important;
+}
+
+@media (min-width: 575px) {
+  .alert {
+    left: 5%;
+    right: 5%;
+    width: auto;
+  }
+}
 
 /*# sourceMappingURL=master.css.map */

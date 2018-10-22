@@ -45,7 +45,7 @@ class VideoUploader
 
     private function handleDailymotionVideos(string $identifier)
     {
-        return 'www.dailymotion/embed/video/' . $identifier;
+        return 'https://www.dailymotion.com/embed/video/' . $identifier;
     }
 
     private function handleVimeoVideos(string $identifier)

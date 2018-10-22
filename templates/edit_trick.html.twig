@@ -8,11 +8,11 @@
     {% if trick.images is not empty %}
         {% set image = trick.images.first() %}
         <div class="trick_header_image" style="background: url('{{ asset(image.path) }}') center 30%; background-size: cover; height: 300px; width: auto">
-            {% include('flash_messages.html.twig') %}
+            {#{% include('flash_messages.html.twig') %}#}
         </div>
         <h3 class="text-md-center mb-4 trick_form_title">Modifier la figure</h3>
     {% else %}
-        {% include('flash_messages.html.twig') %}
+        {#{% include('flash_messages.html.twig') %}#}
     {% endif %}
     {% include('trick_form.html.twig') %}
     {% include('delete_confirmation.html.twig') %}

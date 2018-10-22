@@ -34,10 +34,12 @@ class ForgotPasswordController extends Controller
 
             $resetPasswordService->send($email);
 
-            return $this->render(
-                'reset_mail_confirmation.html.twig',
-                ['email' => $email]
+            $this->addFlash(
+                'success',
+                'Un lien vous a été envoyé à l\'adresse ' . $email . '. Il vous permettra de définir un nouveau mot de passe.'
             );
+
+            return $this->redirectToRoute('home');
         }
 
         return $this->render(
