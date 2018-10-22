@@ -3,7 +3,7 @@ let nextId = function () {
     let regex = new RegExp('trick_form_images_(\\d)_file');
 
     let imageInputNumbers = [];
-    for (let imageInput of imageInputs){
+    for (let imageInput of imageInputs) {
         imageInputNumbers.push(parseInt(imageInput.id.match(regex)[1]));
     }
 
@@ -21,8 +21,7 @@ String.prototype.replaceAll = function (search, replacement) {
 };
 
 let imageFormInputs = document.querySelector('#trick_form_images');
-
-let template = imageFormInputs.getAttribute('data-prototype');
+imageFormInputs.setAttribute('data-prototype', createTemplate());
 imageFormInputs.style.border = 'none';
 imageFormInputs.style.width = 'auto';
 
@@ -31,7 +30,8 @@ for (let j = 0; j < imageFormInputs.childElementCount - 1; j++) {
 }
 
 function addInput (id) {
-    let newTemplate = template.replaceAll('__name__label__', 'Image').replaceAll('__name__', id).trim();
+    let rawTemplate = createTemplate();
+    let newTemplate = rawTemplate.replaceAll('__name__label__', 'Image').replaceAll('__name__', id).trim();
 
     let div = document.createElement('div');
     div.classList.add('mr-3');
@@ -57,10 +57,24 @@ function previewImage (input) {
 document.addEventListener("DOMContentLoaded", function () {
     if (isNaN(nextId())) {
         addInput(0);
-    }
-
-    let uploadIcon = document.querySelectorAll('[src="/OpenClassrooms/P5-SnowTricks/SnowTricks/snow-tricks/public/uploads/images/file_upload.png"]');
-    if (uploadIcon.length === 0) {
+    } else {
         addInput(nextId());
     }
 });
+
+function createTemplate () {
+    let htmlTemplate =
+        '<div>' +
+       '    <div id="trick_form_images___name__">' +
+       '        <div>' +
+       '            <label for="trick_form_images___name___file" class="mb-0">' +
+       '                <img src="/OpenClassrooms/P5-SnowTricks/SnowTricks/snow-tricks/public/uploads/images/file_upload.png" width="125" height="125" class="trick_form_images___name___file_img">' +
+       '            </label>' +
+       '            <input type="file" hidden id="trick_form_images___name___file" class="imageInput" name="trick_form[images][__name__][file]" onchange="previewImage(this)">' +
+       '        </div>' +
+       '    </div>' +
+       '</div>'
+
+    return htmlTemplate;
+}
+
