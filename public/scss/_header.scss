@@ -49,13 +49,13 @@
   }
 }
 
-.alert {
+.flash_message {
   position: absolute;
   top: 10%!important;
 }
 
 @media (min-width: 575px) {
-  .alert {
+  .flash_message {
     left: 5%;
     right: 5%;
     width: auto;
