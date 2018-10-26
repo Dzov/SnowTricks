@@ -17,15 +17,15 @@
 <body>
 {% block header %}
     {% include('flash_messages.html.twig') %}
-    {% include('header.html.twig') %}
+    {% include('partials/header.html.twig') %}
 {% endblock %}
 
 {% block body %}
     {% block main %}
 
     {% endblock %}
-    {% include('footer.html.twig') %}
-    {% include('responsive_header.html.twig') %}
+    {% include('partials/footer.html.twig') %}
+    {% include('partials/responsive_header.html.twig') %}
 {% endblock %}
 
 {% block javascripts %}

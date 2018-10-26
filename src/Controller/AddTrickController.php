@@ -29,15 +29,15 @@ class AddTrickController extends Controller
         $form->handleRequest($request);
 
         $trick = $form->getData();
+        if ($form->isSubmitted()) {
+            if ($trick->getImages()->isEmpty()) {
+                $error = new FormError('Une figure doit contenir au moins une image');
+                $form->get('name')->addError($error);
+            }
 
-        if ($trick->getImages()->isEmpty()) {
-            $error = new FormError('Une figure doit contenir au moins une image');
-            $form->get('name')->addError($error);
-        }
-
-        if ($form->isSubmitted() && $form->isValid()) {
-
-            return $this->addTrick($trick);
+            if ($form->isValid()) {
+                return $this->addTrick($trick);
+            }
         }
 
         return $this->render(
