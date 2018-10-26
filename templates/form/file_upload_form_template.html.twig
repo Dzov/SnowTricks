@@ -1,18 +1,11 @@
 {% block file_widget %}
-    <label for="{{ form.vars.id }}" class="mb-0">
-        {% set image = form.parent.vars.data %}
-        <img src="{{ asset('uploads/images/file_upload.png') }}" width="105" height="105" class="{{ form.vars.id }}_img">
-    </label>
-    <input type="file" hidden id="{{ form.vars.id }}" name="{{ form.vars.full_name }}" onchange="previewImage(this)">
-    <div class="controls hidden d-flex justify-content-around">
-        <label for="{{ form.vars.id }}" class="imageEditionPencil">
-            <i class="fa fa-pencil"></i>
-        </label>
-        <label for="deleteInput" class="imageDeleteButton"><i class="fa fa-trash"></i></label>
-    </div>
+    <input type="file" hidden id="{{ form.vars.id }}" class="imageInput" name="{{ form.vars.full_name }}" onchange="previewImage(this)">
+    <script>
+        let imageSource = {{ asset('uploads/images/file_upload.png') | json_encode | raw }};
+    </script>
 {% endblock file_widget %}
 
 
 {% block url_widget %}
-    <input type="url" id="{{ form.vars.id }}" name="{{ form.vars.full_name }}" class="form-control mt-2">
+    <input type="url" id="{{ form.vars.id }}" name="{{ form.vars.full_name }}" value="{{ form.vars.data }}" class="form-control mt-2">
 {% endblock url_widget %}

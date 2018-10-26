@@ -2,42 +2,45 @@
     <div class="modal-body">
         {{ form_start(form, {'attr': {'class': 'd-flex flex-column'}}) }}
         <div class="trick_edit_form d-flex flex-column my-4">
-            <div class="trick__slider--container">
-                <div class="trick__slider--images d-flex align-items-center">
-                    {{ form_widget(form.images) }}
-                    {% for image in trick.images | reverse %}
-                        <div class='mr-3'>
-                            <img src="{{ asset(image.path) }}" alt="Image de la figure {{ trick.name }}" width="105" height="105" class="card trick_form_images_{{ loop.revindex0 }}_file_img">
-                            <div class="controls d-flex justify-content-around">
-                                <label for="trick_form_images_{{ loop.revindex0 }}_file" class="imageEditionPencil">
-                                    <i class="fa fa-pencil"></i>
-                                </label>
-                                <label for="deleteInput{{ loop.revindex0 }}" class="imageDeleteButton" id="{{ image.id }}"><i class="fa fa-trash"></i></label>
-                            </div>
-                        </div>
-                    {% endfor %}
-                </div>
-            </div>
-            {% if trick.videos is not null %}
+            <div class="gallery">
                 <div class="trick__slider--container">
                     <div class="trick__slider--images d-flex align-items-center">
-                        {% for video in trick.videos | reverse %}
-                            {% if video.iframePath is not null %}
-                                <div class='mr-3'>
-                                    <iframe width="105" height="105" src="{{ video.iframePath }}" frameborder="0" allowfullscreen></iframe>
-                                    <div class="controls d-flex justify-content-around">
-                                        <label for="trick_form_videos_{{ loop.revindex0 }}_url" class="videoEditionPencil">
-                                            <i class="fa fa-pencil"></i>
-                                        </label>
-                                        <label for="deleteInput{{ loop.revindex0 }}" class="videoDeleteButton" id="{{ video.id }}"><i class="fa fa-trash"></i></label>
-                                    </div>
+                        {{ form_widget(form.images) }}
+                        {% for image in trick.images | reverse %}
+                            <div class='mr-3'>
+                                <img src="{{ asset(image.path) }}" alt="Image de la figure {{ trick.name }}" width="150" height="150" class="card trick_form_images_{{ loop.revindex0 }}_file_img">
+                                <div class="controls d-flex justify-content-around">
+                                    <label for="trick_form_images_{{ loop.revindex0 }}_file" class="imageEditionPencil">
+                                        <i class="fa fa-pencil"></i>
+                                    </label>
+                                    <label for="deleteInput{{ loop.revindex0 }}" class="imageDeleteButton" id="{{ image.id }}"><i class="fa fa-trash"></i></label>
                                 </div>
-                            {% endif %}
+                            </div>
                         {% endfor %}
-
                     </div>
                 </div>
-            {% endif %}
+                {% if trick.videos is not null %}
+                    <div class="trick__slider--container">
+                        <div class="trick__slider--images d-flex align-items-center">
+                            {% for video in trick.videos | reverse %}
+                                {% if video.iframePath is not null %}
+                                    <div class='mr-3'>
+                                        <iframe width="200" height="150" src="{{ video.iframePath }}" frameborder="0" allowfullscreen></iframe>
+                                        <div class="controls d-flex justify-content-around">
+                                            <label for="trick_form_videos_{{ loop.revindex0 }}_url" class="videoEditionPencil">
+                                                <i class="fa fa-pencil"></i>
+                                            </label>
+                                            <label for="deleteInput{{ loop.revindex0 }}" class="videoDeleteButton" id="{{ video.id }}"><i class="fa fa-trash"></i></label>
+                                        </div>
+                                    </div>
+                                {% endif %}
+                            {% endfor %}
+
+                        </div>
+                    </div>
+                {% endif %}
+            </div>
+            <button type="button" class="gallery-button btn btn-primary" data-toggle="modal" data-target="#gallery-modal">Afficher les médias</button>
             <div class="form-group">
                 {% if form_errors(form.images) is not empty %}
                     <div class="alert alert-danger" role="alert">
@@ -84,10 +87,12 @@
             </div>
             <div class="controls d-flex justify-content-around mx-md-3 my-3">
                 <button type="submit" class="btn btn-success mr-md-3">Enregister</button>
-                <button class="btn btn-danger">Supprimer</button>
+                <button class="btn btn-danger" data-toggle="modal" data-target="#{{ trick.id }}_delete">Supprimer</button>
             </div>
             {{ form_end(form) }}
 
         </div>
     </div>
 </section>
+
+{% include('gallery_modal.html.twig') %}

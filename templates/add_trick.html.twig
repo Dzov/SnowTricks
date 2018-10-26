@@ -2,10 +2,16 @@
 
 {% form_theme form 'form/file_upload_form_template.html.twig' %}
 
-{% block body %}
+{% block main %}
     <div class="trick_header_image" style="background: url('{{ asset('uploads/images/placeholder.jpg') }}') center 50%; background-size: cover; height: 300px; width: auto">
-        {% include('flash_messages.html.twig') %}
     </div>
     <h3 class="text-md-center mb-4 trick_form_title">Ajouter une figure</h3>
     {% include('trick_form.html.twig') %}
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+    <script src="{{ asset('js/addImageInput.js') }}"></script>
+    <script src="{{ asset('js/deleteImage.js') }}"></script>
+    <script src="{{ asset('js/addVideo.js') }}"></script>
 {% endblock %}

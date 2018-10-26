@@ -16,7 +16,7 @@ class Image
      * @ORM\GeneratedValue()
      * @ORM\Column(type="integer")
      */
-    private $id;
+    protected $id;
 
     /**
      * @var UploadedFile
@@ -24,23 +24,23 @@ class Image
      * @Assert\File(mimeTypes = {"image/jpeg", "image/png"},
      * )
      */
-    private $file;
+    protected $file;
 
     /**
      * @ORM\Column(type="string", length=255)
      */
-    private $fileName;
+    protected $fileName;
 
     /**
      * @ORM\Column(type="string", length=255)
      */
-    private $path;
+    protected $path;
 
     /**
      * @ORM\ManyToOne(targetEntity="App\Entity\Trick", inversedBy="images")
      * @ORM\JoinColumn(nullable=false)
      */
-    private $trick;
+    protected $trick;
 
     public function getId()
     {
