@@ -2,38 +2,40 @@
 
 {% block title %}SnowTricks - {{ trick.name }}{% endblock %}
 
-{% block body %}
+{% block main %}
     {% if trick.images is not empty %}
         {% set image = trick.images.first() %}
         <div class="trick_header_image" style="background: url('{{ asset(image.path) }}') center 30%; background-size: cover; height: 300px; width: auto">
-            {% include('flash_messages.html.twig') %}
+            {#{% include('flash_messages.html.twig') %}#}
         </div>
         <h3 class="text-md-center mb-4 trick_form_title">{{ trick.name | upper }}</h3>
     {% else %}
-        {% include('flash_messages.html.twig') %}
+        {#{% include('flash_messages.html.twig') %}#}
     {% endif %}
-    <div class="modal-body">
-        <div class="trick__slider--container">
-            <div class="trick__slider--images d-flex align-items-center">
-                {% for image in trick.images %}
-                    <div class='d-flex flex-column align-items-center'>
-                        <div>
-                            <img src="{{ asset(image.path) }}" alt="Image de la figure {{ trick.name }}" width="105" height="105" class="card">
-                        </div>
-                        {% if app.user is not null %}
-                            {% if app.user.activated == true %}
-                                <div class="controls">
-                                    <a href="{{ path( 'edit_trick', {'trick': trick.id} ) }}"><i class="fa fa-pencil mr-2"></i></a>
-                                    <a href=""><i class="fa fa-trash"></i></a>
-                                </div>
-                            {% endif %}
+    <div class="trick__information--container d-flex flex-column">
+        <div class="modal-body">
+            <div class="trick__slider--container gallery">
+                <div class="trick__slider--images d-flex justify-content-center">
+                    {% for video in trick.videos | reverse %}
+                        {% if video.iframePath is not null %}
+                            <div class='mr-3'>
+                                <iframe width="200" height="150" src="{{ video.iframePath }}" frameborder="0" allowfullscreen></iframe>
+                            </div>
                         {% endif %}
-                    </div>
-                {% endfor %}
+                    {% endfor %}
+                    {% for image in trick.images %}
+                        <div class='d-flex flex-column align-items-center'>
+                            <div>
+                                <img src="{{ asset(image.path) }}" alt="Image de la figure {{ trick.name }}" width="150" height="150" class="card">
+                            </div>
+                        </div>
+                    {% endfor %}
+                </div>
             </div>
-        </div>
-        <div class="trick__information--container d-flex flex-column">
-            <p class="mx-4 my-3 text-justify">{{ trick.description }}</p>
+            <button type="button" class="gallery-button btn btn-primary" data-toggle="modal" data-target="#gallery-modal">Afficher les médias</button>
+            <hr>
+            <p class="mx-4 my-3 text-justify text-center">{{ trick.description }}</p>
+            <hr>
             <ul class=" d-flex justify-content-around">
                 <li>
                     <small class="text-muted">Groupe: {{ trick.category.name }}</small>
@@ -50,4 +52,6 @@
         <hr>
         {% include('trick_comment_section.html.twig') %}
     </div>
-{% endblock body %}
+    {% include('gallery_modal.html.twig') %}
+{% endblock %}
+

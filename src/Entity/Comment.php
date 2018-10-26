@@ -14,29 +14,29 @@ class Comment
      * @ORM\GeneratedValue()
      * @ORM\Column(type="integer")
      */
-    private $id;
+    protected $id;
 
     /**
      * @ORM\ManyToOne(targetEntity="App\Entity\Trick", cascade={"persist"}, inversedBy="comments")
      * @ORM\JoinColumn(nullable=false)
      */
-    private $trick;
+    protected $trick;
 
     /**
      * @ORM\ManyToOne(targetEntity="App\Entity\User")
      * @ORM\JoinColumn(nullable=false)
      */
-    private $user;
+    protected $user;
 
     /**
      * @ORM\Column(type="text")
      */
-    private $content;
+    protected $content;
 
     /**
      * @ORM\Column(type="datetime")
      */
-    private $postedAt;
+    protected $postedAt;
 
     public function getId()
     {

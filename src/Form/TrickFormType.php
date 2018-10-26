@@ -89,6 +89,7 @@ class TrickFormType extends AbstractType
                     'by_reference'  => false,
                 )
             )
+            ->add('deleteVideos', HiddenType::class, array('mapped' => false))
             ->getForm();
     }
 

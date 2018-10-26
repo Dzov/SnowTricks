@@ -14,59 +14,69 @@ class User implements UserInterface
     /**
      * @ORM\Column(type="boolean")
      */
-    private $activated;
+    protected $activated;
 
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
      */
-    private $avatar;
+    protected $avatar;
+
+    /**
+     * @ORM\Column(type="string", length=255, unique=true)
+     */
+    protected $email;
 
     /**
      * @ORM\Column(type="string", length=255)
      */
-    private $email;
-
-    /**
-     * @ORM\Column(type="string", length=255)
-     */
-    private $firstName;
+    protected $firstName;
 
     /**
      * @ORM\Id()
      * @ORM\GeneratedValue()
      * @ORM\Column(type="integer")
      */
-    private $id;
+    protected $id;
 
     /**
      * @ORM\Column(type="string", length=255)
      */
-    private $lastName;
+    protected $lastName;
 
     /**
      * @ORM\Column(type="string", length=255)
      */
-    private $password;
+    protected $password;
 
     /**
      * @ORM\Column(type="datetime")
      */
-    private $registeredAt;
+    protected $registeredAt;
 
     /**
      * @ORM\Column(type="json")
      */
-    private $roles = [];
+    protected $roles = [];
 
     /**
      * @ORM\Column(type="string")
      */
-    private $token;
+    protected $token;
 
     /**
      * @var string
      */
-    private $username;
+    protected $username;
+
+    /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    protected $passwordResetToken;
+
+    /**
+     * @ORM\Column(type="datetime", nullable=true)
+     */
+    protected $passwordResetDate;
 
     public function __construct()
     {
@@ -213,6 +223,30 @@ class User implements UserInterface
     public function setToken(string $token = null): self
     {
         $this->token = $token;
+
+        return $this;
+    }
+
+    public function getPasswordResetToken(): ?string
+    {
+        return $this->passwordResetToken;
+    }
+
+    public function setPasswordResetToken(string $passwordResetToken = null): self
+    {
+        $this->passwordResetToken = $passwordResetToken;
+
+        return $this;
+    }
+
+    public function getPasswordResetDate(): ?\DateTime
+    {
+        return $this->passwordResetDate;
+    }
+
+    public function setPasswordResetDate(\DateTime $passwordResetDate = null): self
+    {
+        $this->passwordResetDate = $passwordResetDate;
 
         return $this;
     }

@@ -15,7 +15,7 @@
 
     <h5>Commentaires</h5>
     {% if trick.comments is empty %}
-        <p>Pas de commentaire pour le moment !</p>
+        <p class="text-center">Pas de commentaire pour le moment !</p>
     {% else %}
         <div class="trick__comments--list my-5 mx-3">
             {% for comment in trick.comments | reverse %}
