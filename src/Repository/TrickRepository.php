@@ -4,7 +4,10 @@ namespace App\Repository;
 
 use App\Entity\Trick;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
+use Doctrine\ORM\NonUniqueResultException;
+use Doctrine\ORM\NoResultException;
 use Symfony\Bridge\Doctrine\RegistryInterface;
+use Symfony\Component\Routing\Exception\ResourceNotFoundException;
 
 /**
  * @method Trick|null find($id, $lockMode = null, $lockVersion = null)
@@ -19,32 +22,18 @@ class TrickRepository extends ServiceEntityRepository
         parent::__construct($registry, Trick::class);
     }
 
-//    /**
-//     * @return Trick[] Returns an array of Trick objects
-//     */
-    /*
-    public function findByExampleField($value)
+    public function findById(int $trickId)
     {
         return $this->createQueryBuilder('t')
-            ->andWhere('t.exampleField = :val')
-            ->setParameter('val', $value)
-            ->orderBy('t.id', 'ASC')
-            ->setMaxResults(10)
+            ->leftJoin('t.videos', 'v')
+            ->addSelect('v')
+            ->leftJoin('t.images', 'i')
+            ->addSelect('i')
+            ->leftJoin('t.category', 'c')
+            ->addSelect('c')
+            ->andWhere('t.id = :id')
+            ->setParameter('id', $trickId)
             ->getQuery()
-            ->getResult()
-        ;
+            ->getSingleResult();
     }
-    */
-
-    /*
-    public function findOneBySomeField($value): ?Trick
-    {
-        return $this->createQueryBuilder('t')
-            ->andWhere('t.exampleField = :val')
-            ->setParameter('val', $value)
-            ->getQuery()
-            ->getOneOrNullResult()
-        ;
-    }
-    */
 }
