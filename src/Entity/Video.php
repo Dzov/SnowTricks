@@ -14,49 +14,37 @@ class Video
      * @ORM\GeneratedValue()
      * @ORM\Column(type="integer")
      */
-    private $id;
+    protected $id;
 
     /**
      * @ORM\Column(type="string", length=255)
      */
-    private $identifier;
+    protected $iframePath;
 
     /**
      * @ORM\Column(type="string", length=255)
      */
-    private $platformName;
+    protected $url;
 
     /**
      * @ORM\ManyToOne(targetEntity="App\Entity\Trick", cascade={"persist"}, inversedBy="videos")
      * @ORM\JoinColumn(nullable=false)
      */
-    private $trick;
+    protected $trick;
 
     public function getId()
     {
         return $this->id;
     }
 
-    public function getIdentifier(): ?string
+    public function getIframePath(): string
     {
-        return $this->identifier;
+        return $this->iframePath;
     }
 
-    public function setIdentifier(string $identifier): self
+    public function setIframePath(string $iframePath)
     {
-        $this->identifier = $identifier;
-
-        return $this;
-    }
-
-    public function getPlatformName(): ?string
-    {
-        return $this->platformName;
-    }
-
-    public function setPlatformName(string $platformName): self
-    {
-        $this->platformName = $platformName;
+        $this->iframePath = $iframePath;
 
         return $this;
     }
@@ -69,6 +57,18 @@ class Video
     public function setTrick(Trick $trick): self
     {
         $this->trick = $trick;
+
+        return $this;
+    }
+
+    public function getUrl(): ?string
+    {
+        return $this->url;
+    }
+
+    public function setUrl(string $url = null)
+    {
+        $this->url = $url;
 
         return $this;
     }

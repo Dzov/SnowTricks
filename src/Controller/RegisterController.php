@@ -4,15 +4,14 @@ namespace App\Controller;
 
 use App\Entity\User;
 use App\Form\RegisterFormType;
-use Swift_SmtpTransport;
+use App\Service\SendValidationEmail;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
-use Symfony\Component\Form\Form;
 use Symfony\Component\Form\FormInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Symfony\Component\Security\Core\Exception\InvalidCsrfTokenException;
 use Symfony\Component\Security\Csrf\TokenGenerator\TokenGeneratorInterface;
 
@@ -27,8 +26,8 @@ class RegisterController extends Controller
     public function register(
         Request $request,
         UserPasswordEncoderInterface $passwordEncoder,
-        \Swift_Mailer $mailer,
-        TokenGeneratorInterface $generator
+        TokenGeneratorInterface $generator,
+        SendValidationEmail $validationEmailService
     )
     {
         $user = new User();
@@ -42,7 +41,7 @@ class RegisterController extends Controller
 
             $user = $this->createUser($passwordEncoder, $form, $token);
 
-            $this->sendValidationEmail($mailer, $user, $token);
+            $validationEmailService->send($user, $token);
 
             $this->addFlash(
                 'info',
@@ -80,17 +79,7 @@ class RegisterController extends Controller
 
         $this->activateUser($user, $token);
 
-        return $this->redirect('/');
-    }
-
-    private function sendValidationEmail(\Swift_Mailer $mailer, User $user, string $token): void
-    {
-        $message = (new \Swift_Message('Votre inscription sur SnowTricks'))
-            ->setFrom('amelie2360@gmail.com')
-            ->setTo('amelie2360@gmail.com')
-            ->setBody('http://localhost:8000/validate?u=' . $user->getId() . '&t=' . $token);
-
-        $mailer->send($message);
+        return $this->redirectToRoute('home');
     }
 
     private function createUser(UserPasswordEncoderInterface $passwordEncoder, FormInterface $form, string $token): User

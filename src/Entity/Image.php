@@ -16,35 +16,31 @@ class Image
      * @ORM\GeneratedValue()
      * @ORM\Column(type="integer")
      */
-    private $id;
+    protected $id;
 
     /**
      * @var UploadedFile
      *
-     * @Assert\File(mimeTypes = {"image/jpeg", "image/png"})
+     * @Assert\File(mimeTypes = {"image/jpeg", "image/png"},
+     * )
      */
-    private $file;
+    protected $file;
 
     /**
      * @ORM\Column(type="string", length=255)
      */
-    private $fileName;
+    protected $fileName;
 
     /**
      * @ORM\Column(type="string", length=255)
      */
-    private $path;
-
-    /**
-     * @var string
-     */
-    private $tempFileName;
+    protected $path;
 
     /**
      * @ORM\ManyToOne(targetEntity="App\Entity\Trick", inversedBy="images")
      * @ORM\JoinColumn(nullable=false)
      */
-    private $trick;
+    protected $trick;
 
     public function getId()
     {
@@ -99,18 +95,6 @@ class Image
     public function setPath(string $path = null): self
     {
         $this->path = $path;
-
-        return $this;
-    }
-
-    public function getTempFileName(): ?string
-    {
-        return $this->tempFileName;
-    }
-
-    public function setTempFileName(string $tempFileName = null): self
-    {
-        $this->tempFileName = $tempFileName;
 
         return $this;
     }

@@ -1,0 +1,57 @@
+{% extends('base.html.twig') %}
+
+{% block title %}SnowTricks - {{ trick.name }}{% endblock %}
+
+{% block main %}
+    {% if trick.images is not empty %}
+        {% set image = trick.images.first() %}
+        <div class="trick_header_image" style="background: url('{{ asset(image.path) }}') center 30%; background-size: cover; height: 300px; width: auto">
+            {#{% include('flash_messages.html.twig') %}#}
+        </div>
+        <h3 class="text-md-center mb-4 trick_form_title">{{ trick.name | upper }}</h3>
+    {% else %}
+        {#{% include('flash_messages.html.twig') %}#}
+    {% endif %}
+    <div class="trick__information--container d-flex flex-column">
+        <div class="modal-body">
+            <div class="trick__slider--container gallery">
+                <div class="trick__slider--images d-flex justify-content-center">
+                    {% for video in trick.videos | reverse %}
+                        {% if video.iframePath is not null %}
+                            <div class='mr-3'>
+                                <iframe width="200" height="150" src="{{ video.iframePath }}" frameborder="0" allowfullscreen></iframe>
+                            </div>
+                        {% endif %}
+                    {% endfor %}
+                    {% for image in trick.images %}
+                        <div class='d-flex flex-column align-items-center'>
+                            <div>
+                                <img src="{{ asset(image.path) }}" alt="Image de la figure {{ trick.name }}" width="150" height="150" class="card">
+                            </div>
+                        </div>
+                    {% endfor %}
+                </div>
+            </div>
+            <button type="button" class="gallery-button btn btn-primary" data-toggle="modal" data-target="#gallery-modal">Afficher les médias</button>
+            <hr>
+            <p class="mx-4 my-3 text-justify text-center">{{ trick.description }}</p>
+            <hr>
+            <ul class=" d-flex justify-content-around">
+                <li>
+                    <small class="text-muted">Groupe: {{ trick.category.name }}</small>
+                </li>
+                <li>
+                    <small class="text-muted">Créé le {{ trick.createdAt | date("d/m/Y") }}</small>
+                </li>
+                <li>
+                    <small class="text-muted">Modifié le {{ trick.updatedAt | date("d/m/Y") }}</small>
+                </li>
+            </ul>
+        </div>
+
+        <hr>
+        {% include('trick_comment_section.html.twig') %}
+    </div>
+    {% include('gallery_modal.html.twig') %}
+{% endblock %}
+

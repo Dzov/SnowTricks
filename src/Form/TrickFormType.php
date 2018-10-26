@@ -5,6 +5,7 @@ namespace App\Form;
 use App\Entity\Category;
 use App\Entity\Trick;
 use App\Form\Type\ImageType;
+use App\Form\Type\VideoType;
 use Doctrine\Common\Collections\Collection;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
@@ -13,6 +14,7 @@ use Symfony\Component\Form\Extension\Core\Type\CollectionType;
 use Symfony\Component\Form\Extension\Core\Type\HiddenType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
+use Symfony\Component\Form\Extension\Core\Type\UrlType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\Form\FormInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
@@ -60,7 +62,7 @@ class TrickFormType extends AbstractType
                 'images',
                 CollectionType::class,
                 array(
-                    'attr'          => array('class' => 'form-control'),
+                    'attr'          => array('class' => 'form-control d-flex align-items-center'),
                     'entry_type'    => ImageType::class,
                     'entry_options' => array(
                         'label' => false,
@@ -72,14 +74,22 @@ class TrickFormType extends AbstractType
                 )
             )
             ->add('deleteImages', HiddenType::class, array('mapped' => false))
-//            ->add(
-//                'videos',
-//                CollectionType::class,
-//                array(
-//                    'attr'  => array('class' => 'form-control'),
-//                    'label' => 'Mot de passe'
-//                )
-//            )
+            ->add(
+                'videos',
+                CollectionType::class,
+                array(
+                    'attr'          => array('class' => 'd-flex flex-column'),
+                    'entry_type'    => VideoType::class,
+                    'entry_options' => array(
+                        'label' => false,
+                    ),
+                    'allow_add'     => true,
+                    'allow_delete'  => true,
+                    'required'      => false,
+                    'by_reference'  => false,
+                )
+            )
+            ->add('deleteVideos', HiddenType::class, array('mapped' => false))
             ->getForm();
     }
 

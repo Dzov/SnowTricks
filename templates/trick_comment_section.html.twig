@@ -1,13 +1,23 @@
 <section class="comments__section">
+    {% if app.user is not null %}
+        {% if app.user.activated == true %}
+            <div class="trick__comment--form mb-5 d-flex flex-column">
+                <h5 class="mb-2">Laisser un commentaire</h5>
+                {{ form_start(form, {'attr': {'class': 'forms login__form d-flex flex-column'}}) }}
+                <div class="form-group">
+                    {{ form_row(form.content) }}
+                </div>
+                <button type="submit" class="btn btn-success align-self-center">Valider</button>
+                {{ form_end(form) }}
+            </div>
+        {% endif %}
+    {% endif %}
+
     <h5>Commentaires</h5>
-
-    <div class="trick__comment--form">
-
-    </div>
     {% if trick.comments is empty %}
-        <p>Pas de commentaire pour le moment !</p>
+        <p class="text-center">Pas de commentaire pour le moment !</p>
     {% else %}
-        <div class="trick__comments--list my-3 mx-3">
+        <div class="trick__comments--list my-5 mx-3">
             {% for comment in trick.comments | reverse %}
                 <div class="d-flex align-content-between">
                     {% if comment.user.avatar is not empty %}

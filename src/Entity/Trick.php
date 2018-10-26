@@ -21,55 +21,55 @@ class Trick
      * @ORM\GeneratedValue()
      * @ORM\Column(type="integer")
      */
-    private $id;
+    protected $id;
 
     /**
      * @ORM\ManyToOne(targetEntity="App\Entity\Category")
      * @ORM\JoinColumn(nullable=false)
      */
-    private $category;
+    protected $category;
 
     /**
      * @ORM\OneToMany(targetEntity="App\Entity\Comment", mappedBy="trick", cascade={"persist", "remove"})
      */
-    private $comments;
+    protected $comments;
 
     /**
      * @ORM\Column(type="datetime")
      */
-    private $createdAt;
+    protected $createdAt;
 
     /**
      * @ORM\Column(type="text")
      *
      * @Assert\NotBlank()
      */
-    private $description;
+    protected $description;
 
     /**
      * @ORM\OneToMany(targetEntity="App\Entity\Image", mappedBy="trick", cascade={"persist", "remove"})
      *
      * @Assert\Count(min = 1, minMessage = "Veuillez ajouter au moins une image")
-     * @Assert\Valid()
+     * @Assert\Valid
      */
-    private $images;
+    protected $images;
 
     /**
      * @ORM\Column(type="string", length=255)
      *
      * @Assert\NotBlank()
      */
-    private $name;
+    protected $name;
 
     /**
      * @ORM\Column(type="datetime", nullable=true)
      */
-    private $updatedAt;
+    protected $updatedAt;
 
     /**
      * @ORM\OneToMany(targetEntity="App\Entity\Video", mappedBy="trick", cascade={"persist", "remove"})
      */
-    private $videos;
+    protected $videos;
 
     public function __construct()
     {
@@ -194,14 +194,26 @@ class Trick
     /**
      * @return Collection|Video[]
      */
-    public function getVideos(): ArrayCollection
+    public function getVideos()
     {
         return $this->videos;
     }
 
-    public function setVideos(ArrayCollection $videos): self
+    public function removeVideo(Video $video)
     {
-        $this->videos = $videos;
+        if ($this->videos->contains($video)) {
+            $this->videos->removeElement($video);
+
+            return $this;
+        }
+    }
+
+    public function addVideo(Video $video): self
+    {
+        if (!$this->videos->contains($video)) {
+            $this->videos->add($video);
+            $video->setTrick($this);
+        }
 
         return $this;
     }

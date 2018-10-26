@@ -8,6 +8,10 @@
   opacity: .2;
 }
 
+.gallery-button {
+  display: none;
+}
+
 .card-deck {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
@@ -16,9 +20,8 @@
 .trick {
   &__slider--images {
     flex-wrap: nowrap;
-    overflow-x: auto;
+    overflow-x: scroll;
     margin: auto;
-    width: max-content;
 
     .card {
       flex: 0 0 15% !important;
@@ -72,7 +75,7 @@
 }
 
 @media (min-width: 640px) {
-  .comments__section, .trick_edit_form {
+  .comments__section, .trick_edit_form, .trick__information--container {
     width: 75%;
     margin: auto;
 
@@ -86,5 +89,15 @@
       width: 35%;
       margin: auto;
     }
+  }
+}
+
+@media (max-width: 740px) {
+  .gallery {
+    display: none;
+  }
+
+  .gallery-button {
+    display: flex;
   }
 }
