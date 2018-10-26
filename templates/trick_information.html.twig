@@ -52,3 +52,8 @@
     {% include('partials/gallery_modal.html.twig') %}
 {% endblock %}
 
+
+{% block scripts %}
+    {{ parent() }}
+    <script src="{{ asset('js/commentsLoadMore.js') }}"></script>
+{% endblock %}
