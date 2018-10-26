@@ -2,9 +2,9 @@ window.addEventListener("load", function () {
     document.querySelector("#trick_form_deleteImages").value = "";
 });
 
-let deleteVideoButtons = document.querySelectorAll(".imageDeleteButton");
+let deleteImageButtons = document.querySelectorAll(".imageDeleteButton");
 
-deleteVideoButtons.forEach(function (element) {
+deleteImageButtons.forEach(function (element) {
     element.addEventListener("click", function () {
         let confirmation = confirm("Voulez-vous vraiment supprimer cette image ? Vous devrez soumettre le formulaire pour enregistrer les changements");
         if (confirmation) {
