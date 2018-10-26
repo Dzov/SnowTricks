@@ -51,3 +51,7 @@ services:
     App\Service\SendValidationEmail:
         arguments:
             $appUri: '%env(APP_URI)%'
+
+    App\Service\ResetPasswordService:
+            arguments:
+                $appUri: '%env(APP_URI)%'

@@ -22,7 +22,7 @@ class User implements UserInterface
     protected $avatar;
 
     /**
-     * @ORM\Column(type="string", length=255)
+     * @ORM\Column(type="string", length=255, unique=true)
      */
     protected $email;
 
@@ -67,6 +67,16 @@ class User implements UserInterface
      * @var string
      */
     protected $username;
+
+    /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    protected $passwordResetToken;
+
+    /**
+     * @ORM\Column(type="datetime", nullable=true)
+     */
+    protected $passwordResetDate;
 
     public function __construct()
     {
@@ -213,6 +223,30 @@ class User implements UserInterface
     public function setToken(string $token = null): self
     {
         $this->token = $token;
+
+        return $this;
+    }
+
+    public function getPasswordResetToken(): ?string
+    {
+        return $this->passwordResetToken;
+    }
+
+    public function setPasswordResetToken(string $passwordResetToken = null): self
+    {
+        $this->passwordResetToken = $passwordResetToken;
+
+        return $this;
+    }
+
+    public function getPasswordResetDate(): ?\DateTime
+    {
+        return $this->passwordResetDate;
+    }
+
+    public function setPasswordResetDate(\DateTime $passwordResetDate = null): self
+    {
+        $this->passwordResetDate = $passwordResetDate;
 
         return $this;
     }
