@@ -49,6 +49,8 @@ function previewImage (input) {
     };
 
     reader.readAsDataURL(input.files[0]);
+    let controls = document.querySelector("#" + input.id + "_controls");
+    controls.classList.remove('hidden');
     if (input.id === ("trick_form_images_" + (nextId() - 1) + "_file")) {
         addInput(nextId());
     }
@@ -68,12 +70,26 @@ function createTemplate () {
        '    <div id="trick_form_images___name__">' +
        '        <div>' +
        '            <label for="trick_form_images___name___file" class="mb-0">' +
-       '                <img src='+imageSource+' width="125" height="125" class="trick_form_images___name___file_img">' +
+       '                <img src='+imageSource+' width="150" height="150" class="trick_form_images___name___file_img">' +
        '            </label>' +
-       '            <input type="file" hidden id="trick_form_images___name___file" class="imageInput" name="trick_form[images][__name__][file]" onchange="previewImage(this)">' +
+        '            <input type="file" hidden id="trick_form_images___name___file" class="imageInput" name="trick_form[images][__name__][file]" onchange="previewImage(this)">' +
+       '        </div>' +
+       '        <div class="controls d-flex justify-content-around hidden" id="trick_form_images___name___file_controls">' +
+       '            <label for="trick_form_images___name___file" class="imageEditionPencil">'+
+       '                <i class="fa fa-pencil"></i>' +
+       '            </label>' +
+       '            <label onclick="removeUpload(\'trick_form_images___name__\')">' +
+       '                <i class="fa fa-trash"></i>' +
+       '            </label>' +
        '        </div>' +
        '    </div>' +
-       '</div>'
+       '</div>';
 
     return htmlTemplate;
+}
+
+function removeUpload(element)
+{
+    let inputToRemove = document.querySelector("#" + element);
+    inputToRemove.parentElement.parentElement.remove();
 }
