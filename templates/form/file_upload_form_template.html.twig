@@ -1,14 +1,11 @@
 {% block file_widget %}
-    {% set image = form.parent.vars.data %}
-    {% if image is null %}
-        <label for="{{ form.vars.id }}" class="mb-0">
-            <img src="{{ asset('uploads/images/file_upload.png') }}" width="125" height="125" class="{{ form.vars.id }}_img">
-        </label>
-    {% endif %}
-    <input type="file" hidden id="{{ form.vars.id }}" name="{{ form.vars.full_name }}" onchange="previewImage(this)">
+    <input type="file" hidden id="{{ form.vars.id }}" class="imageInput" name="{{ form.vars.full_name }}" onchange="previewImage(this)">
+    <script>
+        let imageSource = {{ asset('uploads/images/file_upload.png') | json_encode | raw }};
+    </script>
 {% endblock file_widget %}
 
 
 {% block url_widget %}
-    <input type="url" id="{{ form.vars.id }}" name="{{ form.vars.full_name }}" class="form-control mt-2">
+    <input type="url" id="{{ form.vars.id }}" name="{{ form.vars.full_name }}" value="{{ form.vars.data }}" class="form-control mt-2">
 {% endblock url_widget %}

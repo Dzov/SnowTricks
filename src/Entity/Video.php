@@ -14,23 +14,23 @@ class Video
      * @ORM\GeneratedValue()
      * @ORM\Column(type="integer")
      */
-    private $id;
+    protected $id;
 
     /**
      * @ORM\Column(type="string", length=255)
      */
-    private $iframePath;
+    protected $iframePath;
 
     /**
      * @ORM\Column(type="string", length=255)
      */
-    private $url;
+    protected $url;
 
     /**
      * @ORM\ManyToOne(targetEntity="App\Entity\Trick", cascade={"persist"}, inversedBy="videos")
      * @ORM\JoinColumn(nullable=false)
      */
-    private $trick;
+    protected $trick;
 
     public function getId()
     {
