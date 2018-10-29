@@ -90,7 +90,7 @@
     text-align: center;
   }
 
-  .trick_edit_form button {
+  .trick_edit_form button, .trick_edit_form a {
     width: 35%;
     margin: auto;
   }
