@@ -15,7 +15,7 @@ class TrickFixtures extends Fixture implements DependentFixtureInterface
 {
     public function load(ObjectManager $manager)
     {
-        $date = new \DateTime();
+        $date = new \DateTimeImmutable();
 
         $trick1 = new Trick();
         $trick1->setDescription('Saisie de la carre backside de la planche, entre les deux pieds, avec la main avant');
