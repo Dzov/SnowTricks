@@ -21,7 +21,7 @@
                         {% endif %}
                     {% endfor %}
                     {% for image in trick.images %}
-                        <div class='d-flex flex-column align-items-center'>
+                        <div class='d-flex flex-column align-items-center mr-3'>
                             <div>
                                 <img src="{{ asset(image.path) }}" alt="Image de la figure {{ trick.name }}" width="150" height="150" class="card">
                             </div>

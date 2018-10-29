@@ -136,6 +136,10 @@ a {
   display: none !important;
 }
 
+main {
+  min-height: calc(100vh - 100px);
+}
+
 @media (max-width: 500px) {
   #main-header .navbar-collapse .nav {
     justify-content: flex-end;
