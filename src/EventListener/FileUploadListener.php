@@ -58,6 +58,10 @@ class FileUploadListener
 
         $fileName = $this->fileUploader->upload($entity->getFile());
 
+        if (null === $fileName) {
+            $fileName = $entity->getFileName();
+        }
+
         $entity->setFileName($fileName);
         $entity->setPath('uploads/images/' . $fileName);
     }

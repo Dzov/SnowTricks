@@ -20,6 +20,7 @@ class TrickFixtures extends Fixture implements DependentFixtureInterface
         $trick1 = new Trick();
         $trick1->setDescription('Saisie de la carre backside de la planche, entre les deux pieds, avec la main avant');
         $trick1->setCreatedAt($date);
+        $trick1->setUpdatedAt($date->add(new \DateInterval('P1M')));
         $trick1->setCategory($this->getReference('cat1'));
         $trick1->setName('sad');
         $manager->persist($trick1);
@@ -29,6 +30,7 @@ class TrickFixtures extends Fixture implements DependentFixtureInterface
             'Saisie de la carre frontside de la planche, entre les deux pieds, avec la main arrière'
         );
         $trick2->setCreatedAt($date->add(new \DateInterval('P1D')));
+        $trick1->setUpdatedAt(null);
         $trick2->setCategory($this->getReference('cat1'));
         $trick2->setName('indy');
         $manager->persist($trick2);
@@ -38,6 +40,7 @@ class TrickFixtures extends Fixture implements DependentFixtureInterface
             'Saisie du carre avant et carre arrière avec chaque main (comme tenir un volant de voiture)'
         );
         $trick3->setCreatedAt($date->add(new \DateInterval('PT3H')));
+        $trick1->setUpdatedAt($date->add(new \DateInterval('P1MT4H')));
         $trick3->setCategory($this->getReference('cat1'));
         $trick3->setName('truck driver');
         $manager->persist($trick3);
@@ -47,6 +50,7 @@ class TrickFixtures extends Fixture implements DependentFixtureInterface
             'Un tour complet en effectuant une rotation horizontale pendant le saut, puis en attérissant en position switch ou normal'
         );
         $trick4->setCreatedAt($date->add(new \DateInterval('P2DT3H')));
+        $trick1->setUpdatedAt(null);
         $trick4->setCategory($this->getReference('cat2'));
         $trick4->setName('360');
         $manager->persist($trick4);
@@ -56,6 +60,7 @@ class TrickFixtures extends Fixture implements DependentFixtureInterface
             'Deux tours complets en effectuant une rotation horizontale pendant le saut, puis en attérissant en position switch ou normal'
         );
         $trick5->setCreatedAt($date->add(new \DateInterval('P4DT3H3M')));
+        $trick1->setUpdatedAt($date->add(new \DateInterval('P7D')));
         $trick5->setCategory($this->getReference('cat2'));
         $trick5->setName('720');
         $manager->persist($trick5);
@@ -65,6 +70,7 @@ class TrickFixtures extends Fixture implements DependentFixtureInterface
             'Trois tours complets en effectuant une rotation horizontale pendant le saut, puis en attérissant en position switch ou normal'
         );
         $trick6->setCreatedAt($date->add(new \DateInterval('P1DT6H2M')));
+        $trick1->setUpdatedAt(null);
         $trick6->setCategory($this->getReference('cat2'));
         $trick6->setName('1080');
         $manager->persist($trick6);
@@ -80,6 +86,7 @@ class TrickFixtures extends Fixture implements DependentFixtureInterface
         $trick8 = new Trick();
         $trick8->setDescription('Rotation verticale arrière');
         $trick8->setCreatedAt($date->add(new \DateInterval('P3DT3H')));
+        $trick1->setUpdatedAt(null);
         $trick8->setCategory($this->getReference('cat3'));
         $trick8->setName('Back flip');
         $manager->persist($trick8);
@@ -87,6 +94,7 @@ class TrickFixtures extends Fixture implements DependentFixtureInterface
         $trick9 = new Trick();
         $trick9->setDescription('Glisser sur une barre de slide avec l\'avant de la planche sur la barre');
         $trick9->setCreatedAt($date->add(new \DateInterval('P10DT2H')));
+        $trick1->setUpdatedAt(null);
         $trick9->setCategory($this->getReference('cat4'));
         $trick9->setName('nose slide');
         $manager->persist($trick9);
