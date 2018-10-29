@@ -11,11 +11,14 @@ use Symfony\Component\HttpFoundation\File\UploadedFile;
  */
 class FileUploader
 {
-    private $targetDirectory;
+    private $uploadsDirectory;
 
-    public function __construct($targetDirectory)
+    private $imagesDirectory;
+
+    public function __construct($uploadsDirectory, $imagesDirectory)
     {
-        $this->targetDirectory = $targetDirectory;
+        $this->uploadsDirectory = $uploadsDirectory;
+        $this->imagesDirectory = $imagesDirectory;
     }
 
     public function upload(UploadedFile $uploadedFile = null)
@@ -25,13 +28,18 @@ class FileUploader
         }
 
         $fileName = md5(uniqid()) . '.' . $uploadedFile->guessExtension();
-        $uploadedFile->move($this->getTargetDirectory(), $fileName);
+        $uploadedFile->move($this->getUploadsDirectory(), $fileName);
 
         return $fileName;
     }
 
-    public function getTargetDirectory()
+    public function getUploadsDirectory()
     {
-        return $this->targetDirectory;
+        return $this->uploadsDirectory;
+    }
+
+    public function getImagesDirectory()
+    {
+        return $this->imagesDirectory;
     }
 }

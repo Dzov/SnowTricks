@@ -8,7 +8,7 @@
     {% block pageTitle %}{% endblock pageTitle %}
     {% block includes %}
         {% include('partials/trick_form.html.twig') %}
-        <script>let imageSource = {{ asset('uploads/images/file_upload.png') | json_encode | raw }};</script>
+        <script>let imageSource = {{ asset('img/file_upload.png') | json_encode | raw }};</script>
     {% endblock includes %}
 {% endblock %}
 

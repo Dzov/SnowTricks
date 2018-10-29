@@ -45,8 +45,12 @@ class FileUploadListener
             return;
         }
 
+        if (file_exists($this->fileUploader->getImagesDirectory() . '/' . $entity->getFileName()))
+        {
+            return;
+        }
         if (null !== $entity->getFileName()) {
-            $entity->setFile(new File($this->fileUploader->getTargetDirectory() . '/' . $entity->getFileName()));
+            $entity->setFile(new File($this->fileUploader->getUploadsDirectory() . '/' . $entity->getFileName()));
         }
     }
 
