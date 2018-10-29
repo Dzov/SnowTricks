@@ -55,7 +55,7 @@ class Trick
     protected $images;
 
     /**
-     * @ORM\Column(type="string", length=255)
+     * @ORM\Column(type="string", length=255, unique=true)
      *
      * @Assert\NotBlank()
      */

@@ -40,7 +40,7 @@
                     </div>
                 {% endif %}
             </div>
-            <button type="button" class="gallery-button btn btn-primary" data-toggle="modal" data-target="#gallery-modal">Afficher les médias</button>
+            <button type="button" class="gallery-button btn btn-primary align-self-center" data-toggle="modal" data-target="#gallery-modal">Afficher les médias</button>
             <div class="form-group">
                 {% if form_errors(form.images) is not empty %}
                     <div class="alert alert-danger" role="alert">
@@ -94,10 +94,11 @@
                 {% endif %}
 
             </div>
+
+            {% include('partials/gallery_modal.html.twig') %}
             {{ form_end(form) }}
 
         </div>
     </div>
 </section>
 
-{% include('partials/gallery_modal.html.twig') %}
