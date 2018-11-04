@@ -40,7 +40,7 @@
                     </div>
                 {% endif %}
             </div>
-            <button type="button" class="gallery-button btn btn-primary" data-toggle="modal" data-target="#gallery-modal">Afficher les médias</button>
+            <button type="button" class="gallery-button btn btn-primary align-self-center" data-toggle="modal" data-target="#gallery-modal">Afficher les médias</button>
             <div class="form-group">
                 {% if form_errors(form.images) is not empty %}
                     <div class="alert alert-danger" role="alert">
@@ -90,14 +90,15 @@
                 {% if trick.id is not null %}
                     <button class="btn btn-danger" data-toggle="modal" data-target="#{{ trick.id }}_delete">Supprimer</button>
                 {% else %}
-                    <button href="{{ path('home') }}" type="submit" class="btn btn-danger">Annuler</button>
+                    <a href="{{ path('home') }}" class="btn btn-danger">Annuler</a>
                 {% endif %}
 
             </div>
+
+            {% include('partials/gallery_modal.html.twig') %}
             {{ form_end(form) }}
 
         </div>
     </div>
 </section>
 
-{% include('partials/gallery_modal.html.twig') %}

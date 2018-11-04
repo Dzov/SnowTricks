@@ -55,7 +55,7 @@ class Trick
     protected $images;
 
     /**
-     * @ORM\Column(type="string", length=255)
+     * @ORM\Column(type="string", length=255, unique=true)
      *
      * @Assert\NotBlank()
      */
@@ -68,6 +68,7 @@ class Trick
 
     /**
      * @ORM\OneToMany(targetEntity="App\Entity\Video", mappedBy="trick", cascade={"persist", "remove"})
+     * @Assert\Valid
      */
     protected $videos;
 
