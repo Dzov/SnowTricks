@@ -10,7 +10,7 @@
         <h3 class="text-md-center mb-4 trick_form_title">{{ trick.name | upper }}</h3>
     {% endif %}
     <div class="trick__information--container d-flex flex-column">
-        <div class="modal-body">
+        <div class="modal-body page-media-content d-flex flex-column">
             <div class="trick__slider--container gallery">
                 <div class="trick__slider--images d-flex justify-content-center">
                     {% for video in trick.videos | reverse %}
@@ -21,7 +21,7 @@
                         {% endif %}
                     {% endfor %}
                     {% for image in trick.images %}
-                        <div class='d-flex flex-column align-items-center'>
+                        <div class='d-flex flex-column align-items-center mr-3'>
                             <div>
                                 <img src="{{ asset(image.path) }}" alt="Image de la figure {{ trick.name }}" width="150" height="150" class="card">
                             </div>
@@ -29,9 +29,9 @@
                     {% endfor %}
                 </div>
             </div>
-            <button type="button" class="gallery-button btn btn-primary" data-toggle="modal" data-target="#gallery-modal">Afficher les médias</button>
+            <button type="button" class="gallery-button btn btn-primary align-self-center" data-toggle="modal" data-target="#gallery-modal">Afficher les médias</button>
             <hr>
-            <p class="mx-4 my-3 text-justify text-center">{{ trick.description }}</p>
+            <p class="mx-4 my-3 text-justify text-center trick__description">{{ trick.description }}</p>
             <hr>
             <ul class=" d-flex justify-content-around">
                 <li>
@@ -49,11 +49,31 @@
         <hr>
         {% include('partials/trick_comment_section.html.twig') %}
     </div>
-    {% include('partials/gallery_modal.html.twig') %}
+
+    <div class="gallery-modal modal fade" id="gallery-modal" tabindex="-1" role="dialog" aria-labelledby="gallery-modal" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Galerie</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body gallery-modal-content m-2">
+
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary close-modal-button" data-dismiss="modal">Fermer</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
 {% endblock %}
 
 
 {% block scripts %}
     {{ parent() }}
     <script src="{{ asset('js/commentsLoadMore.js') }}"></script>
+    <script src="{{ asset('js/mediaModalDisplay.js') }}"></script>
 {% endblock %}

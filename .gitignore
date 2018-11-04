@@ -18,7 +18,7 @@ yarn-error.log
 /.idea/
 
 /public/.htaccess
-/public/uploads/images/*
+/public/uploads/images/
 
 ###> symfony/phpunit-bridge ###
 .phpunit

@@ -37,6 +37,9 @@ class RegisterController extends Controller
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+
+            if ($form->get('email'))
+
             $token = $generator->generateToken();
 
             $user = $this->createUser($passwordEncoder, $form, $token);

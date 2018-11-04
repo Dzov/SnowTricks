@@ -7,46 +7,12 @@
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
-            <div class="modal-body m-2">
-                <div>
-                    <h5>Images</h5>
-                    <div class="d-flex flex-wrap">
-                        {% for image in trick.images | reverse %}
-                            <div class='mr-3'>
-                                <img src="{{ asset(image.path) }}" alt="Image de la figure {{ trick.name }}" width="150" height="150" class="card trick_form_images_{{ loop.revindex0 }}_file_img">
-                                <div class="controls d-flex justify-content-around">
-                                    <label for="trick_form_images_{{ loop.revindex0 }}_file" class="imageEditionPencil">
-                                        <i class="fa fa-pencil"></i>
-                                    </label>
-                                    <label for="deleteInput{{ loop.revindex0 }}" class="imageDeleteButton" id="{{ image.id }}"><i class="fa fa-trash"></i></label>
-                                </div>
-                            </div>
-                        {% endfor %}
-                    </div>
-                </div>
-                <div>
-                    {% if trick.videos | length > 0 %}
-                        <h5>Vidéos</h5>
-                        <div class="d-flex flex-wrap">
-                            {% for video in trick.videos | reverse %}
-                                {% if video.iframePath is not null %}
-                                    <div class='mr-3 '>
-                                        <iframe width="200" height="150" src="{{ video.iframePath }}" frameborder="0" allowfullscreen></iframe>
-                                        <div class="controls d-flex justify-content-around">
-                                            <label for="trick_form_videos_{{ loop.revindex0 }}_url" class="videoEditionPencil">
-                                                <i class="fa fa-pencil"></i>
-                                            </label>
-                                            <label for="deleteInput{{ loop.revindex0 }}" class="videoDeleteButton" id="{{ video.id }}"><i class="fa fa-trash"></i></label>
-                                        </div>
-                                    </div>
-                                {% endif %}
-                            {% endfor %}
-                        </div>
-                    {% endif %}
-                </div>
+            <div class="modal-body gallery-modal-content m-2">
+
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                <button type="submit" class="btn btn-success mr-md-3">Enregister</button>
+                <button type="button" class="btn btn-secondary close-modal-button" data-dismiss="modal">Fermer</button>
             </div>
         </div>
     </div>

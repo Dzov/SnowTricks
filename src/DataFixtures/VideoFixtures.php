@@ -16,14 +16,14 @@ class VideoFixtures extends Fixture implements DependentFixtureInterface
     {
         $video1 = new Video();
         $video1->setTrick($this->getReference('trick1'));
-        $video1->setIdentifier('KEdFwJ4SWq4');
-        $video1->setPlatformName('youtube');
+        $video1->setUrl('https://www.youtube.com/watch?v=KEdFwJ4SWq4');
+        $video1->setIframePath('https://www.youtube.com/embed/KEdFwJ4SWq4');
         $manager->persist($video1);
 
         $video2 = new Video();
         $video2->setTrick($this->getReference('trick2'));
-        $video2->setIdentifier('iKkhKekZNQ8');
-        $video2->setPlatformName('youtube');
+        $video2->setUrl('https://www.youtube.com/watch?v=iKkhKekZNQ8');
+        $video2->setIframePath('https://www.youtube.com/embed/iKkhKekZNQ8');
         $manager->persist($video2);
 
         $manager->flush();

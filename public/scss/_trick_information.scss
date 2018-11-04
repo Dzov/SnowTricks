@@ -39,11 +39,17 @@
       padding: 0;
 
       li {
-        border: 1px solid lightgray;
+        background: lightgray;
         border-radius: 5px;
-        padding: 0 5px;
+        padding: 2px 5px;
       }
     }
+  }
+
+  &__description {
+    border-top: 1px solid lightgray;
+    border-bottom: 1px solid lightgray;
+    padding: 10px;
   }
 }
 
@@ -63,6 +69,12 @@
   }
 }
 
+.comments__section {
+  h5 {
+    text-align: center;
+  }
+}
+
 .trick_form_title {
   border-top: 2px solid #343a40;
   border-bottom: 2px solid #343a40;
@@ -78,14 +90,10 @@
   .comments__section, .trick_edit_form, .trick__information--container {
     width: 75%;
     margin: auto;
-
-    h5 {
-      text-align: center;
-    }
   }
 
   .trick_edit_form {
-    button {
+    button, a {
       width: 35%;
       margin: auto;
     }

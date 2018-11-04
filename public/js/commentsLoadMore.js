@@ -3,9 +3,11 @@ let displayedComments = [];
 document.addEventListener("DOMContentLoaded", function () {
     trickComments = Array.prototype.slice.call(document.querySelectorAll(".trick_comment"));
 
-    for (let i = 0; i < 5; i++) {
-        trickComments[i].classList.remove("hidden");
-        displayedComments.push(trickComments[i]);
+    if (trickComments.length > 0) {
+        for (let i = 0; i < 5; i++) {
+            trickComments[i].classList.remove("hidden");
+            displayedComments.push(trickComments[i]);
+        }
     }
 
     Array.prototype.diff = function (a) {
@@ -34,8 +36,10 @@ document.addEventListener("DOMContentLoaded", function () {
         } while (remainingComments.length > 0);
     }
 
-    loadMoreButton.addEventListener("click", function (e) {
-        e.preventDefault();
-        displayMore();
-    });
+    if (null !== loadMoreButton) {
+        loadMoreButton.addEventListener("click", function (e) {
+            e.preventDefault();
+            displayMore();
+        });
+    }
 });
