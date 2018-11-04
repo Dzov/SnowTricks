@@ -1,17 +1,11 @@
-{% extends('base.html.twig') %}
+{% extends('trick_management.html.twig') %}
 
-{% form_theme form 'form/file_upload_form_template.html.twig' %}
+{% block title %}SnowTricks - Ajouter une figure{% endblock %}
 
 {% block main %}
-    <div class="trick_header_image" style="background: url('{{ asset('uploads/images/placeholder.jpg') }}') center 50%; background-size: cover; height: 300px; width: auto">
+    <div class="trick_header_image" style="background: url('{{ asset('img/placeholder.jpg') }}') center 50%; background-size: cover; height: 300px; width: auto">
     </div>
-    <h3 class="text-md-center mb-4 trick_form_title">Ajouter une figure</h3>
-    {% include('trick_form.html.twig') %}
-{% endblock %}
+    <h3 class="text-md-center mb-4 trick_form_title">{% block pageTitle %}Ajouter une figure{% endblock %}</h3>
 
-{% block javascripts %}
-    {{ parent() }}
-    <script src="{{ asset('js/addImageInput.js') }}"></script>
-    <script src="{{ asset('js/deleteImage.js') }}"></script>
-    <script src="{{ asset('js/addVideo.js') }}"></script>
+    {% block includes %}{{ parent() }}{% endblock includes %}
 {% endblock %}

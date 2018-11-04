@@ -3,6 +3,7 @@
 namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use App\Validator\Constraints as SnowTricksAssert;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\VideoRepository")
@@ -23,6 +24,7 @@ class Video
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @SnowTricksAssert\VideoUrlConstraint
      */
     protected $url;
 

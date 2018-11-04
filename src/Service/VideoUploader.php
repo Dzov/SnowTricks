@@ -18,9 +18,6 @@ class VideoUploader
 
     const VIMEO_PATTERN = "/^(https)?(.*)(player.vimeo|vimeo)(.*)\/([^0-9][a-z]+\/)?([a-zA-Z0-9]+)$/";
 
-    /**
-     * @throws InvalidVideoUrlException
-     */
     public function parseUrl(string $url)
     {
         switch (true) {
@@ -34,7 +31,7 @@ class VideoUploader
                 return $this->handleVimeoVideos(array_pop($matches));
                 break;
             default :
-                throw new InvalidVideoUrlException();
+                return null;
         }
     }
 

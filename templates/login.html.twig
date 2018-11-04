@@ -1,24 +1,26 @@
 {% extends('base.html.twig') %}
 
 {% block main %}
-    {% if error %}
-        <div class="alert alert-danger">
-            {{ error.messageKey|trans(error.messageData, 'security') }}
-        </div>
-    {% endif %}
+    <main>
+        {% if error %}
+            <div class="alert alert-danger">
+                {{ error.messageKey|trans(error.messageData, 'security') }}
+            </div>
+        {% endif %}
 
-    <section class="login__section d-flex flex-column align-items-center justify-content-center">
-        <h3 class="mb-5">Se connecter</h3>
-        {{ form_start(form, {'attr': {'class': 'forms login__form d-flex flex-column'}}) }}
-        <div class="form-group">
-            {{ form_row(form._username) }}
-        </div>
-        <div class="form-group">
-            {{ form_row(form._password) }}
-        </div>
-        <button type="submit" class="btn btn-primary">Valider</button>
-        {{ form_end(form) }}
+        <section class="login__section d-flex flex-column align-items-center justify-content-center">
+            <h3 class="mb-5">Se connecter</h3>
+            {{ form_start(form, {'attr': {'class': 'forms login__form d-flex flex-column'}}) }}
+            <div class="form-group">
+                {{ form_row(form._username) }}
+            </div>
+            <div class="form-group">
+                {{ form_row(form._password) }}
+            </div>
+            <button type="submit" class="btn btn-primary">Valider</button>
+            {{ form_end(form) }}
 
-        <a href="{{ path('forgot_password') }}">Mot de passe oublié ?</a>
-    </section>
+            <a href="{{ path('forgot_password') }}">Mot de passe oublié ?</a>
+        </section>
+    </main>
 {% endblock %}

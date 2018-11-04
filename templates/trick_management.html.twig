@@ -1,0 +1,22 @@
+{% extends('base.html.twig') %}
+
+{% form_theme form 'form/file_upload_form_template.html.twig' %}
+
+{% block title %}{% endblock %}
+
+{% block main %}
+    {% block pageTitle %}{% endblock pageTitle %}
+    {% block includes %}
+        {% include('partials/trick_form.html.twig') %}
+        <script>let imageSource = {{ asset('img/file_upload.png') | json_encode | raw }};</script>
+    {% endblock includes %}
+{% endblock %}
+
+{% block scripts %}
+    {{ parent() }}
+    <script src="{{ asset('js/addImageInput.js') }}"></script>
+    <script src="{{ asset('js/deleteImage.js') }}"></script>
+    <script src="{{ asset('js/addVideo.js') }}"></script>
+    <script src="{{ asset('js/deleteVideo.js') }}"></script>
+    <script src="{{ asset('js/mediaModalEdition.js') }}"></script>
+{% endblock %}

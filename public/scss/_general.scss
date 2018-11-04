@@ -12,5 +12,9 @@ a {
 }
 
 .hidden {
-  display: none!important;
+  display: none !important;
+}
+
+main {
+  min-height: calc(100vh - 100px);
 }
