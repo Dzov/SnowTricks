@@ -29,8 +29,7 @@ composer install
 Create a new database by executing the command `php bin/console doctrine:database:create`. 
 Then, execute the command `php bin/console doctrine:schema:update --force` in order to create the different tables based on the entity mapping. 
 
-Replace the `.env` file at the root of the project with a copy of the `.env.dist` file renamed as `.env`.
-Adapt the `DATABASE_URL` variable by replacing the parameters `db_user`, `db_password` and `db_name` with your own configuration.
+In the `.env` file at the root of the project, adapt the `DATABASE_URL` variable by replacing the parameters `db_user`, `db_password` and `db_name` with your own configuration.
 
 Once your database has been properly set up, run the following command in order to import the data fixtures : `php bin/console doctrine:fixtures:load
 `
@@ -42,7 +41,7 @@ A set of fixture images is located in the resources folder. In order for the tri
 In the `.env` file, adapt the `MAILER_URL` variable with your email information.
 Check out the [SwiftMailer Documentation](https://symfony.com/doc/current/reference/configuration/swiftmailer.html) if you need help with SwiftMailer's configuration.
 
-Set the `APP_URI` variable in the `.env` file to the project URI.
+Add an `APP_URI` variable in the `.env` file and set it to the project URI.
 
 ### Tests
 
@@ -51,7 +50,7 @@ In order to run the tests, execute the following command in the console :
 
 ## Resources 
 
-Diagrams can be found here : [UML Diagrams](https://github.com/Dzov/Blog_PHP/tree/master/resources/diagrammes)
+Diagrams can be found here : [UML Diagrams](https://github.com/Dzov/SnowTricks/tree/master/resources)
 
 Code quality has been analyzed with [Codacy](https://app.codacy.com/project/amelie.haladjian/SnowTricks/dashboard)
 
