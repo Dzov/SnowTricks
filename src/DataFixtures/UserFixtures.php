@@ -20,7 +20,7 @@ class UserFixtures extends Fixture
         $user1->setPassword(password_hash('john', PASSWORD_BCRYPT));
         $user1->setActivated(true);
         $user1->setRegisteredAt(new \DateTime());
-        $user1->setAvatar('johnAvatar.jpeg');
+        $user1->setAvatar('johnAvatar.jpg');
         $user1->setToken('na');
         $manager->persist($user1);
 
@@ -53,7 +53,7 @@ class UserFixtures extends Fixture
         $user4->setPassword(password_hash('Ahmad', PASSWORD_BCRYPT));
         $user4->setActivated(true);
         $user4->setRegisteredAt(new \DateTime());
-        $user4->setAvatar('ahmedAvatar.jpeg');
+        $user4->setAvatar('ahmedAvatar.jpg');
         $user4->setToken('na');
         $manager->persist($user4);
 
