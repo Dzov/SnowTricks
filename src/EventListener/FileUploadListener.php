@@ -45,9 +45,10 @@ class FileUploadListener
             return;
         }
 
-        if (file_exists($this->fileUploader->getImagesDirectory() . '/' . $entity->getFileName())) {
+        if ($this->isImageResource($entity)) {
             return;
         }
+
         if (null !== $entity->getFileName()) {
             $entity->setFile(new File($this->fileUploader->getUploadsDirectory() . '/' . $entity->getFileName()));
         }
@@ -59,6 +60,10 @@ class FileUploadListener
             return;
         }
 
+        if ($this->isImageResource($entity)) {
+            return;
+        }
+
         $fileName = $this->fileUploader->upload($entity->getFile());
 
         if (null === $fileName) {
@@ -67,5 +72,19 @@ class FileUploadListener
 
         $entity->setFileName($fileName);
         $entity->setPath('uploads/images/' . $fileName);
+    }
+
+    private function isImageResource($entity)
+    {
+        if (file_exists($this->fileUploader->getImagesDirectory() . '/' . $entity->getFileName())) {
+            if (null === $entity->getFileName()) {
+                return false;
+            }
+            $entity->setPath('img/' . $entity->getFileName());
+
+            return true;
+        }
+
+        return false;
     }
 }

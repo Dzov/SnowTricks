@@ -40,7 +40,7 @@ if (isNaN(nextVideoId())) {
 
 let button = document.createElement("div");
 button.innerText = "Ajouter une video";
-button.classList = "btn btn-primary mt-3";
+button.classList = "btn btn-primary mt-3 align-self-center";
 button.type = "addVideo";
 button.addEventListener("click", function () {
     addVideoInput(nextVideoId());
