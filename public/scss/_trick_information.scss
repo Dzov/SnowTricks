@@ -109,3 +109,18 @@
     display: flex;
   }
 }
+
+.fa-pencil{
+  color: black;
+  &:hover {
+    color: #28a745;
+  }
+}
+
+.fa-trash {
+  color: #dc3545;
+
+  &:hover {
+    color: rgba(220, 53, 69, .8);
+  }
+}
