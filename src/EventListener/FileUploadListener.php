@@ -77,6 +77,9 @@ class FileUploadListener
     private function isImageResource($entity)
     {
         if (file_exists($this->fileUploader->getImagesDirectory() . '/' . $entity->getFileName())) {
+            if (null === $entity->getFileName()) {
+                return false;
+            }
             $entity->setPath('img/' . $entity->getFileName());
 
             return true;
