@@ -8,7 +8,7 @@ use Doctrine\Migrations\AbstractMigration;
 /**
  * Auto-generated Migration: Please modify to your needs!
  */
-final class SnowTricks extends AbstractMigration
+final class Version20181105132548 extends AbstractMigration
 {
     public function up(Schema $schema): void
     {
