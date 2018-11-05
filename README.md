@@ -11,7 +11,7 @@ Visitors can read comments, however one must register in order to comment.
 
 PHP 7.2
 
-SQL database 
+MySQL 5.7.8 
 
 ### Installing
 
@@ -26,22 +26,23 @@ composer install
 ```
 
 #### Database and fixtures
+In the `.env` file at the root of the project, adapt the `DATABASE_URL` variable by replacing the parameters `db_user`, `db_password` and `db_name` with your own configuration.
+
 Create a new database by executing the command `php bin/console doctrine:database:create`. 
 Then, execute the command `php bin/console doctrine:schema:update --force` in order to create the different tables based on the entity mapping. 
 
-In the `.env` file at the root of the project, adapt the `DATABASE_URL` variable by replacing the parameters `db_user`, `db_password` and `db_name` with your own configuration.
+If your MySQL version is inferior to 5.7.8, run the command `php bin/console doctrine:migrations:migrate` in order to create the tables.
 
 Once your database has been properly set up, run the following command in order to import the data fixtures : `php bin/console doctrine:fixtures:load
 `
-
-A set of fixture images is located in the resources folder. In order for the tricks to be displayed properly, copy paste these images in the `public/upload/images` folder.   
 
 #### Swiftmailer
 
 In the `.env` file, adapt the `MAILER_URL` variable with your email information.
 Check out the [SwiftMailer Documentation](https://symfony.com/doc/current/reference/configuration/swiftmailer.html) if you need help with SwiftMailer's configuration.
 
-Add an `APP_URI` variable in the `.env` file and set it to the project URI.
+Set the `APP_URI` variable in the `.env` file to the path to the public directory.
+Set the `DELIVERY_ADDRESS=` variable to the email of your choice.
 
 ### Tests
 
