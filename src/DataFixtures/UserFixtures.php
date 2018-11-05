@@ -42,18 +42,18 @@ class UserFixtures extends Fixture
         $user3->setPassword(password_hash('alex', PASSWORD_BCRYPT));
         $user3->setActivated(true);
         $user3->setRegisteredAt(new \DateTime());
-        $user3->setAvatar('avatarDummy.png');
+        $user3->setAvatar('alexAvatar.png');
         $user3->setToken('na');
         $manager->persist($user3);
 
         $user4 = new User();
-        $user4->setFirstName('Ahmad');
+        $user4->setFirstName('Ahmed');
         $user4->setLastName('Tiha');
-        $user4->setEmail('ahmad.tiha@gmail.com');
+        $user4->setEmail('ahmed.tiha@gmail.com');
         $user4->setPassword(password_hash('Ahmad', PASSWORD_BCRYPT));
         $user4->setActivated(true);
         $user4->setRegisteredAt(new \DateTime());
-        $user4->setAvatar('ahmadAvatar.jpeg');
+        $user4->setAvatar('ahmedAvatar.jpeg');
         $user4->setToken('na');
         $manager->persist($user4);
 
@@ -64,7 +64,7 @@ class UserFixtures extends Fixture
         $user5->setPassword(password_hash('kimmy', PASSWORD_BCRYPT));
         $user5->setActivated(true);
         $user5->setRegisteredAt(new \DateTime());
-        $user5->setAvatar('avatarDummy.png');
+        $user5->setAvatar('kimmyAvatar.jpeg');
         $user5->setToken('na');
         $manager->persist($user5);
 

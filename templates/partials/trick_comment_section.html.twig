@@ -21,9 +21,9 @@
             {% for comment in trick.comments | reverse %}
                 <div class="d-flex align-content-between trick_comment hidden">
                     {% if comment.user.avatar is not empty %}
-                        <img src="/img{{ asset( comment.user.avatar ) }}" class="trick__comments--img align-self-center mr-2">
+                        <img src="{{ asset( 'img/' ~ comment.user.avatar ) }}" class="trick__comments--img align-self-center mr-2">
                     {% else %}
-                        <img src="/img/avatarDummy.jpg" class="trick__comments--img align-self-center mr-2">
+                        <img src="{{ asset('img/avatarDummy.jpg') }}" class="trick__comments--img align-self-center mr-2">
                     {% endif %}
                     <div class="card-body trick__comments--comment mb-2 px-3 py-2">
                         <small class="text-muted">
