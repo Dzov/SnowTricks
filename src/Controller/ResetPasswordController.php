@@ -28,17 +28,17 @@ class ResetPasswordController extends Controller
 
         if ($form->isSubmitted() && $form->isValid()) {
 
-            if ($this->tokenIsValid($request->get('t'))) {
-                $this->setNewPassword($passwordEncoder, $form, $this->getTokenUser($request->get('t')));
-
-                $this->addFlash('success', 'Votre mot de passe a bien été enregistré');
-
-                return $this->redirectToRoute('login');
-            } else {
+            if (!$this->tokenIsValid($request->get('t'))) {
                 $this->addFlash('warning', 'Le lien a expiré, veuillez refaire une demande');
 
                 return $this->redirectToRoute('forgot_password');
             }
+
+            $this->setNewPassword($passwordEncoder, $form, $this->getTokenUser($request->get('t')));
+
+            $this->addFlash('success', 'Votre mot de passe a bien été enregistré');
+
+            return $this->redirectToRoute('login');
         }
 
         return $this->render(
